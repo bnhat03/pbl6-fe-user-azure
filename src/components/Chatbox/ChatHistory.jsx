@@ -102,7 +102,7 @@ const ChatHistory = (props) => {
         const urlBE = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8080';
         let urlWS = urlBE.split("//")[1];
         // Set up WebSocket connection once
-        const socket = new WebSocket(`ws://${urlWS}/ws/chat`);
+        const socket = new WebSocket(`wss://${urlWS}/ws/chat`);
         socket.onopen = () => {
             // console.log('Connected to the WebSocket server');
             // Send userId information when connected
