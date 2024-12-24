@@ -1,0 +1,146 @@
+body {
+  overflow-x: hidden; /* Ko hiển thị scroll ngang */
+  .page-promotion {
+      // .header {
+      //     width: 100%; 
+      //     height: 40vw; 
+      //     background: url('/header_img4.png') no-repeat; 
+      //     background-size: cover; 
+      //     background-position: center; 
+      //     position: relative; 
+      // }
+      .header {
+        width: 100vw; 
+        height: auto; 
+        min-height: 80vh; 
+        background: url('/header_img4.png') no-repeat center center; /* Canh giữa hình nền */
+        background-size: cover;
+        background-attachment: fixed; /* Giữ nguyên khi cuộn trang */
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        &::before{
+          background-color: rgba(0, 0, 0, 0); /* Màu nền mờ */
+          z-index: 1; /* Đặt z-index thấp hơn so với các phần tử khác */
+        }
+      
+        .header-circle {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background-color: rgba(0, 0, 0, 0.4) ;
+          padding: 50px;
+          width: 400px; 
+          height: 400px; 
+          border-radius: 50%; /* Tạo hình tròn */
+          text-align: center; 
+          color: white;
+          font-weight: bold;
+          z-index: 2; /* Đặt z-index cao hơn để hiển thị trên nền */
+      
+          .header-title {
+            font-size: 45px;
+            font-weight: bold;
+            margin-bottom: 10px;
+          }
+      
+          .header-deco {
+            display: flex;
+            justify-content: space-between;
+            img{
+              height: 60px;
+            }
+            .icon-heart{
+              margin: 0 20px;
+              width: 60px;
+            }
+            .icon-zigzag{
+              width: 100px;
+            }
+          }
+      
+          .header-content {
+            font-size: 14px;
+            margin: 20px 0;
+            text-transform: uppercase;
+          }
+      
+          .header-arrow-down {
+            font-size: 30px;
+            color: #43BCFF;
+            cursor: pointer; 
+            animation: bounce 1s infinite; /* Thêm animation bounce */
+            .arrow-animation {
+              font-size: 24px; /* Kích thước mũi tên */
+            }
+          }
+    
+        }
+        // Animation nhảy lên xuống
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0); /* Vị trí ban đầu */
+          }
+          40% {
+            transform: translateY(-10px); /* Nhảy lên */
+          }
+          60% {
+            transform: translateY(-5px); /* Hạ xuống nhẹ */
+          }
+        }
+    
+    }
+
+
+    .promotions-container {
+      .promotions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 30px;
+    
+        .promo-card {
+          background-color: white;
+          border-radius: 10px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); // Tăng độ rõ ràng của box-shadow
+          overflow: hidden;
+          text-align: center;
+          transition: transform 0.3s ease, box-shadow 0.3s ease; // Thêm hiệu ứng chuyển động
+          cursor: pointer;
+          &:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); // Tăng shadow khi hover
+            transform: translateY(-5px); // Thêm hiệu ứng hover nhấn nổi lên
+          }
+          img {
+            margin-top: 20px;
+            width: 90%;
+            height: 350px;
+            border-radius: 10px;
+            object-fit: contain;
+          }
+    
+          .promo-content {
+            padding: 10px;
+    
+            h3 {
+              color: #d32f2f;
+              font-size: 18px;
+              margin-bottom: 10px;
+            }
+    
+            p {
+              color: #333;
+              font-size: 14px;
+              text-transform: uppercase;
+            }
+          }
+        }
+      }
+    }   
+    .pagination-container{
+      display: flex;
+      justify-content: center; 
+      margin-top: 40px;
+    }   
+  }
+}

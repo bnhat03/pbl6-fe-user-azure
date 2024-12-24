@@ -1,0 +1,41 @@
+.contact-page{
+    width: 100%;
+    // max-width: max(30%,500px);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin-top: 30px;
+    .title{
+        font-size: 35px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: red;
+        // margin: 0;
+        margin-bottom: 50px;
+    }
+    input{
+        margin-bottom: 15px;
+        width: 500px;
+        padding: 10px;
+        border: 1px solid #c5c5c5;
+        border-radius: 4px;
+        outline-color: tomato;
+
+    }
+    .multi-fields{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+        .row-edit {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+    }
+    button{
+        text-transform: uppercase;
+        padding: 10px 30px;
+        font-weight: bold;
+    }
+}

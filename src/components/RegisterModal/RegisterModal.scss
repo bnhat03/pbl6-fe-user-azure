@@ -1,0 +1,61 @@
+.custom-modal-register {
+    max-width: 30% !important;
+    .title-bold{
+        font-weight: 700;
+    }
+    .form-register {
+        .form-register-input{
+            margin-bottom: 20px;
+            input {
+                width: 100%;
+                border-radius: 5px;
+                border: 1px solid #E7E7E7;
+                padding: 10px 15px;
+                margin: 5px 0;
+                &:focus {
+                    outline: none; 
+                    border: 1px solid red; 
+                }
+            }
+            .password-input-container {
+                position: relative;
+
+                input {
+                    padding-right: 40px; // Dành không gian cho icon eye
+                }
+
+                .password-toggle {
+                    position: absolute;
+                    top: 50%;
+                    right: 10px;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    color: #aaa;
+                    &:hover {
+                        color: #333;
+                    }
+                }
+            }
+            
+        }
+
+        .btn {
+            width: 100%; //btn login chiếm toàn bộ chiều rộng
+        }
+
+        .click-register {
+            margin-top: 20px;
+            display: flex;
+            p {
+                margin: 0;
+                padding-right: 10px;
+            }
+            button {
+                background-color: transparent;
+                border: none;
+                color: #e3000e;
+                cursor: pointer;
+            }
+        }
+    }
+}

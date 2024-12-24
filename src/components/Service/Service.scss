@@ -1,0 +1,42 @@
+.about_section {
+    margin-top: 50px;
+    width: 100%;
+    h2 {
+      font-size: 2.5rem;
+      color: red;
+      font-weight: 700;
+      margin: 20px 0;
+    }
+  
+    p {
+      color: var(--grey);
+      padding: 10px 30px 30px 30px;
+      font-size: 19px;
+    }
+}
+  
+.about_wrapper {
+    background: #f7be27;
+    padding-top: 70px;
+    padding-bottom: 30px;
+    margin-bottom: 80px;
+    .about_box {
+        .about_icon {
+            img {
+                max-width: 25%;
+            }
+        }   
+        h4 {
+            font-size: 26px;
+            line-height: 1;
+            letter-spacing: 0.5008px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            padding: 0 20px;
+        }
+    }
+}
+  

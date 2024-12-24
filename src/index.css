@@ -1,0 +1,154 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"); */
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Dela+Gothic+One&display=swap');
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  /* font-family: 'MergeBlack', sans-serif !important; */
+  font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* .overlay{
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.65);
+} */
+
+* {
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+body {
+  min-height: 100vh;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.app {
+  /* width: 80%; */
+  margin: auto;
+}
+
+@keyframes fadeIn{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+/* Common CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Root Variables */
+:root {
+  /* Fonts Family */
+  --roboto-font: "Roboto", sans-serif;
+  --lilita-font: "Lilita One", cursive;
+  --oswald-font: "Oswald", sans-serif;
+
+  /* Colors */
+  --light-black: #333;
+  --light-white: #f7f7f7;
+  --light-red: #e3000e;
+  --light-grey: #f6f9fa;
+  --light-grey-2: #dddddd;
+  --white: #fff;
+  --yellow: #f7be27;
+  --grey: #757575;
+  --brown: #6f5e4d;
+  --bg-coffee: #642f21;
+}
+
+body,
+html {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-top: 5px ;
+  font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+@media (max-width: 992px) {
+  body,
+  html {
+    font-size: 0.875rem;
+  }
+}
+
+/* Headline Tag */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* font-family: var(--oswald-font); */
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+p {
+  font-size: 16px;
+}
+
+/* Achor Tag */
+a {
+  color: var(--light-black);
+  text-decoration: none;
+  -webkit-transition: all 400ms ease-in-out;
+  -moz-transition: all 400ms ease-in-out;
+  -o-transition: all 400ms ease-in-out;
+  -ms-transition: all 400ms ease-in-out;
+  transition: all 400ms ease-in-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--yellow);
+}
+
+/* Common Button */
+.order_now {
+  color: var(--light-black);
+  background: var(--yellow);
+  border-color: var(--yellow);
+  padding: 12px 30px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-family: var(--oswald-font);
+  vertical-align: middle;
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
+}
+.order_now:hover,
+.order_now:focus {
+  color: var(--white);
+  background: transparent;
+  border-color: var(--white);
+}
+
+.btn_red {
+  color: var(--white);
+  background: var(--light-red);
+  border-color: var(--light-red);
+}
+.btn_red:hover,
+.btn_red:focus {
+  color: var(--light-red);
+  background: transparent;
+  border-color: var(--light-red);
+}

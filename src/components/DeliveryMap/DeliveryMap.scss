@@ -1,0 +1,140 @@
+.page-store-detail{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    .store-detail-infor{
+        display: flex;
+        // min-width: 600px;
+        // height: 60vh;
+        .infor-left{
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            .infor-left-order-container {            
+                flex: 1;
+                border: 1px solid #e60000; 
+                padding: 10px 30px;
+                border-radius: 10px; 
+                background-color: #fff; 
+              
+                .title {
+                  font-size: 20px;
+                  font-weight: 700; 
+                  color: #e60000;
+                  text-transform: uppercase;
+                  margin-bottom: 10px;
+                  text-align: center; 
+                }
+              
+                .order-detail-container {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 10px; 
+                  
+                  span {
+                    display: flex;
+                    align-items: center; /* Căn giữa icon và nội dung */
+                    font-size: 14px;
+                    color: #333;
+                    background-color: #fff; 
+                    padding: 5px;
+                    border-radius: 8px; 
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Tăng độ rõ đổ bóng */
+                  }
+              
+                  i {
+                    padding: 8px;
+                    background-color: #e60000; 
+                    color: white;
+                    font-weight: bold;
+                    border-radius: 50%; /* Icon dạng tròn */
+                    margin-right: 10px; /* Khoảng cách giữa icon và text */
+                  }
+                }
+            }
+            
+            .infor-left-shipper-container {
+                flex: 1;
+                border: 1px solid #e60000; 
+                padding: 10px 30px;
+                margin-top: 20px;
+                border-radius: 10px; 
+                background-color: #fff; 
+              
+                .title {
+                  font-size: 20px;
+                  font-weight: 700; 
+                  color: #e60000;
+                  text-transform: uppercase;
+                  margin-bottom: 10px;
+                  text-align: center; 
+                }
+              
+                .shipper-detail-container {
+                  .no-shipper{
+                    font-size: 30px;
+                    text-align: center;
+                    font-weight: bold;
+                  }
+                  .has-shipper {
+                    display: flex;
+                  flex-direction: column;
+                  gap: 10px; 
+                    span {
+                      display: flex;
+                      align-items: center; /* Căn giữa icon và nội dung */
+                      font-size: 14px;
+                      color: #333;
+                      background-color: #fff; 
+                      padding: 5px;
+                      border-radius: 8px; 
+                      // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+                      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Tăng độ rõ đổ bóng */
+                    }
+                    i {
+                      padding: 8px;
+                      background-color: #e60000; 
+                      color: white;
+                      font-weight: bold;
+                      border-radius: 50%; /* Icon dạng tròn */
+                      margin-right: 10px; /* Khoảng cách giữa icon và text */
+                    }
+                    .avatar{
+                      img{
+                        margin-left: 20px;
+                        width: 30px;
+                        height: 30px;
+                        cursor: pointer;
+                      }
+                    }
+                  }
+                }
+            }
+              
+        }
+        .infor-right{
+            flex: 7;
+            // display: flex;
+            // flex-direction: column;
+            margin-left: 20px;
+            .infor-right-ggmap-container {
+                // img {
+                //   height: 80vh; 
+                //   width: 100%; 
+                // }
+              width: 100%;
+              height: 80vh;
+            }
+        }
+    }
+    .list-products{
+        text-align: center;
+        margin-top: 50px;
+        h2{
+            font-size: 2.5rem;
+            color: red;
+            margin-bottom: 20px;
+        }
+    }
+
+}

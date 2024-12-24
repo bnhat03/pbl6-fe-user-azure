@@ -1,0 +1,51 @@
+.infor-right-store-display {
+  max-height:150px;
+  min-height:140px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  outline: 1px solid #ffc522;
+  border-radius: 10px;
+}
+
+.store-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #ffc522;
+  padding: 10px;
+  border-radius: 10px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.selected-store-item {
+  border: 2px solid red; /* Viền đỏ cho cửa hàng được chọn */
+}
+
+.store-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.store-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.store-name {
+  font-weight: bold;
+  margin: 0;
+  font-size: 16px;
+}
+
+.store-address {
+  margin: 0;
+  font-size: 14px;
+  i {
+    padding-right: 5px;
+  }
+}

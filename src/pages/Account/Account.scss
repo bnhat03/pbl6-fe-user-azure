@@ -1,0 +1,131 @@
+.account-page {
+  width: 100%;
+  height: 100vh;
+
+  .header-account {
+    background-color: #f5f5f5; // Nền xám nhẹ
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Đổ bóng
+    border-radius: 8px; // Bo góc mềm mại
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    margin: 20px; // Thêm khoảng cách giữa header và các thành phần khác
+    border: 1px solid #ddd; // Đường viền nhẹ để tăng tính nổi bật
+
+    .breadcrumb {
+      color: #666; // Màu chữ xám
+      font-size: 14px;
+
+      span {
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+          color: #333; // Đổi màu khi hover
+        }
+      }
+    }
+
+    h1 {
+      font-size: 25px;
+      margin-top: 10px;
+      font-weight: 600;
+      color: #333; // Màu chữ đậm để nổi bật trên nền xám
+    }
+  }
+
+  /* Main content container */
+  .main-content {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 100px);
+    padding: 20px;
+
+    /* Sidebar */
+    .sidebar {
+      width: 20%;
+      border-right: 1px solid #ddd;
+      padding: 20px;
+
+      ul {
+        list-style: none;
+
+        li {
+          cursor: pointer;
+          border-radius: 4px;
+          transition: background-color 0.3s ease;
+          border-bottom: 1px solid #e7e7e7;
+          margin-left: 6px;
+          position: relative;
+
+          a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+
+            &.active,
+            &:hover {
+              background-color: #e3000e;
+              color: white;
+            }
+          }
+        }
+      }
+
+      .logout-button {
+        display: block;
+        padding: 10px;
+        color: #333;
+        text-decoration: none;
+        background: none;
+        border: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover,
+        &.active {
+          background-color: #e3000e;
+          color: white;
+        }
+      }
+    }
+
+    /* Content */
+    .content {
+      width: 80%;
+      padding: 20px;
+
+      h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 16px;
+        color: #555;
+      }
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .main-content {
+      flex-direction: column;
+
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .content {
+        width: 100%;
+      }
+    }
+  }
+}

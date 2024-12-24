@@ -1,0 +1,295 @@
+.navbar {
+  padding: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 50px;
+  position: relative;
+  // Chuyển sang chế độ sticky khi đạt đến vị trí top
+  &.sticky {
+    position: sticky;
+    top: 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    background-color: #fff;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: flex-end;
+
+    .logo-image {
+      width: 60px;
+    }
+  }
+  .navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    color: #49557e;
+    font-size: 15px;
+    padding-top: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    a {
+      &:hover {
+        color: red;
+      }
+    }
+
+    .active {
+      padding-bottom: 2px;
+      border-bottom: 3px solid #d64747;
+    }
+  }
+
+  // Mobile
+  .navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  .left-panel {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: -50%;
+    max-width: 50%;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: left 0.3s ease-in-out;
+  
+    &.open {
+      left: 0;
+    }
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 25px;
+      color: #333;
+      cursor: pointer;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #007bff;
+      }
+    }
+    .left-panel-content {
+      padding: 20px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+  
+      .left-panel-list {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        .left-panel-item {
+          padding: 15px 20px;
+          font-size: 12px;
+          font-weight: 500;
+          text-transform: uppercase;
+          color: #333;
+          cursor: pointer;
+          transition: background-color 0.2s ease, color 0.2s ease;
+          &:hover {
+            background-color: #f8f9fa;
+          }
+
+          .left-panel-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;            
+            img {
+              width: 30px;
+              height: 30px;
+              margin-right: 10px;
+              object-fit: cover;
+              border-radius: 5px;
+            }
+            &:hover {
+              background-color: #f0f0f0;
+              color: #007bff;
+            }
+  
+            &.active {
+              background-color: #007bff;
+              color: white;
+              border-radius: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    button {
+      background: transparent;
+      font-size: 16px;
+      color: #49557e;
+      border: 1px solid #e3000e;
+      padding: 10px 30px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-bottom: 10px;
+
+      &:hover {
+        background-color: #f01010;
+        color: white;
+      }
+    }
+    .navbar-cart-icon {
+      position: relative;
+      img{
+        width: 30px;
+        height: 30px;
+      }
+      .dot {
+        position: absolute;
+        min-width: 10px;
+        min-height: 10px;
+        background-color: #e3000e;
+        border-radius: 5px;
+        top: -4px;
+        right: -4px;
+      }
+      // &.active {
+      //   padding-bottom: 2px;
+      //   border-bottom: 3px solid #d64747;
+      // }
+    }
+    .navbar-profile {
+      position: relative;
+      padding: 0;
+      img{
+        width: 30px;
+        height: 30px;
+      }  
+      // border: 1px solid #ccc;
+      // border-radius: 50%;
+    }
+  }
+
+  .navbar-category {
+    &:hover .navbar-category-dropdown {
+      display: flex;  
+      gap: 40px;
+      background-color: #fff;
+      padding: 15px 30px;
+      border-radius: 15px;
+      border: 1px solid red;
+      list-style: none;
+      justify-content: space-around;
+      /* Animation mờ dần khi hiển thị dropdown */
+      opacity: 1; 
+      visibility: visible; 
+      animation: fadeIn 0.5s ease-in-out; /* Tăng thời gian animation nếu cần */
+    }
+
+    .navbar-category-dropdown {
+      position: absolute;
+      display: none;
+      border-radius: 15px;
+      transform: translateX(-40%); // dịch chuyển phần tử theo chiều ngang sang trái bằng 35% kích thước của chính phần tử đó.
+      z-index: 100;
+      // width: 80%;
+      background-color: white;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      color: black;
+      // margin-top: 5px; 
+      /* Thêm hiệu ứng chuyển mượt mà khi hiện/ẩn */
+      opacity: 0;
+      visibility: hidden; 
+      transition: opacity 0.5s ease-in-out, visibility 0s linear 0.5s;
+
+      .navbar-category-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+        cursor: pointer;
+        height: auto;
+        min-width: 25px;
+        min-height: 25px;
+
+        p {
+          align-items: center;
+          padding-top: 10px;
+          font-size: 13px;
+          margin: 0;
+        }
+        img {
+          width: 70px;
+          height: 50px;
+        }
+        .active-category-item p {
+          color: red; // Màu cho mục con active
+        }
+        &:hover {
+          color: red;
+        }
+
+
+      }
+    }
+  }
+}
+@media (max-width: 750px) {
+  .navbar {
+    margin: 0;
+    .logo {
+      .logo-image {
+        width: 40px;  // Điều chỉnh kích thước hình ảnh logo cho màn hình nhỏ
+      }
+    }
+    .navbar-menu {
+      display: none;  // Ẩn menu trên màn hình nhỏ
+    }
+    .navbar-toggle {
+      display: block;
+      font-size: 30px;
+      background: none;
+      border: none;
+      color: black;
+      cursor: pointer;
+    }
+    .left-panel{
+      display: block;
+    }
+  }
+}
+
+// Đảm bảo nội dung không bị navbar che khuất
+.navbar + .content {
+  padding-top: 80px;
+}
+/* Keyframes cho hiệu ứng mờ dần */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

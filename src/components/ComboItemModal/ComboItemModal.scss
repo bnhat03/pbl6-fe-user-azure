@@ -1,0 +1,235 @@
+.custom-modal-productitem{
+    max-width: 60% !important;
+    // overflow-x: auto;
+    .modal-product-item{
+        display: flex;
+        flex-direction: column;
+        .product-detail-infor{
+            display: flex;
+            .infor-left{
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .img-container {
+                    img {
+                      // height: 500px;
+                      height: 100%;
+                      width: 100%; 
+                      object-fit: contain; /* Đảm bảo tỉ lệ hình ảnh không bị biến dạng */
+                    }
+                  }
+            }
+            .infor-right{
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                max-width: 50%;
+                .category{
+                    font-size: 20px;
+                    font-weight: 500;
+                    color: grey;
+                }
+                .name{
+                    font-size: 25px;
+                    font-weight: 600;
+                    color: rgb(32, 32, 32);
+                    text-transform: uppercase;
+                }
+                .products-container{
+                  .title{
+                    font-weight: bold;
+                  }
+                  .list-products{
+                    margin-top: 5px;
+                    display: flex;
+                    flex-direction: row;
+                    border: 1px solid #E7E7E7;
+                    max-width: 500px; 
+                    overflow-x: auto; /* Cuộn ngang */
+                      .product-item{
+                        flex: 1;
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        min-width: 200px;
+                        .product-item-image{
+                            width: 50px;
+                            height: 50px;
+                            border: 1px solid #E7E7E7;
+                            cursor: pointer;
+                            img{
+                              width: 100%;
+                              height: 100%;
+                              object-fit: contain;
+                            }
+                        }
+                        .product-item-infor{
+                            display: flex;
+                            flex-direction: column;
+                            margin: 0 5px;
+                            justify-content: center;
+                            p{
+                                margin: 0;
+                                max-width: 140px;
+                                
+                            }
+                            .infor-price-quantity{
+                                display: flex;
+                            }
+                        }
+                    }
+                  }
+                }
+                .drinks-container {
+                  margin-top: 5px;
+                  .title{
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                  }
+                  .list-drinks {
+                    max-width: 100%; // Giữ kích thước của select
+                  }
+                  .drink-select{
+                    background-color: #FFC522;
+                    // font-weight: bold;
+                    text-transform: uppercase;
+                  }
+                }
+                
+                .size-container {
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                    .title{
+                      font-weight: bold;
+                    }
+                    .list-size {
+                      margin-top: 10px;
+                      font-size: 15px;
+                      display: flex;
+                      flex-wrap: wrap; 
+                      gap: 30px; 
+                    
+                      .size-item {
+                        padding: 5px 30px; 
+                        border: 1px solid #ccc;
+                        cursor: pointer;
+                        border-radius: 20px;
+                        text-align: center;
+                        transition: background-color 0.3s, border-color 0.3s, color 0.3s; // Hiệu ứng khi hover hoặc chọn
+                    
+                        &:hover {
+                          background-color: #eee; 
+                        }
+                      }
+                    
+                      .size-item.selected {
+                        background-color: #ffc522; 
+                        // color: #fff;
+                        font-weight: bold;
+                        border-color: #ffc522; 
+                      }
+                    }
+                    
+                  }
+                  
+                  .quantity-totalprice-container {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 8px;
+                    // max-width: 300px;
+                    margin: 10px 0;
+                  
+                    .quantity-container {
+                      display: flex;
+                      align-items: center;
+                  
+                      .quantity-btn {
+                        color: var(--white);
+                        background: var(--light-red);
+                        border: var(--light-red);
+                        padding: 10px 15px;
+                        font-size: 13px;
+                        font-weight: 600;
+                        letter-spacing: 0.5px;
+                        font-family: var(--oswald-font);
+                        vertical-align: middle;
+                        text-transform: uppercase;
+                        transition: all 0.3s ease-in-out;
+                        border-radius: 8px;
+                        outline: none;
+                        border: none;
+                        &:hover, &:focus{
+                            color: var(--light-red);
+                            background: transparent;
+                            outline: 1px solid var(--light-red);
+                        }
+                      }
+                  
+                      .quantity-input {
+                        width: 60px;
+                        height: 40px;
+                        text-align: center;
+                        border: 1px solid #ccc;
+                        margin: 0 5px;
+                        border-radius: 5px;
+                        font-size: 16px;
+                      }
+                    }
+                    .totalprice-container {
+                      font-size: 25px;
+                      font-weight: 700;
+                      color: var(--light-red);
+                    }
+                  }
+                  .btn-container{
+                    margin-top: 10px;
+                    button{
+                      color: var(--white);
+                      background: var(--light-red);
+                      border: var(--light-red);
+                      padding: 10px 15px;
+                      font-size: 15px;
+                      font-weight: 600;
+                      letter-spacing: 0.5px;
+                      font-family: var(--oswald-font);
+                      vertical-align: middle;
+                      text-transform: uppercase;
+                      transition: all 0.3s ease-in-out;
+                      border-radius: 8px;
+                      outline: none;
+                      border: none;
+                      &:hover, &:focus{
+                          color: var(--light-red);
+                          background: transparent;
+                          outline: 1px solid var(--light-red);
+                      }
+                    }
+                  } 
+                
+                .store{
+                    .store-title{
+                        font-size: 15px;
+                        margin-bottom: 10px;
+                        font-weight: bold;
+                        max-height: 35px;
+                    }
+                }
+                .stock-quantity{
+                  font-size: 15px;
+                        margin-top: 10px;
+                        font-weight: bold;
+                }
+            }
+        }
+    
+        .product-detail-comment{
+            text-align: center;
+            margin-top: 50px;
+            font-size: 50px;
+        }
+    }
+}

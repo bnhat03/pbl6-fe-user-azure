@@ -1,0 +1,37 @@
+.promotion-detail-page {
+    padding: 40px 20px;  // Tăng khoảng cách padding trên/dưới
+    max-width: 1000px;
+    margin: 30px auto;
+    background-color: #fff;  // Tạo nền trắng cho phần nội dung chính
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  // Tạo hiệu ứng shadow
+    border-radius: 8px;  // Bo góc cho hộp nội dung
+    text-align: left;
+
+    h1 {
+        color: #d32f2f;
+        font-size: 32px;  // Tăng kích thước chữ tiêu đề
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .infor-container {
+        padding: 20px 0;  // Thêm padding để tạo không gian giữa các phần nội dung
+        
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 1.6;  // Tăng khoảng cách dòng cho dễ đọc
+        }
+
+        ul {
+            margin-left: 40px;
+            list-style-type: disc;  // Sử dụng bullet point cho danh sách
+        }
+
+        li {
+            font-size: 16px;
+            margin-bottom: 10px;  // Tạo khoảng cách giữa các item trong danh sách
+        }
+    }
+}

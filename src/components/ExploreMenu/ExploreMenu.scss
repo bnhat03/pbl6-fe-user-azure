@@ -1,0 +1,86 @@
+.explore-menu {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  
+
+  h1 {
+    color: #da3333;
+    font-weight: 700;
+  }
+
+  .explore-menu-text {
+    // max-width: 60%;
+    columns: #494747;
+    font-size: 18px;
+  }
+
+  .explore-menu-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    text-align: center;
+    margin: 20px 0; // Bỏ margin hai bên để thanh cuộn dễ thấy
+    overflow-x: auto; // Cho phép cuộn ngang
+    overflow-y: hidden; // Ngăn cuộn dọc
+    white-space: nowrap; // Ngăn văn bản xuống dòng
+
+    &::-webkit-scrollbar {
+      display: block; // Hiển thị thanh cuộn
+    }
+
+    .explore-menu-list-item {
+      min-width: 110px;
+      img {
+        width: 7vw;
+        height: 7vw;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: 0.2s;
+        border: 2px dashed red;
+
+        &.active {
+          border: 4px solid #e3000e;
+          padding: 2px;
+        }
+      }
+
+      p {
+        margin-top: 10px;
+        color: #464242;
+        font-size: 14px;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: 700;
+        min-height: 50px; 
+        white-space: wrap; 
+        // overflow: hidden; // Cắt bớt phần nội dung vượt quá
+        // text-overflow: ellipsis; // Thêm dấu "..." nếu văn bản quá dài
+      }
+
+      &:hover {
+        p {
+          color: red;
+        }
+      }
+    }
+  }
+  hr {
+    margin-top: 10px 0px;
+    height: 2px;
+    background-color: #e2e2e2;
+    border: none;
+  }
+}
+@media (max-width: 750px) {
+  .explore-menu {
+    .explore-menu-list{
+      .explore-menu-list-item{
+        
+      }
+    }
+  }
+}

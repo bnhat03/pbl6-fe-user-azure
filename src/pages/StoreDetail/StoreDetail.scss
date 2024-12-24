@@ -1,0 +1,94 @@
+.page-store-detail{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    .store-detail-infor{
+        display: flex;
+        // min-width: 600px;
+        // height: 60vh;
+        .infor-left{
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            .infor-left-voucher-container {
+              height: 40vh;
+            }
+            .infor-left-infor-container {
+                border: 1px solid #e60000; 
+                padding: 10px 30px;
+                margin-top: 2vh;
+                border-radius: 10px; 
+                background-color: #fff; 
+                height: 40vh;
+              
+                .infor-left-name {
+                  font-size: 20px;
+                  font-weight: 700; 
+                  color: #e60000;
+                  text-transform: uppercase;
+                  margin-bottom: 10px;
+                  text-align: center; 
+                }
+              
+                .infor-left-contact-container {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 10px; 
+            
+                  span {
+                    display: flex;
+                    align-items: center; /* Căn giữa icon và nội dung */
+                    font-size: 14px;
+                    color: #333;
+                    background-color: #fff; 
+                    padding: 5px;
+                    border-radius: 8px; 
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+                  }
+              
+                  i {
+                    padding: 8px;
+                    background-color: #e60000; 
+                    color: white;
+                    font-weight: bold;
+                    border-radius: 50%; /* Icon dạng tròn */
+                    margin-right: 10px; /* Khoảng cách giữa icon và text */
+                  }
+                  button {
+                    border-radius: 5px;
+                    border:#333 1px;
+                    padding: 10px 0px;
+                    color: #333;
+                    transition: background-color 0.5s ease;
+                  }
+                  .chat-store:hover{
+                    background-color: #cac4c4;
+                  }
+                }
+              }
+              
+        }
+        .infor-right{
+            flex: 7;
+            // display: flex;
+            // flex-direction: column;
+            margin-left: 20px;
+            .infor-right-ggmap-container {
+                // img {
+                //   height: 80vh; 
+                //   width: 100%; 
+                // }
+            }
+        }
+    }
+    .list-products{
+        text-align: center;
+        margin-top: 50px;
+        h2{
+            font-size: 2.5rem;
+            color: red;
+            margin-bottom: 20px;
+        }
+    }
+
+}

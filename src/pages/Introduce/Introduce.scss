@@ -1,0 +1,105 @@
+.introduce-section-1 {
+  margin-top: 30px;
+    .section-1-up{
+        background: var(--yellow);
+        .container-edit{
+          width: 80%;
+          margin: 80px auto;
+          display: flex;
+          .introduce-section-1-title{
+              font-size: 2rem;
+              font-family: 'MergeBlack', sans-serif !important;
+              color: #e31837;
+              text-transform: uppercase;
+              font-weight: 700;
+          }
+          .introduce-section-1-description{
+              text-align: left;
+              margin: 30px 0;
+              line-height: 24px;
+              color: rgb(21, 20, 20);
+              font-size: 17px;
+              font-weight: 500;
+          }
+          .introduce-section-1-image{
+              margin-left: 60px;
+              width: 550px;
+              height: 400px;
+          }
+        }
+    }
+    .section-1-down {
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+    }
+    
+    .section-1-down-subimage {
+        padding: 0 !important;
+        width: 25%; /* Mỗi cột chiếm 25% chiều rộng để tạo 4 cột */
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .section-1-down-subimage img {
+        width: 100%; 
+        height: 100%;
+    }    
+}
+
+// Section 2
+.introduce-section-2 {
+  margin: 50px 0;
+  padding: 2rem 0; /* Thêm khoảng cách trên và dưới */
+}
+
+.introduce-section-2-title {
+  text-align: center; 
+  font-size: 2rem;
+  margin-bottom: 1rem; 
+  color: #e31837;
+  font-size: 600;
+}
+
+.introduce-section-2-description {
+  font-size: 1.2rem; 
+  line-height: 1.5; 
+  text-align: left; 
+}
+
+// Section 3
+.introduce-section-3 {
+    margin-top: 50px;
+    padding: 80px 0 50px;
+    background: url("../../assets/blog/reviews_2.jpg") no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow: hidden;
+  .user_img img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin-bottom: 25px;
+  }
+  .carousel.slide .carousel-inner .carousel-caption p {
+    font-size: 1.7rem;
+    line-height: 1.45;
+    font-weight: 400;
+    padding: 0 12%;
+    margin-bottom: 25px;
+  }
+  .carousel.slide .carousel-inner .carousel-caption .item_rating i {
+    color: var(--yellow);
+    margin-right: 5px;
+  }
+  .carousel.slide .carousel-inner .carousel-caption h5 {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+}
+
+
+

@@ -1,0 +1,111 @@
+.custom-modal-login {
+    max-width: 30% !important;
+
+    .title-bold {
+        font-weight: 700;
+    }
+
+    .form-login {
+        .form-login-input {
+            margin-bottom: 10px;
+
+            input {
+                width: 100%;
+                border-radius: 5px;
+                border: 1px solid #E7E7E7;
+                padding: 10px 15px;
+                margin: 10px 0;
+
+                &:focus {
+                    outline: none;
+                    border: 1px solid red;
+                }
+            }
+
+            // Thêm container cho trường mật khẩu với icon mắt
+            .password-container {
+                position: relative;
+
+                input {
+                    padding-right: 40px; // Chừa khoảng trống cho icon
+                }
+
+                .toggle-password {
+                    position: absolute;
+                    top: 50%;
+                    right: 10px;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    color: #aaa;
+
+                    &:hover {
+                        color: #333;
+                    }
+                }
+            }
+
+            .btn-forgot-password {
+                background-color: transparent;
+                border: none;
+                color: #e3000e;
+                cursor: pointer;
+                text-decoration: underline;
+
+                &:hover {
+                    opacity: 0.5;
+                }
+            }
+        }
+
+        .btn {
+            width: 100%;
+        }
+
+        .google-facebook-container {
+            display: flex;
+            margin: 30px 20px;
+            justify-content: space-around;
+            align-items: center;
+
+            p {
+                margin: 0;
+            }
+
+            .gg-fb-icon {
+                display: flex;
+            }
+
+            .custom-facebook-button {
+                margin-left: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: 1px solid white;
+                font-size: 38px;
+                color: #2c98eb;
+
+                &:hover {
+                    color: #7abbec;
+                }
+            }
+        }
+
+        .click-register {
+            margin-top: 10px;
+            display: flex;
+
+            p {
+                margin: 0;
+                padding-right: 10px;
+            }
+
+            button {
+                background-color: transparent;
+                border: none;
+                color: #e3000e;
+                cursor: pointer;
+            }
+        }
+    }
+}

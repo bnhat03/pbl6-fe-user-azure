@@ -1,0 +1,152 @@
+
+.page-category {
+  margin-top: 20px;
+  .search-filter-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 50px;
+    margin-right: 200px;
+    // .file-upload-AI-container {
+    //   position: relative;
+    //   display: inline-block;
+    //   margin-right: 30px;
+    //   cursor: pointer;
+    //   input[type="file"] {
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     opacity: 0; /* Ẩn input file */
+    //     width: 100%;
+    //     height: 100%;
+    //     cursor: pointer;
+    //   }
+    
+    //   label {
+    //     i{
+    //       margin-right: 5px;
+    //     }
+    //     color: black; /* Màu chữ */
+    //     border: 1px solid black;
+    //     padding: 5px 10px; /* Khoảng cách trong nút */
+    //     border-radius: 5px; /* Bo góc */
+    //     cursor: pointer; /* Con trỏ chuột thành tay khi hover */
+    //     display: inline-block;
+    //     font-weight: 400;
+    //     &:hover {
+    //       border: 1px solid red; /* Đổi màu viền khi hover */
+    //       color: red;
+    //     }
+    //   }
+    // }
+
+    .file-upload-AI-container {
+      margin-right: 30px;
+      position: relative;
+      width: 70px; 
+      height: 70px; 
+      overflow: hidden;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      // cursor: pointer;
+      background-color: #f9f9f9;
+      transition: border-color 0.3s;         
+      .image-upload-label {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f9f9f9; 
+        cursor: pointer;
+        .image-preview {
+          width: 100%; 
+          height: 100%;
+          margin: 0;
+        }
+        .image-upload-placeholder {
+          color: #aaa; // Màu chữ cho placeholder
+          font-size: 16px;
+        }
+      }
+    }
+    .search-container{
+      margin-right: 30px;
+      display: flex;
+      align-items: center;
+    }
+    .filter-container{
+      display: flex;
+      align-items: center;
+    }
+  }
+  .has-products {
+    background: url('../../assets/category/jollibee.png') no-repeat;
+    background-size: inherit;
+    background-position: center;
+    @media screen and (min-width: 260px) and (max-width: 1080px) {
+      .title {
+        gap: 1rem;
+        h1 {
+          font-size: 2rem;
+        }
+        p {
+          padding: 0 1vw;
+        }
+      }
+    }
+    .category-list-products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin: 0 200px;
+      .hr-separate {
+        grid-column: 1 / -1; 
+        border: 2px dashed red; 
+        margin: 1rem 0;
+        width: 100%;
+      }
+    }
+    .pagination-container{
+      display: flex;
+      justify-content: center; 
+      margin-top: 50px;
+    }
+  }
+  .no-product{
+    font-size: 35px;
+    text-align: center;
+    font-weight: bold;
+    color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    grid-column: 1 / -1; /* Trải rộng trên toàn grid */
+  }
+  .loading-container{   
+    font-size: 20px;
+    text-align: center;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    grid-column: 1 / -1; /* Trải rộng trên toàn grid */
+    .loading-data{
+      color: black;
+      margin-top: 20px;
+    }
+  }
+
+  @media screen and (min-width: 280px) and (max-width: 720px) {
+    .category-list-products {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+  }
+  @media screen and (min-width: 720px) and (max-width: 1080px) {
+    .category-list-products {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+}

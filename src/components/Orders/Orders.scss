@@ -1,0 +1,38 @@
+.orders-management{
+    .icon-filter-container{
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #D7D7D7;
+        margin-bottom: 20px;
+         padding-bottom: 20px;
+        .icon-container{
+            
+            .icon-i{
+                font-size: 26px;
+                margin-right: 15px;
+                color: #D3D3D4;
+            }
+            .icon-span{
+                font-size: 21px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+        }
+        .filter-container{
+
+        }
+    }
+    .table-orders{
+        text-align: center;
+        margin: auto 0;
+        margin-bottom: 30px !important;
+    }
+    .btn-return-homepage{
+        padding: 10px 25px !important;
+    }
+    .pagination-container{
+        display: flex;
+        justify-content: center; 
+        margin-top: 40px;
+      }  
+}
