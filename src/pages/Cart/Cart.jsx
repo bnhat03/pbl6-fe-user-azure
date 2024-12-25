@@ -34,17 +34,29 @@ const Cart = () => {
   }, [dispatch]);
 
   // Chọn cửa hàng đầu tiên khi danh sách sản phẩm hoặc combo thay đổi
-  useEffect(() => {
-    if (Array.isArray(listProductsInCart) && Array.isArray(listCombosInCart)) {
-      const allItems = [...listProductsInCart, ...listCombosInCart];
-      if (allItems.length > 0) {
-        const firstStore = allItems.find((item) => item.product || item.combo);
-        setSelectedStore(+firstStore?.product?.storeId || +firstStore?.combo?.storeId || 0);
-      } else {
-        setSelectedStore(0);
+  // useEffect(() => {
+  //   if (Array.isArray(listProductsInCart) && Array.isArray(listCombosInCart)) {
+  //     const allItems = [...listProductsInCart, ...listCombosInCart];
+  //     if (allItems.length > 0) {
+  //       const firstStore = allItems.find((item) => item.product || item.combo);
+  //       setSelectedStore(+firstStore?.product?.storeId || +firstStore?.combo?.storeId || 0);
+  //     } else {
+  //       setSelectedStore(0);
+  //     }
+  //   }
+  // }, [listProductsInCart, listCombosInCart]);
+
+    // const [selectedStore, setSelectedStore] = useState("all");
+    const [selectedStore, setSelectedStore] = useState(0);
+    useEffect(() => {
+      if (Array.isArray(listProductsInCart) && Array.isArray(listCombosInCart)) {
+        const allItems = [...listProductsInCart, ...listCombosInCart];
+        if (allItems.length > 0 && selectedStore === 0) {
+          const firstStore = allItems.find((item) => item.product || item.combo);
+          setSelectedStore(+firstStore?.product?.storeId || +firstStore?.combo?.storeId || 0);
+        }
       }
-    }
-  }, [listProductsInCart, listCombosInCart]);
+    }, [listProductsInCart, listCombosInCart, selectedStore]);
 
   const handleCheckboxChange = (cartId) => {
     setCheckedItems((prevCheckedItems) =>
@@ -137,8 +149,6 @@ const Cart = () => {
   };
 
 
-  // const [selectedStore, setSelectedStore] = useState("all");
-  const [selectedStore, setSelectedStore] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleStoreChange = (event) => {

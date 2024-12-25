@@ -146,13 +146,13 @@ const ComboItemModal = ({ showModalCombo, handleCloseModalCombo, combo, stores, 
 
   // Reset tất cả state khi đóng modal
   const handleModalClose = () => {
-    setQuantity(1);
     setSelectedStore(null); // Reset cửa hàng về null -> Ko chọn cửa hàng nào
     setSelectedSize(listSizes.length > 0 ? listSizes[0].name : ""); // Reset kích thước về kích thước đầu tiên
-    setFinalPrice(combo.price);
+    handleCloseModalCombo();
     setTimeout(() => {
-      handleCloseModalCombo();
-    }, 200);
+      setQuantity(1);
+      setFinalPrice(combo.price);
+    }, 1000);
   };
 
   // const drinks = [

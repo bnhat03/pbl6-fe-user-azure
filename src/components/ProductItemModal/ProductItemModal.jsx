@@ -144,14 +144,13 @@ const ProductItemModal = ({ showModalProduct, handleCloseModalProduct, product, 
 
   // Reset tất cả state khi đóng modal
   const handleModalClose = () => {
-    setQuantity(1);
     setSelectedStore(null); // Reset cửa hàng về null -> Ko chọn cửa hàng nào
     setSelectedSize(listSizes.length > 0 ? listSizes[0].name : ""); // Reset kích thước về kích thước đầu tiên
-    setFinalPrice(product.discountedPrice);
-    setFinalPrice(product?.discountedPrice);
+    handleCloseModalProduct();
     setTimeout(() => {
-      handleCloseModalProduct();
-    }, 200);
+      setQuantity(1);
+      setFinalPrice(product?.discountedPrice);
+    }, 1000);
   };
   return (
     <Modal
