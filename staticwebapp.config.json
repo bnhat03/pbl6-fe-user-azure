@@ -1,0 +1,13 @@
+{
+    "routes": [
+      {
+        "route": "/oauth2/redirect",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/*",
+        "rewrite": "/index.html"
+      }
+    ]
+}
+  

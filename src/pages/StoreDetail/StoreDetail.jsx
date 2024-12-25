@@ -201,7 +201,8 @@ const StoreDetail = () => {
                 </span>
                 <span className="contact-time">
                   <i className="fa-solid fa-clock"></i>
-                  {formatDate(storeDetail.openingTime)} - {formatDate(storeDetail.closingTime)} hàng ngày
+                  {/* {formatDate(storeDetail.openingTime)} - {formatDate(storeDetail.closingTime)} hàng ngày */}
+                  {String(storeDetail?.openingTime || '').slice(0, 5)} - {String(storeDetail?.closingTime || '').slice(0, 5)} hàng ngày
                 </span>
                 {
                   isAuthenticated === true
