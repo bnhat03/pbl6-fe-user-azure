@@ -8,6 +8,7 @@ import { Form } from 'react-bootstrap';
 import L from 'leaflet';
 import iconStore from '../../assets/logo/map_store.png'
 import iconOrder from '../../assets/logo/map_order.png'
+import iconCurrentLocation from '../../assets/logo/map_current_location.png'
 //MAP
 import axios from 'axios';
 import { MapContainer, TileLayer, Polyline, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
@@ -241,16 +242,22 @@ const Checkout_V2 = () => {
         const distance = R * c; // khoảng cách (km)
         return distance.toFixed(2); // km
     }
+    // Customize icon markup
     const customIconStore = new L.Icon({
         iconUrl: iconStore,
         iconSize: [40, 40],       // Kích thước icon
         iconAnchor: [20, 40],     // Điểm gắn icon
         popupAnchor: [0, -40],    // Điểm gắn Popup
     });
-    // Customize icon markup
     const customIconOrder = new L.Icon({
         iconUrl: iconOrder,
         iconSize: [60, 60],       // Kích thước icon
+        iconAnchor: [20, 40],     // Điểm gắn icon
+        popupAnchor: [0, -40],    // Điểm gắn Popup
+    });
+    const customIconCurrentLocation = new L.Icon({
+        iconUrl: iconCurrentLocation,
+        iconSize: [30, 30],       // Kích thước icon
         iconAnchor: [20, 40],     // Điểm gắn icon
         popupAnchor: [0, -40],    // Điểm gắn Popup
     });
@@ -349,7 +356,7 @@ const Checkout_V2 = () => {
                                 )}
 
                                 {currentCoords && (
-                                    <Marker position={currentCoords}>
+                                    <Marker position={currentCoords} icon={customIconCurrentLocation}>
                                         <Popup>
                                             Vị trí hiện tại của bạn
                                         </Popup>
