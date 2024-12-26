@@ -113,6 +113,9 @@ const Checkout_V2 = () => {
         if (!fullname || !phonenumber || !address) {
             toast.error('Vui lòng điền đầy đủ thông tin đơn hàng!');
         }
+        else if (!/^0\d{9}$/.test(phonenumber)){
+            toast.error('Nhập số điện thoại hợp lệ!');
+        }
         else {
             let method = 'CASH';
             switch (paymentMethod) {
@@ -149,7 +152,6 @@ const Checkout_V2 = () => {
     // MAP: OpenRouteService
     const [addressCoords, setAddressCoords] = useState([16.075966, 108.149805]); // Tọa độ click -> Chọn giao hàng ở đó -> Trên Map
     const [currentCoords, setCurrentCoords] = useState([16.075966, 108.149805]); // Tọa độ hiện tại của mình
-    const apiKey = import.meta.env.VITE_API_KEY_MAP;
 
     // Lấy tọa độ hiện tại (Mới vô MAP)
     const getCurrentCoors = () => {
@@ -187,7 +189,7 @@ const Checkout_V2 = () => {
     const ZoomToAddress = () => {
         const map = useMap();
         if (addressCoords) {
-            map.setView(addressCoords, 16); // Phóng to đến tọa độ với level 18
+            map.setView(addressCoords, 18); // Phóng to đến tọa độ với level 18
         }
         return null;
     };
@@ -251,7 +253,7 @@ const Checkout_V2 = () => {
     });
     const customIconOrder = new L.Icon({
         iconUrl: iconOrder,
-        iconSize: [60, 60],       // Kích thước icon
+        iconSize: [40, 40],       // Kích thước icon
         iconAnchor: [20, 40],     // Điểm gắn icon
         popupAnchor: [0, -40],    // Điểm gắn Popup
     });
@@ -378,7 +380,7 @@ const Checkout_V2 = () => {
                                 <ZoomToAddress /> {/* Thêm component phóng to */}
                             </MapContainer>
                         </div>
-                        <div className="form-group col-md-12">
+                        {/* <div className="form-group col-md-12">
                             <label htmlFor="">Ghi chú</label>
                             <textarea
                                 name="note"
@@ -386,7 +388,7 @@ const Checkout_V2 = () => {
                                 value={note}
                                 onChange={(e) => setNote(e.target.value)}
                             />
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="order-summary">

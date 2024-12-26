@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { hideLoginModal, showRegisterModal } from '../../redux/actions/modalActions';
 import { loginUser, loginGoogle } from '../../redux/actions/authActions';
 
-import { GoogleLogin } from '@react-oauth/google';
 // import FacebookLogin from 'react-facebook-login';
 import fbIcon from '../../assets/logo/facebook.png'
+import googleIcon from '../../assets/logo/google.png'
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import ForgetPasswordModal from '../ForgetPasswordModal/ForgetPasswordModal';
@@ -71,20 +71,11 @@ const LoginModal = () => {
     let urlBE = import.meta.env.VITE_BACKEND_URL || `http://localhost:8080`;
     window.location.href = `${urlBE}/oauth2/authorization/google`;
   }
-  const handleErrorGoogle = () => {
-    alert('Lỗi tùm lum');
-  }
-
   // FB
   const handleSuccessFacebook = async () => {
-    // dispatch(loginGoogle(credentialResponse.credential));
     let urlBE = import.meta.env.VITE_BACKEND_URL || `http://localhost:8080`;
     window.location.href = `${urlBE}/oauth2/authorization/facebook`;
   }
-  const handleErrorFacebook = () => {
-    alert('Lỗi tùm lum');
-  }
-
 
   useEffect(() => {
     if (isAuthenticated) { // Login successfully -> Ẩn modal + xóa dl
@@ -160,21 +151,27 @@ const LoginModal = () => {
               <div className="google-facebook-container">
                 <p>Hoặc đăng nhập với </p>
                 <div className="gg-fb-icon">
-                  <GoogleLogin
+                  {/* <GoogleLogin
                     onSuccess={handleSuccessGoogle}
                     onError={handleErrorGoogle}
                     // type='icon'
                     shape='circle'
                     text='signin'
-                  />
-                  {/* <FacebookLogin
-                    appId=''
-                    autoLoad={true}
-                    fields='name,email,picture'
-                    textButton={<i className="fa-brands fa-facebook" />}
-                    cssClass='custom-facebook-button'
-                    onClick={handleSuccessFacebook}
                   /> */}
+                  <button 
+                    className='custom-google-button' 
+                    onClick={handleSuccessGoogle}
+                    title='Google'
+                  >
+                     <img src={googleIcon} alt="" />
+                  </button>
+                  {/* <button 
+                    className='custom-facebook-button' 
+                    onClick={handleSuccessFacebook}
+                    title='Facebook'
+                    >
+                     <i className="fa-brands fa-facebook" />
+                  </button> */}
                 </div>
               </div>
               <div className="click-register">

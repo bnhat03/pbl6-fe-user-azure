@@ -118,8 +118,8 @@ const logoutUser = () => {
     return async (dispatch) => {
         // const res = await logoutUserService();
         toast.success('Đăng xuất thành công!');
-        dispatch(logoutUserSuccess());
-        dispatch(resetAllUser());
+        dispatch(logoutUserSuccess()); // auth action
+        dispatch(resetAllUser()); // user action
     };
 };
 
@@ -182,14 +182,15 @@ const getUserAccount = () => {
                     dispatch(getUserAccountSuccess(res.data.data));
                     // toast.success(res.data.message);
                 } else {
-                    // Hiển thị thông báo lỗi nếu đăng nhập không thành công
-                    // toast.error(res.data.message || "Đăng nhập thất bại.");
+                    dispatch({ type: 'FETCH_USER_ACCOUNT_ERROR' });
                 }
+            }
+            else {
+                dispatch({ type: 'FETCH_USER_ACCOUNT_ERROR' });
             }
         } catch (error) {
             console.log(error);
-            // Hiển thị thông báo lỗi
-            // toast.error(res.data.message || "Đăng nhập thất bại.");
+            dispatch({ type: 'FETCH_USER_ACCOUNT_ERROR' });
         }
     };
 };

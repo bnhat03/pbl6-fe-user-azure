@@ -74,10 +74,7 @@
           }
         }
       }
-      .btn-redirect-checkout {
-        i{
-          margin-right: 5px;
-        }
+      .btn-redirect-checkout {    
         border: 1px solid #e3000e;
         color: white;
         background: #e3000e;
@@ -89,6 +86,9 @@
         &:hover {
           color: #e3000e;
           background: transparent;
+        }
+        i{
+          margin-right: 5px;
         }
       }
     }

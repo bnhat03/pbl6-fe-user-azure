@@ -1,6 +1,7 @@
 // reducers/authReducer.js
 const initialState = {
     isAuthenticated: false, // Đã đăng nhập chưa 
+    isLoading: true, // Trạng thái chờ khi xác thực người dùng
     registerNewUserSuccess: false,
     account: {}, // Thông tin account
     isSentOTP: false,
@@ -27,7 +28,8 @@ const authReducer = (state = initialState, action) => {
             address = action.accountInfo.address;
             return { ...state, account: { ...account, fullName, avatar, email, address } };
         case 'LOGOUT_USER':
-            return { ...state, isAuthenticated: false, account: {} };
+            // return { ...state, isAuthenticated: false, account: {} };
+            return { ...initialState, isLoading: false };
         case 'LOGIN_GOOGLE_SUCCESS':
             return { ...state, isAuthenticated: true };
         case 'LOGIN_GOOGLE_ERROR':
@@ -40,7 +42,13 @@ const authReducer = (state = initialState, action) => {
             avatar = action.accountInfo.avatar;
             email = action.accountInfo.email;
             address = action.accountInfo.address;
-            return { ...state, isAuthenticated: true, account: { ...account, id, phoneNumber, fullName, avatar, email, address } };
+            return { ...state, isLoading: false, isAuthenticated: true, account: { ...account, id, phoneNumber, fullName, avatar, email, address } };
+        case 'FETCH_USER_ACCOUNT_ERROR':
+            return {
+                ...state,
+                isAuthenticated: false,
+                isLoading: false,
+            };
         case 'SENT_OTP_SUCCESS':
             return { ...state, isSentOTP: true };
         case 'VERIFY_OTP_SUCCESS':

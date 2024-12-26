@@ -87,7 +87,6 @@ const DeliveryMap_V2 = () => {
   const [distance, setDistance] = useState(null);
   const [duration, setDuration] = useState(null); // Thời gian di chuyển ước lượng
   const [addressCoords, setAddressCoords] = useState([16.075966, 108.149805]); // Tọa độ hiện tại của mình (Mới vô) / Tọa độ Click
-  const apiKey = import.meta.env.VITE_API_KEY_MAP;
   // Hàm xử lý click trên bản đồ 
   const handleMapClick = (event) => {
     const { lat, lng } = event.latlng;

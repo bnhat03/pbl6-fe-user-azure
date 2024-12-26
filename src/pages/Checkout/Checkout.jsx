@@ -156,7 +156,7 @@ const Checkout = () => {
     const [currentCoords, setCurrentCoords] = useState([16.075966, 108.149805]); // Tọa độ hiện tại của mình
     // const [error, setError] = useState(null);
     // const [clickedCoords, setClickedCoords] = useState(null); // Tọa độ click
-    const apiKey = import.meta.env.VITE_API_KEY_MAP;
+    const apiKey = import.meta.env.VITE_API_KEY_MAP || 'N/A';
 
     // Lấy tọa độ hiện tại (Mới vô MAP)
     const getCurrentCoors = () => {

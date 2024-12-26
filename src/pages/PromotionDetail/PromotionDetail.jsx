@@ -57,7 +57,7 @@ const PromotionDetail = () => {
                 <p>- Áp dụng tại các cửa hàng: </p>
                 <ul>
                     {
-                        promotion.storeIds && promotion.storeIds.length > 0 && promotion.storeIds.map((store, index) => (
+                        promotion.storeNames && promotion.storeNames.length > 0 && promotion.storeNames.map((store, index) => (
                             <li key={index}>{store}</li>
                         ))
                     }

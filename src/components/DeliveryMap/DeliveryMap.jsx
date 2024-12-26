@@ -99,7 +99,7 @@ const DeliveryMap = () => {
   const [distance, setDistance] = useState(null);
   const [duration, setDuration] = useState(null); // Thời gian di chuyển ước lượng
   const [addressCoords, setAddressCoords] = useState([16.075966, 108.149805]); // Tọa độ hiện tại của mình (Mới vô) / Tọa độ Click
-  const apiKey = import.meta.env.VITE_API_KEY_MAP;
+  const apiKey = import.meta.env.VITE_API_KEY_MAP || 'N/A';
   // const [orderCoords, setOrderCoords] = useState([108.149805, 16.075966]); // [lon, lat]: Tọa độ nhận hàng
   // const [shipperCoords, setShipperCoords] = useState([108.1497442227022, 16.073974660899232]); // Tọa độ hiện tại của Shipper
 

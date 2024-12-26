@@ -22,7 +22,7 @@ const RouteMap = () => {
   const [error, setError] = useState(null);
   const [addressCoords, setAddressCoords] = useState([16.075966, 108.149805]); // Tọa độ hiện tại của mình
   const [clickedCoords, setClickedCoords] = useState(null); // Thêm state lưu tọa độ click
-  const apiKey = import.meta.env.VITE_API_KEY_MAP;
+  const apiKey = import.meta.env.VITE_API_KEY_MAP || 'N/A';
 
   // geometry -> 2 điểm 
   const decodePolyline = (encoded) => {

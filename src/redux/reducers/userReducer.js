@@ -2,7 +2,6 @@
 const initialState = {
     isLoadingListFavouriteProducts: false,
 
-
     listProductsInCart: {}, // list products ở giỏ hàng khách hàng => fetch từ BE
     listCombosInCart: {},
 

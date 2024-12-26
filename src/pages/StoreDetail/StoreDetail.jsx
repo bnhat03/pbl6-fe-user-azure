@@ -11,7 +11,7 @@ import { fetchUpdate } from '../../redux/actions/chatStoreAction';
 import VoucherList from '../../components/VoucherList/VoucherList';
 import { fetchVouchersByIdStore } from '../../redux/actions/promotionActions';
 import { saveVoucher, fetchVouchers } from '../../redux/actions/userActions';
-
+import { toast } from 'react-toastify';
 
 const StoreDetail = () => {
   const { setShowChat, setSelectedUser } = useContext(ChatContext);
@@ -22,7 +22,6 @@ const StoreDetail = () => {
   const u = useSelector((state) => state.auth.account)
   const idU = u.id;
   const stores = useSelector((state) => state.stores.stores); // Lấy dữ liệu từ Redux store
-
   const storeDetail = useSelector((state) => {
     return state.store.storeDetail;
   })
@@ -120,12 +119,17 @@ const StoreDetail = () => {
   };
   const [vouchers, setVouchers] = useState([]);
   const handleSaveVoucher = (voucherId) => {
-    dispatch(saveVoucher(voucherId));
-    setVouchers((prevVouchers) =>
-      prevVouchers.map((voucher) =>
-        +voucher.voucherId === +voucherId ? { ...voucher, userHas: true } : voucher
-      )
-    );
+    if (isAuthenticated) {
+      dispatch(saveVoucher(voucherId));
+      setVouchers((prevVouchers) =>
+        prevVouchers.map((voucher) =>
+          +voucher.voucherId === +voucherId ? { ...voucher, userHas: true } : voucher
+        )
+      );
+    }
+    else {
+      toast.error('Vui lòng đăng nhập');
+    }
   }
   useEffect(() => {
     window.scrollTo(0, 0);

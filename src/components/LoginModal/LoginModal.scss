@@ -63,28 +63,37 @@
 
         .google-facebook-container {
             display: flex;
-            margin: 30px 20px;
+            margin: 20px 80px;
             justify-content: space-around;
             align-items: center;
-
             p {
                 margin: 0;
             }
-
             .gg-fb-icon {
                 display: flex;
             }
-
-            .custom-facebook-button {
+            .custom-google-button {
                 margin-left: 10px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 border-radius: 50%;
                 border: 1px solid white;
-                font-size: 38px;
+                background: transparent;
+                img{
+                    width: 37px;
+                    height: 37px;
+                }
+            }
+            .custom-facebook-button {
+                margin-left: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: 1px solid white;
+                font-size: 40px;
                 color: #2c98eb;
-
                 &:hover {
                     color: #7abbec;
                 }

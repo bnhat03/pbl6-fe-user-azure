@@ -25,6 +25,19 @@ const OrderDetailModal = ({ showModal, handleClose, orderDetails, statusOrderInt
     }
   }, [orderDetails]);
 
+  // Format Date
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const daysOfWeek = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+    const dayOfWeek = daysOfWeek[date.getDay()];
+    const day = date.getDate();  
+    const month = date.getMonth() + 1;  // Lấy tháng (tháng trong JS bắt đầu từ 0)
+    const year = date.getFullYear(); 
+    const hours = date.getHours().toString().padStart(2, '0');  // Lấy giờ (padStart để đảm bảo đủ 2 chữ số)
+    const minutes = date.getMinutes().toString().padStart(2, '0');  // Lấy phút
+    return `${day}/${month}/${year} lúc ${hours}:${minutes}`;
+  };
+
   return (
     <Modal
       show={showModal}
@@ -39,13 +52,17 @@ const OrderDetailModal = ({ showModal, handleClose, orderDetails, statusOrderInt
         {orderDetails ? (
           <div className="order-detail">
             <div className="order-detail-infor">
-              <div className="order-detail-infor-item">
+              {/* <div className="order-detail-infor-item">
                 <p className="infor-title">Mã đơn hàng</p>
                 <p className="infor-content">{orderDetails.orderCode}</p>
-              </div>
+              </div> */}
               <div className="order-detail-infor-item address-item">
                 <p className="infor-title">Địa chỉ nhận hàng</p>
                 <p className="infor-content">{orderDetails.deliveryAddress}</p>
+              </div>
+              <div className="order-detail-infor-item">
+                <p className="infor-title">Cửa hàng</p>
+                <p className="infor-content">BE CÒN TRỐNG</p>
               </div>
               <div className="order-detail-infor-item">
                 <p className="infor-title">Phương thức thanh toán</p>
@@ -59,12 +76,10 @@ const OrderDetailModal = ({ showModal, handleClose, orderDetails, statusOrderInt
                 <p className="infor-title">Phí giao hàng</p>
                 <p className="infor-content">{Number(orderDetails.shippingFee).toLocaleString('vi-VN')} đ</p>
               </div>
-
-
-              {/* <div className="order-detail-infor-item">
-                <p className="infor-title">Ghi chú</p>
-                <p className="infor-content">Đem nhanh nhanh nha anh Shipper</p>
-              </div> */}
+              <div className="order-detail-infor-item">
+                <p className="infor-title">Mã giảm giá</p>
+                <p className="infor-content">BE CÒN TRỐNG</p>
+              </div>
             </div>
 
             <div className="order-detail-status">
@@ -130,11 +145,10 @@ const OrderDetailModal = ({ showModal, handleClose, orderDetails, statusOrderInt
                   return (
                     <div className="order-detail-product-item" key={index}>
                       <div className="product-item-image">
-                        {/* <img src={'data:image/png;base64,' + item.productDetail.productImage} alt="" /> */}
                         <img
                           src={`${import.meta.env.VITE_BACKEND_URL}/api/v1/public/uploads/images/${item.productDetail.productImage}`}
                           alt='Ảnh sản phẩm'
-                          onClick={() => handleImageClick('data:image/png;base64,' + item.productDetail.productImage)} // Gọi modal preview
+                          onClick={() => handleImageClick(`${import.meta.env.VITE_BACKEND_URL}/api/v1/public/uploads/images/${item.productDetail.productImage}`)} // Gọi modal preview
                         />
                       </div>
                       <div className="product-item-infor">
@@ -151,9 +165,9 @@ const OrderDetailModal = ({ showModal, handleClose, orderDetails, statusOrderInt
                           </p>
 
                         </div>
-                        <p className="infor-store">
+                        {/* <p className="infor-store">
                           Cửa hàng: {item.productDetail.storeId}
-                        </p>
+                        </p> */}
                       </div>
                     </div>
                   )
@@ -185,9 +199,9 @@ const OrderDetailModal = ({ showModal, handleClose, orderDetails, statusOrderInt
                           </p>
 
                         </div>
-                        <p className="infor-store">
+                        {/* <p className="infor-store">
                           Cửa hàng: {item.comboDetail.storeId}
-                        </p>
+                        </p> */}
                       </div>
                     </div>
                   )

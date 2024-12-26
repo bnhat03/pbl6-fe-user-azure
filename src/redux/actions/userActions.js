@@ -473,9 +473,22 @@ const fetchAllOrders = () => {
     return async (dispatch, getState) => {
         try {
             const res = await fetchAllOrdersService();
-            const data = res && res.data && res.data.data ? res.data.data : [];
-            // Lấy thêm thông tin User => Ko cần
-            dispatch(fetchAllOrdersSuccess(data));
+            const dataOrder = res && res.data && res.data.data ? res.data.data : [];
+            // dataOrder = await Promise.all(
+            //     dataOrder.orderDetails.map(async (productInOrder) => {
+            //         const resStore = await fetchStoreByIdService(productInOrder.productDetail.storeId);
+            //         // Thêm thông tin cửa hàng -> storeId -> infor store
+            //         const dataStore = resStore && resStore.data ? resStore.data.data : {};
+            //         return {
+            //             ...productInOrder,
+            //             product: {
+            //                 ...productInOrder.product,
+            //                 dataStore: dataStore, // Thêm thông tin từ dataStore vào product
+            //             },
+            //         };
+            //     })
+            // );
+            dispatch(fetchAllOrdersSuccess(dataOrder));
         } catch (error) {
             console.log(error);
             // toast.error('Có lỗi ở Server!');  // BE return status=400 -> Lỗi do BE nên chạy vô catch error ni

@@ -17,6 +17,7 @@ import { fetchProductsBestSale } from "./redux/actions/productActions";
 import { fetchAllPromotions } from "./redux/actions/promotionActions";
 import { fetchAllStores } from "./redux/actions/storeActions";
 import ChatContext, { ChatProvider } from "./context/showChat";
+import PacmanLoader from 'react-spinners/PacmanLoader';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,11 @@ const App = () => {
     dispatch(fetchAllPromotions());
     dispatch(fetchAllStores());
   }, [dispatch]);
+
+  const { isLoading } = useSelector((state) => state.auth); // Redux lưu tất cả state trước khi đến các route
+  if (isLoading) {
+    return <></>;
+  }
   return (
     <>
       <div className="app">

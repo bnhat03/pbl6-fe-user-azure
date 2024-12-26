@@ -9,7 +9,6 @@ import Cart from '../pages/Cart/Cart';
 import Contact from '../pages/Contact/Contact';
 import Account from '../pages/Account/Account';
 import ProductItemDetail from '../components/ProductItemDetail/ProductItemDetail';
-// import Store_Old from '../pages/Store_Old/Store_Old';
 import Store from '../pages/Store/Store';
 import StoreDetail from '../pages/StoreDetail/StoreDetail';
 import PlaceOrder from '../pages/PlaceOrder/PlaceOrder';
@@ -27,6 +26,9 @@ import Loading from '../pages/Loading/Loading';
 import RouteMap2 from '../components/RouteMap2/RouteMap2';
 import Checkout_V2 from '../pages/Checkout_V2/Checkout_V2';
 import DeliveryMap_V2 from '../components/DeliveryMap_V2/DeliveryMap_V2';
+import LoginRoute from './LoginRoute';
+import RegisterRoute from './RegisterRoute';
+import NotFound from '../pages/NotFound/NotFound';
 
 const AppRoutes = (props) => {
     return (
@@ -37,8 +39,7 @@ const AppRoutes = (props) => {
                 <Route path='/cart' element={<PrivateRoutes element={<Cart />} />} />
                 <Route path='/order' element={<PrivateRoutes element={<PlaceOrder />} />} />
                 <Route path='/account/*' element={<PrivateRoutes element={<Account />} />} />
-                <Route path='/checkout' element={<PrivateRoutes element={<Checkout_V2 />} />} />
-                
+                <Route path='/checkout' element={<PrivateRoutes element={<Checkout_V2 />} />} />               
                 <Route path='/order-complete' element={<PrivateRoutes element={<OrderComplete />} />} />
                 <Route path='/order-in-transit/:orderCode' element={<PrivateRoutes element={<DeliveryMap_V2 />} />} />
 
@@ -57,6 +58,8 @@ const AppRoutes = (props) => {
                 <Route path="/promotion-detail/:id" element={<PromotionDetail />} />
                 <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
                 <Route path="/download" element={<Download />} />
+                <Route path="/login" element={<LoginRoute />} />
+                <Route path="/register" element={<RegisterRoute />} />
                 {/* <Route path="/store" element={<Store_Old />} /> */}
                 {/* <Route path="/cart" element={<Cart />} /> */}
                 {/* <Route path="/order" element={<PlaceOrder />} /> */}
@@ -66,7 +69,7 @@ const AppRoutes = (props) => {
                 {/* <Route path="/order-in-transit/:orderCode" element={<DeliveryMap />} /> */}
 
                 {/* <Route path="/test-map" element={<RouteMap/>} /> */}
-                <Route path="*" element={<div>404 Not Found!!!</div>} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </>
     );
