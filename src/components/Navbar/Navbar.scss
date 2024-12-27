@@ -13,7 +13,7 @@
     z-index: 1000;
     background-color: #fff;
     margin: 0;
-    padding: 20px;
+    padding: 10px 20px;
   }
 
   .logo {
@@ -201,14 +201,14 @@
       /* Animation mờ dần khi hiển thị dropdown */
       opacity: 1; 
       visibility: visible; 
-      animation: fadeIn 0.5s ease-in-out; /* Tăng thời gian animation nếu cần */
+      animation: fadeIn 0.5s ease-in-out; 
     }
 
     .navbar-category-dropdown {
       position: absolute;
       display: none;
       border-radius: 15px;
-      transform: translateX(-40%); // dịch chuyển phần tử theo chiều ngang sang trái bằng 35% kích thước của chính phần tử đó.
+      transform: translateX(-40%); // dịch chuyển phần tử theo chiều ngang sang trái 
       z-index: 100;
       // width: 80%;
       background-color: white;
@@ -242,7 +242,7 @@
           height: 50px;
         }
         .active-category-item p {
-          color: red; // Màu cho mục con active
+          color: red;
         }
         &:hover {
           color: red;
@@ -258,7 +258,7 @@
     margin: 0;
     .logo {
       .logo-image {
-        width: 40px;  // Điều chỉnh kích thước hình ảnh logo cho màn hình nhỏ
+        width: 40px;  
       }
     }
     .navbar-menu {

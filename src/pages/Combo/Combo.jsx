@@ -12,11 +12,10 @@ export default function Combo() {
   const dispatch = useDispatch();
   const allCombos = useSelector((state) => state.product.allCombos);
   const isLoading = useSelector((state) => state.product.isLoadingAllCombos);
-
-  // State -> trang hiện tại
+  // state phân trang
   const [activePage, setActivePage] = useState(1);
-  const itemsPerPage = 8; // Số sản phẩm mỗi trang
-  const totalPages = Math.ceil(allCombos.length / itemsPerPage); // Tổng số trang
+  const itemsPerPage = 8; 
+  const totalPages = Math.ceil(allCombos.length / itemsPerPage); 
   // State cho AI + search + select
   const [searchTerm, setSearchTerm] = useState('');
   const [searchTermAI, setSearchTermAI] = useState('');
@@ -26,18 +25,14 @@ export default function Combo() {
     dispatch(fetchAllCombos());
   }, [dispatch]);
 
-  // Hàm xử lý thay đổi từ khóa tìm kiếm
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
-    setActivePage(1); // Reset về trang 1 khi tìm kiếm mới
+    setActivePage(1); 
   };
-
-  // Hàm xử lý thay đổi sắp xếp
   const handleSortChange = (event) => {
     setSelectedSort(event.target.value);
-    setActivePage(1); // Reset về trang 1 khi thay đổi sắp xếp
+    setActivePage(1);
   };
-
   // Lọc và sắp xếp sản phẩm theo search (input) + AI(file) và giá (select)
   const filteredProducts = allCombos
     .filter((combo) =>
@@ -50,45 +45,38 @@ export default function Combo() {
       return 0;
     });
 
-  // Lấy sản phẩm cho trang hiện tại
+  // Phân trang
   const currentCombos = filteredProducts.slice(
     (activePage - 1) * itemsPerPage,
     activePage * itemsPerPage
   );
-
-  // Nhấn vào một trang
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
   };
-
-  // Nhấn nút Previous
   const handlePrevious = () => {
     if (activePage > 1) {
       setActivePage(activePage - 1);
     }
   };
-
-  // Nhấn nút Next
   const handleNext = () => {
     if (activePage < totalPages) {
       setActivePage(activePage + 1);
     }
   };
-
   const [previewImage, setPreviewImage] = useState(null);
   // AI file upload
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     return new Promise((resolve, reject) => {
       if (file) {
-        const reader = new FileReader(); // FileReader hoạt động Asynchronous
+        const reader = new FileReader(); 
         reader.onloadend = () => {
-          const base64String = reader.result.split(",")[1]; // Chuyển thành base64
-          resolve(base64String); // Trả về chuỗi base64
+          const base64String = reader.result.split(",")[1]; 
+          resolve(base64String); 
           setPreviewImage(reader.result);
         };
         reader.onerror = (error) => reject(error);
-        reader.readAsDataURL(file); // Đọc file dưới dạng chuỗi base64
+        reader.readAsDataURL(file); 
       } else {
         reject("No file selected");
       }
@@ -97,14 +85,12 @@ export default function Combo() {
   const onFileSelected = async (event) => {
     try {
       const base64FileImage = await handleFileChange(event);
-      // console.log("Chuỗi base64:", base64FileImage);
-      // AI: Tìm product bằng AI -> upload file
+      // AI: Tìm product-> upload file
       try {
         let urlAI = import.meta.env.VITE_AI_URL || `http://localhost:5000`;
         const responseAI = await axios.post(`${urlAI}/predict`, {
           image: base64FileImage
         });
-        // console.log("response AI:", responseAI);
         if (responseAI?.data) {
           const nameProduct = responseAI.data;
           // setSearchTermAI(nameProduct);
@@ -140,7 +126,6 @@ export default function Combo() {
                 />
               ) : (
                 <div className="image-upload-placeholder">
-                  {/* <i className="fa-solid fa-robot"></i> */}
                   AI
               </div>
               )

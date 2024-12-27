@@ -5,13 +5,11 @@ import ExploreMenu from '../../components/ExploreMenu/ExploreMenu'
 import FoodDisplay from '../../components/FoodDisplay/FoodDisplay'
 import Service from '../../components/Service/Service'
 import BannerWelcome from '../../components/BannerWelcome/BannerWelcome'
-
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductsBestSale } from "../../redux/actions/productActions";
 import { fetchFavouriteProducs } from "../../redux/actions/userActions";
 
 const Home = () => {
-  // fetch product best sale
   const dispatch = useDispatch();
   const listProductsBestSale = useSelector((state) => {
     return state.product.listProductsBestSale;
@@ -22,7 +20,6 @@ const Home = () => {
   const isLoadingListFavouriteProducts = useSelector((state) => {
     return state.user.isLoadingListFavouriteProducts;
   })
-
   const isAuthenticated = useSelector((state) => {
     return state.auth.isAuthenticated;
   })
@@ -30,7 +27,6 @@ const Home = () => {
     return state.auth.account;
   })
   const listFavouriteProducts = useSelector((state) => {
-    // console.log("Favourite Products:", state.user.listFavouriteProducts);
     return state.user.listFavouriteProducts;
   })
 

@@ -1,9 +1,6 @@
-// Scroll danh sách cửa hàng có sản phẩm trong page Product Detail
 import React from 'react';
 import './VoucherList.scss';
 import logoVoucher from '../../assets/logo/voucher.png'
-// import { saveVoucher } from '../../redux/actions/userActions';
-// import { useDispatch, useSelector } from 'react-redux';
 
 const VoucherList = ({ vouchers, handleSaveVoucher }) => {
 

@@ -9,32 +9,25 @@ import { fetchAllPromotions } from '../../redux/actions/promotionActions';
 import Pagination from 'react-bootstrap/Pagination';
 
 const Promotion = () => {
-  const dispatch = useDispatch();
+  // state phân trang
   const promotions = useSelector((state) => state.promotion.listPromotions);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6); // Số lượng chương trình khuyến mãi hiển thị mỗi trang
-
+  const [itemsPerPage] = useState(6); 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // Lướt trang
+  // Lướt 
   const contentRef = useRef(null);
   const scrollToContent = () => {
     if (contentRef.current) {
       contentRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
   // Phân trang
   const indexOfLastPromo = currentPage * itemsPerPage;
   const indexOfFirstPromo = indexOfLastPromo - itemsPerPage;
   const currentPromotions = promotions?.slice(indexOfFirstPromo, indexOfLastPromo);
-
-  // Tính toán tổng số trang
   const totalPages = Math.ceil(promotions?.length / itemsPerPage);
-
-  // Hàm để chuyển trang
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     scrollToContent(); // Cuộn lên đầu nội dung khi chuyển trang

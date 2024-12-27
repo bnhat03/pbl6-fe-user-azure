@@ -10,19 +10,22 @@ const AccountInfo = () => {
   const accountInfo = useSelector((state) => {
     return state.auth.account;
   });
-
-  // disable/enable các input
-  const [isEditing, setIsEditing] = useState(false);
+  // state
+  const [isEditing, setIsEditing] = useState(false); // button [Cập nhật] / [Lưu thay đổi & Hủy]
   const [avatarPreview, setAvatarPreview] = useState(`data:image/png;base64,${accountInfo.avatar}` || ''); // Preview avatar
-
+  const [fullname, setFullname] = useState(accountInfo.fullName); 
+  const [phonenumber, setPhonenumber] = useState(accountInfo.phoneNumber);
+  const [address, setAddress] = useState(accountInfo.address);
+  const [email, setEmail] = useState(accountInfo.email);
+  const [avatarFile, setAvatarFile] = useState(null);
+  // onclick 3 nút
   const handleSaveChangeClick = () => {
-    setIsEditing(false); // update
+    setIsEditing(false); 
     dispatch(updateProfile(fullname, avatarFile, email, address));
     // dispatch(updateAccountAuth(fullname, avatarPreview.slice(22), email, address));
   };
-
   const handleCancelClick = () => {
-    setIsEditing(false); // update
+    setIsEditing(false); 
     if (accountInfo) {
       setFullname(accountInfo.fullName || '');
       setPhonenumber(accountInfo.phoneNumber || '');
@@ -30,32 +33,18 @@ const AccountInfo = () => {
       setEmail(accountInfo.email || '');
       setAvatarPreview(`data:image/png;base64,${accountInfo.avatar}`);
     }
-    // setAvatarPreview(`data:image/png;base64,${accountInfo.avatar}`); // Revert avatar if cancel
   };
-
   const handleEditClick = () => {
-    setIsEditing(true); // => disabled
+    setIsEditing(true); 
   };
-
-  // state input
-  // setState(redux) => Chỉ lấy redux lần đầu thôi 
-  // => Nếu redux thay đổi -> state không thay đổi theo
-  // -> Cần viết thêm useEffect có dependency = redux => redux thay đổi thì state thay đổi tương ứng
-  // -> Bựa dừ cứ tưởng state phụ thuộc theo redux ban đầu thì sau ni vẫn phụ thuộc tiếp
-  const [fullname, setFullname] = useState(accountInfo.fullName); // chỉ lấy accountInfo lần đầu
-  const [phonenumber, setPhonenumber] = useState(accountInfo.phoneNumber);
-  const [address, setAddress] = useState(accountInfo.address);
-  const [email, setEmail] = useState(accountInfo.email);
-  const [avatarFile, setAvatarFile] = useState(null);
-
-  // Xử lý chọn avatar mới
+  // Chọn avatar mới
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setAvatarFile(file); // Lưu trữ tệp avatar vào state
+      setAvatarFile(file); 
       const reader = new FileReader();
       reader.onloadend = () => {
-        setAvatarPreview(reader.result); // Cập nhật preview
+        setAvatarPreview(reader.result); // Cập nhật preview -> base64
       };
       reader.readAsDataURL(file); // Đọc file dưới dạng base64
     }
@@ -63,8 +52,9 @@ const AccountInfo = () => {
   // useEffect(() => {
   //   dispatch(getUserAccount());
   // }, [dispatch]);
-  // Cập nhật state sau khi accountInfo từ Redux store thay đổi
-  useEffect(() => { // Đảm bảo redux thay đổi thì state thay đổi theo luôn (VD: refresh trang)
+
+  // Cập nhật state sau khi accountInfo từ Redux thay đổi
+  useEffect(() => { 
     if (accountInfo) {
       setFullname(accountInfo.fullName || '');
       setPhonenumber(accountInfo.phoneNumber || '');

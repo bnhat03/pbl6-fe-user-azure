@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import './Orders.scss';
-import OrderDetailModal from '../../components/OrderDetailModal/OrderDetailModal'; // Import Modal
+import OrderDetailModal from '../../components/OrderDetailModal/OrderDetailModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllOrders, cancelOrder } from "../../redux/actions/userActions";
 import ReviewModal from "../ReviewModal/ReviewModal";
 import Pagination from 'react-bootstrap/Pagination';
 import { Link, NavLink } from "react-router-dom";
 // const _ = require('lodash'); // copy object
+
 const Orders = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => {
@@ -18,14 +19,12 @@ const Orders = () => {
   const [statusOrderInteger, setStatusOrderInteger] = useState(0);
   // Phân trang
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5); // Số lượng đơn hàng hiển thị mỗi trang
-
-  // Filter status -> Select
+  const [itemsPerPage] = useState(5); 
+  // Dropdown
   const [selectedStatus, setSelectedStatus] = useState("0"); // Mặc định là "Tất cả đơn hàng"
 
   // Nhấn vô 'Xem chi tiết đơn hàng' -> Quy trạng thái từ Chữ => Số
   const handleShowDetails = (order) => {
-    // let orderChangeStatus = _.cloneDeep(order);
     switch (order.status) {
       case 'Đơn hàng mới':
         setStatusOrderInteger(1);
@@ -66,11 +65,11 @@ const Orders = () => {
     const date = new Date(dateString);
     const daysOfWeek = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
     const dayOfWeek = daysOfWeek[date.getDay()];
-    const day = date.getDate();  // Lấy ngày
-    const month = date.getMonth() + 1;  // Lấy tháng (tháng trong JS bắt đầu từ 0)
-    const year = date.getFullYear();  // Lấy năm
+    const day = date.getDate();  
+    const month = date.getMonth() + 1;  
+    const year = date.getFullYear();  
     const hours = date.getHours().toString().padStart(2, '0');  // Lấy giờ (padStart để đảm bảo đủ 2 chữ số)
-    const minutes = date.getMinutes().toString().padStart(2, '0');  // Lấy phút
+    const minutes = date.getMinutes().toString().padStart(2, '0');  
     return `${day}/${month}/${year} lúc ${hours}:${minutes}`;
   };
   const handleCancelOrder = (orderCode) => {
@@ -79,25 +78,22 @@ const Orders = () => {
 
   // Lọc đơn hàng theo selectedStatus
   const filteredOrders = Array.isArray(orders) ? orders.filter(order =>
-    selectedStatus === "0" || order.status === selectedStatus
-    // selectedStatus = 0: All orders sẽ được gán vô filteredOrders -> Hiển thị all (không áp dụng điều kiện lọc).
-    // selectedStatus != 0: Chỉ các order có order.status trùng khớp với selectedStatus sẽ được giữ lại -> Gán vô 
+    selectedStatus === "0" || order.status === selectedStatus // chữ
   ) : [];
 
   // Phân trang
   const indexOfLastOrder = currentPage * itemsPerPage;
   const indexOfFirstOrder = indexOfLastOrder - itemsPerPage;
-  const currentOrders = Array.isArray(filteredOrders) ? filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder) : []; // Kiểm tra orders là mảng?
-  // Tính toán tổng số trang
+  const currentOrders = Array.isArray(filteredOrders) ? filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder) : []; 
   const totalPages = Math.ceil((Array.isArray(filteredOrders) ? filteredOrders.length : 0) / itemsPerPage);
 
-  // Hàm để chuyển trang
+  // Chuyển trang
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
   const handleStatusChange = (event) => {
     setSelectedStatus(event.target.value);
-    setCurrentPage(1); // Đặt lại về trang đầu khi thay đổi filter
+    setCurrentPage(1); 
   };
   useEffect(() => {
     dispatch(fetchAllOrders());
@@ -155,10 +151,10 @@ const Orders = () => {
                     </button>
                   </td>
 
-                  {/* status = 5 -> Hiện button 'Đánh giá' */}
-                  {/* status = 4 -> Hiện button 'Xem lộ trình' */}
+                  {/* status = 7 -> Hiện button 'Đánh giá' */}
+                  {/* status = 6 -> Hiện button 'Xem lộ trình' */}
                   {/* status = 1 -> Hiện button 'Hủy đơn hàng */}
-                  {/* status = 2,3 -> Disable button 'Hủy đơn hàng' */}
+                  {/* status = 2,3,4,5 -> Disable button 'Hủy đơn hàng' */}
                   {
                     order && order.status == 'Đơn hàng đã hoàn thành' && (
                       <td className="text-center align-middle">

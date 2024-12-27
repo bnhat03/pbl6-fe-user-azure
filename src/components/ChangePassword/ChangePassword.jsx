@@ -11,9 +11,9 @@ const ChangePassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [showOldPassword, setShowOldPassword] = useState(false); // Trạng thái hiển thị mật khẩu hiện tại
-  const [showNewPassword, setShowNewPassword] = useState(false); // Trạng thái hiển thị mật khẩu mới
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Trạng thái hiển thị mật khẩu xác nhận
+  const [showOldPassword, setShowOldPassword] = useState(false); // Mật khẩu hiện tại
+  const [showNewPassword, setShowNewPassword] = useState(false); // Mật khẩu mới
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Mật khẩu xác nhận
 
   const defaultValidInput = {
     isValidOldPassword: true,
@@ -21,7 +21,6 @@ const ChangePassword = () => {
     isValidConfirmPassword: true,
   };
   const [objCheckInput, setObjCheckInput] = useState(defaultValidInput);
-
   const checkValidInputs = () => {
     let objCheckValidInput = { ...defaultValidInput };
     if (!oldPassword) {
@@ -37,7 +36,6 @@ const ChangePassword = () => {
     const hasInvalidInput = Object.values(objCheckValidInput).some(value => value === false);
     return !hasInvalidInput;
   }
-
   const handleChangePassword = async () => {
     let isValidInputs = checkValidInputs();
     if (isValidInputs) {

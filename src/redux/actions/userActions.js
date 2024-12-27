@@ -24,19 +24,17 @@ import { fetchStoreByIdService } from "../../services/storeService";
 import { fetchProductByIdService } from "../../services/productService";
 import { toast } from "react-toastify";
 
-// Register New User
+// update profile
 const updateProfileSuccess = () => {
     return {
         type: types.UPDATE_PROFILE_SUCCESS,
     };
 };
-
 const updateProfileError = (errorMessage) => {
     return {
         type: types.UPDATE_PROFILE_ERROR,
     };
 };
-
 const updateProfile = (fullName, avatar, email, address) => {
     return async (dispatch) => {
         try {
@@ -60,7 +58,7 @@ const updateProfile = (fullName, avatar, email, address) => {
     };
 };
 
-// Add product to cart
+// Add product/combo to cart
 const addToCartSuccess = () => {
     return {
         type: types.ADD_TO_CART_SUCCESS,
@@ -71,8 +69,6 @@ const addToCartError = () => {
         type: types.ADD_TO_CART_ERROR,
     };
 };
-
-
 const addToCartProduct = (productId, quantity, storeId, size, status) => {
     return async (dispatch) => {
         try {
@@ -167,23 +163,20 @@ const fetchProductsInCart = () => {
             );
             // Kiểm tra nếu giỏ hàng rỗng
             if (data.length === 0) {
-                // console.log("Giỏ hàng trống");
                 dispatch(fetchProductsInCartSuccess([]));  // Gửi array rỗng đến redux
             }
             else {
-                // console.log('data: ', data);
                 dispatch(fetchProductsInCartSuccess(dataProducts, dataCombos));
-                // console.log('>>> data cart: ', data);
             }
         } catch (error) {
             console.log(error);
-            // BE return status 400 when cart is empty -> rơi vô catch error ni -> note: BE xử lý sai
+            // note: BE return status 400 khi: cart is empty -> rơi vô catch error ni -> note: BE xử lý sai
             dispatch(fetchProductsInCartSuccess([]));
         }
     }
 };
 
-// Nhấn MUA NGAY trong Modal -> Chuyển đến Check out
+// Nhấn MUA NGAY trong Modal product -> Chuyển đến Check out
 const placeOrderUsingBuyNow = (product, finalPrice, quantity, store, size) => {
     return {
         type: types.BUY_NOW_OPTION,
@@ -241,15 +234,10 @@ const placeOrderBuyNowError = () => {
         type: types.PLACE_ORDER_BUY_NOW_ERROR,
     };
 };
-
 const placeOrderBuyNow = (paymentMethod, productDetailBuyNow, address, longitude, latitude, navigate, voucher) => {
     return async (dispatch) => {
-        // console.log('>>> voucher: ', voucher);
         try {
-            // dispatch(placeOrderBuyNowSuccess());
-
             const res = await placeOrderBuyNowService(paymentMethod, productDetailBuyNow, address, longitude, latitude, voucher);
-            // console.log('>>> res: ', res);
             if (paymentMethod === 'CASH') {
                 const isSuccess = res && res.data ? res.data.success : false;
                 if (isSuccess) {
@@ -289,10 +277,7 @@ const placeOrderBuyNow = (paymentMethod, productDetailBuyNow, address, longitude
 }
 const placeOrderComboBuyNow = (paymentMethod, comboDetailBuyNow, address, longitude, latitude, navigate, voucher) => {
     return async (dispatch) => {
-        // console.log('>>> voucher: ', voucher);
         try {
-            // dispatch(placeOrderBuyNowSuccess());
-
             const res = await placeOrderComboBuyNowService(paymentMethod, comboDetailBuyNow, address, longitude, latitude, voucher);
             if (paymentMethod === 'CASH') {
                 const isSuccess = res && res.data ? res.data.success : false;
@@ -329,7 +314,7 @@ const placeOrderComboBuyNow = (paymentMethod, comboDetailBuyNow, address, longit
         }
     };
 }
-// Check out = Add to cart
+// Check out qua Add to cart
 const placeOrderAddToCartSuccess = () => {
     return {
         type: types.PLACE_ORDER_ADD_TO_CART_SUCCESS,
@@ -340,12 +325,10 @@ const placeOrderAddToCartError = () => {
         type: types.PLACE_ORDER_ADD_TO_CART_ERROR,
     };
 };
-
 const placeOrderAddToCart = (paymentMethod, cartIds, address, longitude, latitude, navigate, voucher) => {
     return async (dispatch) => {
         try {
             const res = await placeOrderAddToCartService(paymentMethod, cartIds, address, longitude, latitude, voucher);
-            // console.log('>>> res: ', res);
             if (paymentMethod === 'CASH') {
                 const isSuccess = res && res.data ? res.data.success : false;
                 if (isSuccess) {
@@ -382,7 +365,7 @@ const placeOrderAddToCart = (paymentMethod, cartIds, address, longitude, latitud
     };
 }
 
-//
+// Reset tất cả state trong redux
 const resetAllUser = () => {
     return {
         type: types.RESET_ALL_USER,
@@ -412,7 +395,6 @@ const removeProductInCart = (cartId) => {
         }
     }
 };
-
 // Nhấn + => Tăng 1
 const increaseOneQuantitySuccess = () => {
     return {
@@ -554,7 +536,6 @@ const fetchOrderInTransitByOrderCodeSuccess = (data) => {
 const fetchOrderInTransitByOrderCode = (orderCode) => {
     return async (dispatch, getState) => {
         try {
-            // console.log('orderCode: ', orderCode);
             const resOrder = await fetchOrderInTransitByOrderCodeService(orderCode);
             const dataOrderDetail = resOrder && resOrder.data ? resOrder.data.data : {};
             if (dataOrderDetail.shipperId !== 0) {
@@ -562,7 +543,6 @@ const fetchOrderInTransitByOrderCode = (orderCode) => {
                 const dataShipperDetail = resShipper && resShipper.data ? resShipper.data.data : {};
                 dataOrderDetail['shipperDetail'] = dataShipperDetail;
             }
-            // console.log('>>> đơn hàng đang giao: ', dataOrderDetail)
             dispatch(fetchOrderInTransitByOrderCodeSuccess(dataOrderDetail));
         } catch (error) {
             console.log(error);

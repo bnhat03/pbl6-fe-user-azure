@@ -1,10 +1,9 @@
 // reducers/authReducer.js
 const initialState = {
     isLoadingListFavouriteProducts: false,
-
     listProductsInCart: {}, // list products ở giỏ hàng khách hàng => fetch từ BE
     listCombosInCart: {},
-
+    
     listProductsSelectInCart: {}, // list products chọn để mua ở trang Cart -> checkout
     listCombosSelectInCart: {}, // list combos chọn để mua ở trang Cart -> checkout
     selectedStore: {}, //store chọn để mua ở trang Cart -> checkout

@@ -15,10 +15,10 @@ export default function Category() {
   const dispatch = useDispatch();
   const listProducts = useSelector((state) => state.product.listProductsByIdCategory);
   const isLoading = useSelector((state) => state.product.isLoadingListProductsByIdCategory);
-  // State -> trang hiện tại
+  // Phân trang
   const [activePage, setActivePage] = useState(1);
-  const itemsPerPage = 8; // Số sản phẩm mỗi trang
-  const totalPages = Math.ceil(listProducts.length / itemsPerPage); // Tổng số trang
+  const itemsPerPage = 8; 
+  const totalPages = Math.ceil(listProducts.length / itemsPerPage); 
   // State cho AI + search + select
   const [searchTerm, setSearchTerm] = useState('');
   const [searchTermAI, setSearchTermAI] = useState('');
@@ -29,18 +29,14 @@ export default function Category() {
     dispatch(fetchProductsByIdCategory(id));
   }, [id, dispatch]); // 'id' category thay đổi -> lấy lại list products
 
-  // Thay đổi từ khóa tìm kiếm
   const handleSearchChange = (event) => {
   setSearchTerm(event.target.value);
-    setActivePage(1); // Reset về trang 1 khi tìm kiếm mới
+    setActivePage(1); 
   };
-
-  // Thay đổi sắp xếp
   const handleSortChange = (event) => {
     setSelectedSort(event.target.value);
-    setActivePage(1); // Reset về trang 1 khi thay đổi sắp xếp
+    setActivePage(1); 
   };
-
   // Lọc và sắp xếp sản phẩm theo từ khóa và giá (search & select)
   const filteredProducts = listProducts
     .filter((product) =>
@@ -52,43 +48,37 @@ export default function Category() {
       if (selectedSort === "desc") return b.discountedPrice - a.discountedPrice;
       return 0; // Mặc định
     });
-
-  // Lấy list sản phẩm cho trang hiện tại
+  // Phân trang
   const currentProducts = filteredProducts.slice(
     (activePage - 1) * itemsPerPage,
     activePage * itemsPerPage
   );
-
-  // Nhấn vào một trang
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
   };
-
-  // Nhấn nút Previous
+  // Prev
   const handlePrevious = () => {
     if (activePage > 1) {
       setActivePage(activePage - 1);
     }
   };
-
-  // Nhấn nút Next
+  // Next
   const handleNext = () => {
     if (activePage < totalPages) {
       setActivePage(activePage + 1);
     }
   };
-
-  // State để lưu trữ URL preview của hình ảnh
+  // preview (base64)
   const [previewImage, setPreviewImage] = useState(null);
   // Image -> base64
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     return new Promise((resolve, reject) => {
       if (file) {
-        const reader = new FileReader(); // FileReader hoạt động Asynchronous
+        const reader = new FileReader(); // Asynchronous
         reader.onloadend = () => {
-          const base64String = reader.result.split(",")[1]; // Chuyển thành base64
-          resolve(base64String); // Trả về chuỗi base64
+          const base64String = reader.result.split(",")[1]; // base64 (Không tiền tố MIME: data:image/png;base64)
+          resolve(base64String);
           setPreviewImage(reader.result);
         };
         reader.onerror = (error) => reject(error);
@@ -103,13 +93,12 @@ export default function Category() {
   const onFileSelected = async (event) => {
     try {
       const base64FileImage = await handleFileChange(event);
-      // AI: Tìm product bằng AI -> upload file
+      // AI: Tìm product-> upload file
       try {
         let urlAI = import.meta.env.VITE_AI_URL || `http://localhost:5000`;
         const responseAI = await axios.post(`${urlAI}/predict`, {
           image: base64FileImage
         });
-        // console.log("response AI:", responseAI);
         if (responseAI?.data) {
           const nameProduct = responseAI.data;
           // setSearchTermAI(nameProduct);
@@ -127,7 +116,6 @@ export default function Category() {
   return (
     <div className="page-category">
       <div className="search-filter-container">
-
         {/* AI */}
         <div className="file-upload-AI-container">
           <input
@@ -153,12 +141,7 @@ export default function Category() {
               )
             }
           </label>
-          {/* <label htmlFor="file-input">
-            <i className="fa-solid fa-robot"></i>
-            AI
-          </label> */}
         </div>
-
         <div className="search-container">
           <div className="row">
             <div className="col-md-12">

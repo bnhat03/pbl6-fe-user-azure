@@ -8,7 +8,6 @@ import {
     sendOTPService,
     verifyOTPService,
     changePasswordUserService
-
 } from "../../services/authService";
 import { toast } from "react-toastify";
 import { resetAllUser, fetchProductsInCart } from "./userActions";
@@ -19,13 +18,11 @@ const registerNewUserSuccess = () => {
         type: types.REGISTER_NEW_USER_SUCCESS,
     };
 };
-
 const registerNewUserError = (errorMessage) => {
     return {
         type: types.REGISTER_NEW_USER_ERROR,
     };
 };
-
 const registerNewUser = (fullName, password, phoneNumber, email, address) => {
     return async (dispatch) => {
         try {
@@ -35,13 +32,11 @@ const registerNewUser = (fullName, password, phoneNumber, email, address) => {
                 dispatch(registerNewUserSuccess());
                 toast.success(res.data.message);
             } else {
-                // Handle case where registration was unsuccessful but no error was thrown
                 dispatch(registerNewUserError(res.data.message || "Registration failed."));
                 toast.error(res.data.message || "Registration failed.");
             }
         } catch (error) {
             console.log(error);
-            // Handle error response if it exists
             const errorMessage = error.response && error.response.data ? error.response.data.message : "An error occurred.";
             dispatch(registerNewUserError(errorMessage));
             toast.error(errorMessage);
@@ -55,30 +50,24 @@ const loginUserSuccess = (userInfo) => {
         account: userInfo
     };
 };
-
 const loginUserError = () => {
     return {
         type: types.LOGIN_USER_ERROR,
 
     };
 };
-
 const loginUser = (phonenumber, password) => {
     return async (dispatch) => {
         try {
             const res = await loginUserService(phonenumber, password);
             const isSuccess = res && res.data ? res.data.success : false;
-            // console.log("res login: ",res);
             if (isSuccess) {
                 dispatch(loginUserSuccess(res.data.data));
                 localStorage.setItem("token", res.data.data.token);
                 toast.success(res.data.message);
                 // Đợi token được thiết lập xong trước khi fetch sản phẩm trong giỏ hàng
                 await new Promise((resolve) => setTimeout(resolve, 1000));
-
-                // dispatch(fetchProductsInCart());
             } else {
-                // Hiển thị thông báo lỗi nếu đăng nhập không thành công
                 toast.error(res.data.message || "Đăng nhập thất bại.");
                 dispatch(loginUserError());
             }
@@ -88,7 +77,6 @@ const loginUser = (phonenumber, password) => {
             const errorMessage = error.response && error.response.data
                 ? error.response.data.message
                 : "Đã xảy ra lỗi khi đăng nhập.";
-
             // Hiển thị thông báo lỗi
             toast.error(errorMessage);
             dispatch(loginUserError());
@@ -129,18 +117,14 @@ const loginGoogleSuccess = () => {
         type: types.LOGIN_GOOGLE_SUCCESS,
     };
 };
-
 const loginGoogleError = () => {
     return {
         type: types.LOGIN_GOOGLE_ERROR,
     };
 };
-
 const loginGoogle = (tokenGoogle) => {
     return async (dispatch) => {
         try {
-            // console.log('>>> check token: ', tokenGoogle);
-
             const res = await loginGoogleService(tokenGoogle);
             const isSuccess = res && res.data ? res.data.success : false;
             if (isSuccess) {
@@ -156,8 +140,6 @@ const loginGoogle = (tokenGoogle) => {
             const errorMessage = error.response && error.response.data
                 ? error.response.data.message
                 : "Đã xảy ra lỗi khi đăng nhập.";
-
-            // Hiển thị thông báo lỗi
             toast.error(errorMessage);
             dispatch(loginGoogleError());
         }
@@ -174,7 +156,6 @@ const getUserAccount = () => {
     return async (dispatch) => {
         try {
             const token = localStorage.getItem("token");
-            // console.log('>>> check token user: ', token);
             if (token) {
                 const res = await getUserAccountService();
                 const isSuccess = res && res.data ? res.data.success : false;
@@ -194,7 +175,6 @@ const getUserAccount = () => {
         }
     };
 };
-
 // send otp (forget password)
 const sentOTPSuccess = () => {
     return {
@@ -215,12 +195,10 @@ const sendOTP = (email) => {
         } catch (error) {
             console.log(error);
             toast.error("Email không hợp lệ");
-            // Hiển thị thông báo lỗi
-            // toast.error(res.data.message || "Đăng nhập thất bại.");
         }
     };
 };
-// send otp (forget password)
+// verify otp (forget password)
 const verifyOTPSuccess = () => {
     return {
         type: types.VERIFY_OTP_SUCCESS,
@@ -250,7 +228,6 @@ const changePasswordUserSuccess = () => {
         type: types.CHANGE_PASSWORD_USER_SUCCESS,
     };
 };
-
 const changePasswordUser = (oldPassword, newPassword) => {
     return async (dispatch) => {
         try {
@@ -264,12 +241,9 @@ const changePasswordUser = (oldPassword, newPassword) => {
             }
         } catch (error) {
             console.log(error);
-            // Xử lý thông báo lỗi nếu có phản hồi từ server
             const errorMessage = error.response && error.response.data
                 ? error.response.data.message
                 : "Đã xảy ra lỗi khi đổi mật khẩu.";
-
-            // Hiển thị thông báo lỗi
             toast.error(errorMessage);
         }
     };
@@ -284,5 +258,4 @@ export {
     sendOTP,
     verifyOTP,
     changePasswordUser
-
 };

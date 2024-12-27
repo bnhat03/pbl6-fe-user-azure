@@ -6,30 +6,23 @@ import FoodItemCombo from "../FoodItem/FoodItemCombo";
 import PacmanLoader from 'react-spinners/PacmanLoader';
 
 const FoodDisplay = ({ listProducts, isLoading, itemsPerPage = 4 }) => {
+  // Phân trang
   const [activePage, setActivePage] = useState(1);
-
-  // Tính toán số trang dựa trên danh sách sản phẩm và số sản phẩm mỗi trang
   const totalPages = listProducts ? Math.ceil(+listProducts.length/itemsPerPage) : 0;
-
-  // Lấy danh sách sản phẩm cho trang hiện tại
   const currentProducts = listProducts && listProducts.length > 0 ? (listProducts.slice(
     (activePage - 1) * itemsPerPage,
     activePage * itemsPerPage
   )) : [];
-
-  // Nhấn vào một trang
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
   };
-
-  // Nhấn nút Previous
+  // Previous
   const handlePrevious = () => {
     if (activePage > 1) {
       setActivePage(activePage - 1);
     }
   };
-
-  // Nhấn nút Next
+  // Next
   const handleNext = () => {
     if (activePage < totalPages) {
       setActivePage(activePage + 1);

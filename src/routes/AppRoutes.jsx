@@ -11,7 +11,6 @@ import Account from '../pages/Account/Account';
 import ProductItemDetail from '../components/ProductItemDetail/ProductItemDetail';
 import Store from '../pages/Store/Store';
 import StoreDetail from '../pages/StoreDetail/StoreDetail';
-import PlaceOrder from '../pages/PlaceOrder/PlaceOrder';
 import Checkout from '../pages/Checkout/Checkout';
 import OrderComplete from '../pages/OrderComplete/OrderComplete';
 import PromotionDetail from '../pages/PromotionDetail/PromotionDetail';
@@ -34,10 +33,8 @@ const AppRoutes = (props) => {
     return (
         <>
             <Routes>
-
                 {/* PrivateRoutes */}
                 <Route path='/cart' element={<PrivateRoutes element={<Cart />} />} />
-                <Route path='/order' element={<PrivateRoutes element={<PlaceOrder />} />} />
                 <Route path='/account/*' element={<PrivateRoutes element={<Account />} />} />
                 <Route path='/checkout' element={<PrivateRoutes element={<Checkout_V2 />} />} />               
                 <Route path='/order-complete' element={<PrivateRoutes element={<OrderComplete />} />} />
@@ -67,7 +64,6 @@ const AppRoutes = (props) => {
                 {/* <Route path="/checkout" element={<Checkout />} /> */}
                 {/* <Route path="/order-complete" element={<OrderComplete />} /> */}
                 {/* <Route path="/order-in-transit/:orderCode" element={<DeliveryMap />} /> */}
-
                 {/* <Route path="/test-map" element={<RouteMap/>} /> */}
                 <Route path="*" element={<NotFound />} />
             </Routes>

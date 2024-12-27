@@ -17,46 +17,32 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // state redux
   const listProductsInCart = useSelector((state) => {
     return state.user.listProductsInCart;
   })
-
   const listCombosInCart = useSelector((state) => {
     return state.user.listCombosInCart;
   })
 
-  // Array chứa list cartIds đã check
-  const [checkedItems, setCheckedItems] = useState([]);
+  // state
+  const [checkedItems, setCheckedItems] = useState([]); // Array chứa list cartIds đã check
+  const [selectedStore, setSelectedStore] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchProductsInCart());
   }, [dispatch]);
-
-  // Chọn cửa hàng đầu tiên khi danh sách sản phẩm hoặc combo thay đổi
-  // useEffect(() => {
-  //   if (Array.isArray(listProductsInCart) && Array.isArray(listCombosInCart)) {
-  //     const allItems = [...listProductsInCart, ...listCombosInCart];
-  //     if (allItems.length > 0) {
-  //       const firstStore = allItems.find((item) => item.product || item.combo);
-  //       setSelectedStore(+firstStore?.product?.storeId || +firstStore?.combo?.storeId || 0);
-  //     } else {
-  //       setSelectedStore(0);
-  //     }
-  //   }
-  // }, [listProductsInCart, listCombosInCart]);
-
-    // const [selectedStore, setSelectedStore] = useState("all");
-    const [selectedStore, setSelectedStore] = useState(0);
-    useEffect(() => {
-      if (Array.isArray(listProductsInCart) && Array.isArray(listCombosInCart)) {
-        const allItems = [...listProductsInCart, ...listCombosInCart];
-        if (allItems.length > 0 && selectedStore === 0) {
-          const firstStore = allItems.find((item) => item.product || item.combo);
-          setSelectedStore(+firstStore?.product?.storeId || +firstStore?.combo?.storeId || 0);
-        }
+  // tìm store đầu tiên cho dropdown (mới vô page)
+  useEffect(() => {
+    if (Array.isArray(listProductsInCart) && Array.isArray(listCombosInCart)) {
+      const allItems = [...listProductsInCart, ...listCombosInCart];
+      if (allItems.length > 0 && selectedStore === 0) {
+        const firstStore = allItems.find((item) => item.product || item.combo);
+        setSelectedStore(+firstStore?.product?.storeId || +firstStore?.combo?.storeId || 0);
       }
-    }, [listProductsInCart, listCombosInCart, selectedStore]);
+    }
+  }, [listProductsInCart, listCombosInCart, selectedStore]);
 
   const handleCheckboxChange = (cartId) => {
     setCheckedItems((prevCheckedItems) =>
@@ -65,7 +51,7 @@ const Cart = () => {
         : [...prevCheckedItems, cartId] // add
     );
   };
-
+  // +1
   const handleIncreaseQuantity = (item) => {
     if (item) {
       let quantity;
@@ -78,7 +64,7 @@ const Cart = () => {
       dispatch(increaseOneQuantity(item.cartId, quantity + 1));
     }
   };
-
+  // -1
   const handleDecreaseQuantity = (item) => {
     if ((item?.product?.quantity > 1) || (item?.combo?.quantity > 1)) {
       let quantity;
@@ -91,18 +77,18 @@ const Cart = () => {
       dispatch(decreaseOneQuantity(item.cartId, quantity - 1));
     }
   };
-
+  // icon trash
   const handleRemoveProductInCart = (cartId) => {
     dispatch(removeProductInCart(cartId));
   };
-
+  // tổng tiền giỏ hàng
   const getTotalPriceInCart = () => {
     let total = 0;
     for (let i = 0; i < listProductsInCart?.length; i++) {
       const item = listProductsInCart[i];
       if (
         checkedItems.includes(item.cartId) && // checked
-        +item.product?.dataStore?.storeId === selectedStore  // Cửa hàng đang chọn ở select
+        +item.product?.dataStore?.storeId === selectedStore  // cửa hàng đang chọn
       ) {
         total += item.product.unitPrice * item.product.quantity;
       }
@@ -118,47 +104,41 @@ const Cart = () => {
     }
     return total;
   };
-
-
+  // Nhấn button [Thanh toán]
   const handlePlaceOrder = () => {
-    if (
-      !Array.isArray(listProductsInCart) && listProductsInCart.length === 0 && !Array.isArray(listCombosInCart) && listCombosInCart.length === 0
-    ) {
+    if (!Array.isArray(listProductsInCart) && listProductsInCart.length === 0 && !Array.isArray(listCombosInCart) && listCombosInCart.length === 0) {
       toast.error('Không có sản phẩm trong giỏ hàng!');
-    } else {
+    } 
+    else {
       if (checkedItems.length === 0) {
         toast.error('Chọn ít nhất một sản phẩm để thanh toán!');
       } else {
         const selectedProducts = listProductsInCart.filter(
           (item) =>
-            checkedItems.includes(item.cartId) && // Row checked
-            +item.product?.dataStore?.storeId === selectedStore // Cửa hàng đang chọn
+            checkedItems.includes(item.cartId) && // checked
+            +item.product?.dataStore?.storeId === selectedStore //Cửa hàng đang chọn
         );
         const selectedCombos = listCombosInCart.filter(
           (item) =>
             checkedItems.includes(item.cartId) &&
             +item.combo?.dataStore?.storeId === selectedStore
         );
-        // console.log('selectedProducts: ', selectedProducts);
-        // console.log('id selectedStore: ', selectedStore);
-
         dispatch(placeOrderUsingAddToCart(selectedProducts, selectedCombos, selectedStore));
         navigate('/checkout');
       }
     }
   };
 
-
   const [searchTerm, setSearchTerm] = useState("");
-
   const handleStoreChange = (event) => {
     setSelectedStore(+event.target.value);
   };
-
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-
+  // product/combo ở trong giỏ hàng đáp ứng:
+    // 1. Tên chứa input search
+    // 2. Cửa hàng đúng với dropdown [Cửa hàng]
   const filteredProducts = Array.isArray(listProductsInCart) && Array.isArray(listCombosInCart)
     ? [
       ...listProductsInCart,
@@ -201,21 +181,8 @@ const Cart = () => {
                 className="form-select"
                 value={selectedStore}
                 onChange={handleStoreChange}
-                aria-label="Default select example"
+                aria-label=""
               >
-                {/* <option value="all">Tất cả cửa hàng</option> */}
-                {/* {
-                  // Tìm các store khác nhau trong cart
-                  Array.isArray(listProductsInCart) && Array.isArray(listCombosInCart) &&
-                  listProductsInCart.concat(listCombosInCart)
-                    .map((item) => (item.product ? item.product.dataStore : item.combo.dataStore))
-                    .filter((value, index, self) => value && self.findIndex(v => v.storeId === value.storeId) === index)
-                    .map((store) => (
-                      <option key={store.storeId} value={store.storeId}>
-                        {store.storeName}
-                      </option>
-                    ))
-                } */}
                 {
                   Array.isArray(listProductsInCart) && Array.isArray(listCombosInCart) &&
                   [
@@ -264,14 +231,13 @@ const Cart = () => {
             const itemUnitPrice = data.unitPrice;
             const itemQuantity = data.quantity;
             const itemTotalPrice = itemUnitPrice * itemQuantity;
-
             return (
               <div key={index}>
                 <div className="cart-items-title cart-items-item">
                   <input
                     type="checkbox"
-                    checked={checkedItems.includes(item.cartId)} // Checked if item is in checkedItems
-                    onChange={() => handleCheckboxChange(item.cartId)} // Toggles item selection
+                    checked={checkedItems.includes(item.cartId)} 
+                    onChange={() => handleCheckboxChange(item.cartId)} 
                   />
                   <Link to={isProduct ? `/product-detail/${data.productId}` : `/combo-detail/${data.comboId}`}>
                     <img src={`${import.meta.env.VITE_BACKEND_URL}/api/v1/public/uploads/images/${itemImage}`} alt="Ảnh sản phẩm" />

@@ -15,7 +15,7 @@ import { MapContainer, TileLayer, Polyline, Marker, Popup, useMap, useMapEvents 
 import 'leaflet/dist/leaflet.css';
 import { debounce } from 'lodash';
 
-// Component Click chuột trên map
+// Component click  trên map
 const LocationMarker = ({ setPosition }) => {
     useMapEvents({
         click(e) {
@@ -29,53 +29,32 @@ const LocationMarker = ({ setPosition }) => {
 const Checkout_V2 = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    // state redux
     const isBuyNow = useSelector((state) => state.user.isBuyNow);
     const isBuyNowCombo = useSelector((state) => state.user.isBuyNowCombo);
     const productDetailBuyNow = useSelector((state) => state.user.productDetailBuyNow);
     const comboDetailBuyNow = useSelector((state) => state.user.comboDetailBuyNow);
-
     const listProductsSelectInCart = useSelector((state) => state.user.listProductsSelectInCart);
     const listCombosSelectInCart = useSelector((state) => state.user.listCombosSelectInCart);
     const selectedStore = useSelector((state) => state.user.selectedStore);
-
     const accountInfo = useSelector((state) => {
         return state.auth.account;
     });
-    // Voucher
     const listVouchersUser = useSelector((state) => state.user.listVouchersUser);
+    // state chi phí
     const [selectedVoucherId, setSelectedVoucherId] = useState("0");
     const [selectedVoucher, setSelectedVoucher] = useState(null);
     const [promotion, setPromotion] = useState(0);
-
-    // Lọc các voucher hợp lệ theo điều kiện selectedStore và used = false
     const [filteredVouchers, setFilteredVouchers] = useState([]);
+    // Lọc các voucher hợp lệ theo điều kiện selectedStore và used = false
     useEffect(() => {
         if (listVouchersUser && listVouchersUser.length > 0) {
             const vouchers = listVouchersUser ? (listVouchersUser.filter(
                 (voucher) => voucher.storeId.includes(+selectedStore.storeId) && !voucher.used
             )) : [];
-            // console.log('vouchers: ', vouchers);
             setFilteredVouchers(vouchers)
         }
     }, [listVouchersUser]);
-    // const filteredVouchers = listVouchersUser ? (listVouchersUser.filter(
-    //     (voucher) => voucher.storeId.includes(selectedStore.storeId) && !voucher.used
-    // )) : [];
-
-    // useEffect(() => {
-    //     // Nếu có voucher hợp lệ, chọn mã đầu tiên từ `filteredVouchers`
-    //     if (filteredVouchers && filteredVouchers.length > 0) {
-    //         setSelectedVoucherId(filteredVouchers[0].voucherId);
-    //         setSelectedVoucher(filteredVouchers[0]);
-    //         setPromotion(+filteredVouchers[0].discountPercent);
-    //     } else {
-    //         // Nếu không có voucher hợp lệ, đặt các giá trị về mặc định
-    //         setSelectedVoucherId("0");
-    //         setSelectedVoucher(null);
-    //         setPromotion(0);
-    //     }
-    // }, [filteredVouchers]);
-
     useEffect(() => {
         // Cập nhật `selectedVoucher` và `promotion` khi `selectedVoucherId` thay đổi
         const voucher = filteredVouchers.find(voucher => voucher.voucherId === +selectedVoucherId);
@@ -87,12 +66,7 @@ const Checkout_V2 = () => {
             setPromotion(0);
         }
     }, [selectedVoucherId, filteredVouchers]);
-    // useEffect(() => { // Mới vô chọn mã đầu tiên
-    //     if (listVouchersUser && listVouchersUser.length > 0) {
-    //         setSelectedVoucherId(listVouchersUser[0].voucherId);
-    //     }
-    // }, [listVouchersUser]);
-
+    // state thông tin nhận hàng
     const [fullname, setFullname] = useState(accountInfo.fullName);
     const [phonenumber, setPhonenumber] = useState(accountInfo.phoneNumber);
     const [address, setAddress] = useState("Địa chỉ của bạn");
@@ -185,11 +159,11 @@ const Checkout_V2 = () => {
         const { lat, lng } = event.latlng;
         setAddressCoords([lat, lng]); // Lưu tọa độ đã click
     };
-    // Component để phóng to bản đồ
+    // Phóng to bản đồ (Khi chọn vị trí nhận hàng)
     const ZoomToAddress = () => {
         const map = useMap();
         if (addressCoords) {
-            map.setView(addressCoords, 18); // Phóng to đến tọa độ với level 18
+            map.setView(addressCoords, 18); 
         }
         return null;
     };
@@ -201,7 +175,6 @@ const Checkout_V2 = () => {
             const response = await axios.get(url);
             if (response?.data?.address) {
                 const address = response.data.address; 
-                // console.log('>>>Địa chỉ:', address);
                 const formattedAddress = [ // Địa chỉ đầy đủ
                     address.road,        // Tên đường,
                     address.village,    // xã
@@ -220,7 +193,7 @@ const Checkout_V2 = () => {
             console.error("Error details: ", err);
         }
     };
-    const debouncedFetchAddress = useCallback(
+    const debouncedFetchAddress = useCallback( // không bị tạo lại trong mỗi lần render
         debounce((lat, lon) => {
           fetchAddressFromCoordinates(lat, lon);
         }, 1100), 
@@ -241,48 +214,43 @@ const Checkout_V2 = () => {
             Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
             Math.sin(dLon / 2) * Math.sin(dLon / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        const distance = R * c; // khoảng cách (km)
-        return distance.toFixed(2); // km
+        const distance = R * c; // (km)
+        return distance.toFixed(2); // 2 số thập phân
     }
     // Customize icon markup
     const customIconStore = new L.Icon({
         iconUrl: iconStore,
-        iconSize: [40, 40],       // Kích thước icon
-        iconAnchor: [20, 40],     // Điểm gắn icon
-        popupAnchor: [0, -40],    // Điểm gắn Popup
+        iconSize: [40, 40],       
+        iconAnchor: [20, 40],     
+        popupAnchor: [0, -40],    
     });
     const customIconOrder = new L.Icon({
         iconUrl: iconOrder,
-        iconSize: [40, 40],       // Kích thước icon
-        iconAnchor: [20, 40],     // Điểm gắn icon
-        popupAnchor: [0, -40],    // Điểm gắn Popup
+        iconSize: [40, 40],       
+        iconAnchor: [20, 40],     
+        popupAnchor: [0, -40],    
     });
     const customIconCurrentLocation = new L.Icon({
         iconUrl: iconCurrentLocation,
-        iconSize: [30, 30],       // Kích thước icon
-        iconAnchor: [20, 40],     // Điểm gắn icon
-        popupAnchor: [0, -40],    // Điểm gắn Popup
+        iconSize: [30, 30],       
+        iconAnchor: [20, 40],     
+        popupAnchor: [0, -40],    
     });
-    // Mới vô -> Hiển thị trên input + map => Vị trí hiện tại
+    // Mới vô page-> Hiển thị trên input + map => Vị trí hiện tại
     useEffect(() => {
         window.scrollTo(0, 0);
         dispatch(fetchVouchers());
         getCurrentCoors();
-        // debouncedFetchAddress(addressCoords[0],addressCoords[1]);
-        // fetchAddressFromCoordinates(addressCoords[0], addressCoords[1]);  // (lat, lon)
     }, []);
 
-    // Click chuột -> Tọa độ thay đổi -> Input thay đổi
+    // Click chuột -> Tọa độ thay đổi -> Input address thay đổi
     useEffect(() => {
         if (addressCoords) {       
-            // fetchAddressFromCoordinates(addressCoords[0], addressCoords[1]);  // Gọi hàm với tọa độ mới
             debouncedFetchAddress(addressCoords[0],addressCoords[1]);
             let distance = getDistance(addressCoords[0], addressCoords[1], selectedStore ? +selectedStore.latitude : 16.0471, selectedStore ? +selectedStore.longitude : 108.206); // note: thay tọa độ sau bằng tọa độ cửa hàng
             setDistance(distance);
             if (distance > 1.5) {
-                // setShippingFee(Math.floor(distance * 10000));
                 const calculatedFee = distance * 10000;
-                // Quy về hàng nghìn
                 const roundedFee = Math.floor(calculatedFee / 1000) * 1000;
                 setShippingFee(roundedFee);
             }
@@ -340,15 +308,12 @@ const Checkout_V2 = () => {
                                 center={[16.2554, 107.9006]}
                                 zoom={9}
                                 style={{ height: '400px', width: '100%' }}
-                                onClick={handleMapClick} //
+                                onClick={handleMapClick} 
                             >
                                 <TileLayer
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                 />
-                                {/* {route && (
-                                    <Polyline positions={route} color="blue" />
-                                )} */}
                                 {addressCoords && (
                                     <Marker position={addressCoords} icon={customIconOrder}>
                                         <Popup>
@@ -364,20 +329,11 @@ const Checkout_V2 = () => {
                                         </Popup>
                                     </Marker>
                                 )}
-
-                                {/* note: thay tọa độ sau bằng tọa độ cửa hàng */}
                                 <Marker position={[selectedStore?.latitude ? +selectedStore.latitude : 16.0471, selectedStore?.longitude ? +selectedStore.longitude : 108.206]} icon={customIconStore}>
                                     <Popup>Vị trí của cửa hàng</Popup>
                                 </Marker>
-                                {/* {clickedCoords && (
-                                    <Marker position={clickedCoords}>
-                                        <Popup>
-                                            Tọa độ đã click: {clickedCoords.join(", ")}
-                                        </Popup>
-                                    </Marker>
-                                )} */}
                                 <LocationMarker setPosition={setAddressCoords} /> {/* Cập nhật vị trí đã click */}
-                                <ZoomToAddress /> {/* Thêm component phóng to */}
+                                <ZoomToAddress /> 
                             </MapContainer>
                         </div>
                         {/* <div className="form-group col-md-12">
@@ -513,7 +469,6 @@ const Checkout_V2 = () => {
                         </div>
 
                         <div className="shipping-method">
-                            {/* note: Phải call api lấy all payment methods -> thêm vô reducer: payment method-> BE chưa làm */}
                             <h3>Phương thức thanh toán</h3>
                             <div>
                                 <input

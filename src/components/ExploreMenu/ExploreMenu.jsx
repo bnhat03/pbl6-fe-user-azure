@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import './ExploreMenu.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllCategories } from "../../redux/actions/categoryActions";
 import { NavLink } from "react-router-dom";
 import cate_1 from "../../assets/navbar/cate_1.png";
 
 const ExploreMenu = () => {
-  // fetch category
   const listCategories = useSelector((state) => {
     return state.category.listCategories;
   })

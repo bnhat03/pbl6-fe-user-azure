@@ -14,7 +14,6 @@
       overflow: hidden;
       border: 1px solid #ccc;
       border-radius: 6px;
-      // cursor: pointer;
       background-color: #f9f9f9;
       transition: border-color 0.3s;         
       .image-upload-label {
@@ -31,7 +30,7 @@
           margin: 0;
         }
         .image-upload-placeholder {
-          color: #aaa; // Màu chữ cho placeholder
+          color: #aaa; 
           font-size: 16px;
         }
       }

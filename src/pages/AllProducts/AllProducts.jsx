@@ -12,10 +12,9 @@ export default function AllProducts() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.product.allProducts);
   const isLoading = useSelector((state) => state.product.isLoadingAllProducts);
-
-  // State -> trang hiện tại
+  // Phân trang
   const [activePage, setActivePage] = useState(1);
-  const itemsPerPage = 8; // Số sản phẩm mỗi trang
+  const itemsPerPage = 8; 
   const totalPages = allProducts && allProducts.length > 0 ? Math.ceil(allProducts.length / itemsPerPage) : 0; // Tổng số trang
   // State cho AI + search + select
   const [searchTerm, setSearchTerm] = useState('');
@@ -26,19 +25,15 @@ export default function AllProducts() {
     window.scrollTo(0, 0);
     dispatch(fetchAllProducts());
   }, [dispatch]);
-
-  // Hàm xử lý thay đổi từ khóa tìm kiếm
+  
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
     setActivePage(1); // Reset về trang 1 khi tìm kiếm mới
   };
-
-  // Hàm xử lý thay đổi sắp xếp
   const handleSortChange = (event) => {
     setSelectedSort(event.target.value);
     setActivePage(1); // Reset về trang 1 khi thay đổi sắp xếp
   };
-
   // Lọc và sắp xếp sản phẩm theo từ khóa và giá
   const filteredProducts = allProducts && allProducts.length > 0 ? (allProducts
     .filter((product) =>
@@ -50,42 +45,35 @@ export default function AllProducts() {
       if (selectedSort === "desc") return b.discountedPrice - a.discountedPrice;
       return 0; // Mặc định
     })) : [];
-
-  // Lấy sản phẩm cho trang hiện tại
+  // Phân trang
   const currentProducts = filteredProducts.slice(
     (activePage - 1) * itemsPerPage,
     activePage * itemsPerPage
   );
-
-  // Nhấn vào một trang
   const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
   };
-
-  // Nhấn nút Previous
   const handlePrevious = () => {
     if (activePage > 1) {
       setActivePage(activePage - 1);
     }
   };
-
-  // Nhấn nút Next
   const handleNext = () => {
     if (activePage < totalPages) {
       setActivePage(activePage + 1);
     }
   };
 
-  const [previewImage, setPreviewImage] = useState(null);
   // AI file upload
+  const [previewImage, setPreviewImage] = useState(null);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     return new Promise((resolve, reject) => {
       if (file) {
-        const reader = new FileReader(); // FileReader hoạt động Asynchronous
+        const reader = new FileReader(); // Asynchronous
         reader.onloadend = () => {
           const base64String = reader.result.split(",")[1]; // Chuyển thành base64
-          resolve(base64String); // Trả về chuỗi base64
+          resolve(base64String); // 
           setPreviewImage(reader.result);
         };
         reader.onerror = (error) => reject(error);
@@ -103,7 +91,6 @@ export default function AllProducts() {
         const responseAI = await axios.post(`${urlAI}/predict`, {
           image: base64FileImage
         });
-        // console.log("response AI:", responseAI);
         if (responseAI?.data) {
           const nameProduct = responseAI.data;
           // setSearchTermAI(nameProduct);
@@ -140,7 +127,6 @@ export default function AllProducts() {
                 />
               ) : (
                 <div className="image-upload-placeholder">
-                  {/* <i className="fa-solid fa-robot"></i> */}
                   AI
               </div>
               )

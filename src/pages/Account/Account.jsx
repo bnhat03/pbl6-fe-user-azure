@@ -6,13 +6,8 @@ import ChangePassword from '../../components/ChangePassword/ChangePassword';
 import Orders from '../../components/Orders/Orders';
 import { logoutUser } from '../../redux/actions/authActions';
 import { useDispatch } from 'react-redux';
+
 const Account = () => {
-  const menuOptions = [
-    { name: "Thông tin tài khoản", path: "info" },
-    { name: "Đổi mật khẩu", path: "change-password" },
-    { name: "Đơn hàng của bạn", path: "orders" },
-    { name: "Đăng xuất", path: "logout" }
-  ];
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -20,10 +15,10 @@ const Account = () => {
     dispatch(logoutUser());
     navigate('/');
   };
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []); 
+
   return (
     <div className="account-page">
       {/* Header */}
@@ -42,7 +37,7 @@ const Account = () => {
           <ul>
             <li>
               <NavLink
-                to='info' // Đường dẫn tương đối
+                to='info' 
                 className={({ isActive }) => (isActive ? 'active' : '')}
               >
                 Thông tin tài khoản
@@ -78,9 +73,7 @@ const Account = () => {
             <Route path="info" element={<AccountInfo />} />
             <Route path="change-password" element={<ChangePassword />} />
             <Route path="orders" element={<Orders />} />
-            {/* Redirect mặc định đến trang "Thông tin tài khoản" */}
-            <Route path="/" element={<Navigate to="info" replace />} />
-            {/* <Route path="logout" element={<Logout />} /> */}
+            <Route path="/" element={<Navigate to="info" replace />} /> {/* Redirect mặc định đến trang "Thông tin tài khoản" */}
           </Routes>
         </div >
       </div >

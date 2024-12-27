@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductById, fetchRatingProductById, fetchSimilarProducts } from "../../redux/actions/productActions";
 import FoodDisplay from '../FoodDisplay/FoodDisplay'
 
-
 const ProductItemDetail = () => {
   // Preview image
   const [showImagePreview, setShowImagePreview] = useState(false);
@@ -24,20 +23,19 @@ const ProductItemDetail = () => {
     setShowImagePreview(false);
     setPreviewImage('');
   };
-
   // Format Date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const daysOfWeek = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
     const dayOfWeek = daysOfWeek[date.getDay()];
-    const day = date.getDate();  // Lấy ngày
-    const month = date.getMonth() + 1;  // Lấy tháng (tháng trong JS bắt đầu từ 0)
-    const year = date.getFullYear();  // Lấy năm
-    const hours = date.getHours().toString().padStart(2, '0');  // Lấy giờ (padStart để đảm bảo đủ 2 chữ số)
-    const minutes = date.getMinutes().toString().padStart(2, '0');  // Lấy phút
+    const day = date.getDate(); 
+    const month = date.getMonth() + 1;  
+    const year = date.getFullYear();  
+    const hours = date.getHours().toString().padStart(2, '0'); 
+    const minutes = date.getMinutes().toString().padStart(2, '0');  
     return `${day}/${month}/${year} lúc ${hours}:${minutes}`;
   };
-  // Modal
+  // Modal Product
   const [showModalProduct, setShowModalProduct] = useState(false);
   const [isAddToCart, setIsAddToCart] = useState(false);
   const handleShowModalProduct = () => {
@@ -54,9 +52,9 @@ const ProductItemDetail = () => {
     handleShowModalProduct();
   };
 
-  // API
   const { id } = useParams();
   const dispatch = useDispatch();
+  // state redux
   const productDetail = useSelector((state) => {
     return state.product.productDetail;
   })
@@ -64,15 +62,10 @@ const ProductItemDetail = () => {
     return state.product.listSimilarProducts;
   })
   const isLoading = useSelector((state) => state.product.isLoadingListSimilarProducts);
-
-  const ratingProduct = useSelector((state) => { // All số bài đánh giá sản phẩm (Ko phải số sao)
+  const ratingProduct = useSelector((state) => { // All bài đánh giá sản phẩm (Ko phải số sao)
     return state.product.ratingProduct;
   })
-
   const account = useSelector((state) => state.auth.account); // Khách hàng đã đánh giá sản phẩm ni -> Vô coi đánh giá sản phẩm -> hiện "Bạn"
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
   useEffect(() => {
     dispatch(fetchProductById(id));
     dispatch(fetchRatingProductById(id));
@@ -92,7 +85,6 @@ const ProductItemDetail = () => {
   if (!productDetail) {
     return <div>Không có thông tin sản phẩm.</div>;
   }
-  
   else return (
     <div className="page-product-detail">
       <div className="container">
@@ -118,7 +110,6 @@ const ProductItemDetail = () => {
             <hr />
             <div className="infor-right-price-container">
               <span className="infor-right-price-discount">
-                {/* {Number(productDetail.price - productDetail.discountedPrice).toLocaleString('vi-VN')} đ */}
                 {Number(productDetail.discountedPrice).toLocaleString('vi-VN')} đ
               </span>
               <span className="infor-right-price-origin">

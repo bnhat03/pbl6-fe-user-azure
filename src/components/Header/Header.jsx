@@ -1,13 +1,8 @@
 import React from 'react'
 import './Header.scss'
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
 
 const Header = () => {
-  // fetch category
-  const listCategories = useSelector((state) => {
-    return state.category.listCategories;
-  })
   return (
     <div className='header'>
       <div className="header-contents">

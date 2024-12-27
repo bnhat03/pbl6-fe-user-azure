@@ -30,8 +30,6 @@ const Store = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-
   // Reset contentRef khi component unmounts
   useEffect(() => {
     return () => {

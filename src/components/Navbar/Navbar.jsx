@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./Navbar.scss";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { showLoginModal, showRegisterModal } from "../../redux/actions/modalActions";
-// import { fetchAllCategories } from "../../redux/actions/categoryActions";
+import "./Navbar.scss";
 import logoStore from '../../assets/logo4.png'
 import logoCart from '../../assets/logo/cart.png'
 import logoUser from '../../assets/logo/user.png'
@@ -11,45 +10,35 @@ import cate_1 from "../../assets/navbar/cate_1.png";
 import ChatButton from "../Chatbox/ChatButton";
 
 const Navbar = () => {
-  // redux modal
+  // state redux
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
   const account = useSelector((state) => state.auth.account);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const listProductsInCart = useSelector((state) => state.user.listProductsInCart); // lấy listProducts in cart -> hiển thị chấm đỏ
-
+  const listCategories = useSelector((state) => {
+    return state.category.listCategories;
+  })
+  //state
   const [avatar, setAvatar] = useState(account?.avatar);
   const [product, setProduct] = useState(null);
   const [st, setST] = useState(null);
-
+  // show modal: login, register
   const handleShowLogin = () => {
     dispatch(showLoginModal());
   };
-
   const handleShowRegister = () => {
     dispatch(showRegisterModal());
   };
 
-  // fetch category
-  const listCategories = useSelector((state) => {
-    return state.category.listCategories;
-  })
-
   useEffect(() => {
     setAvatar(account.avatar)
   }, [account]);
-
-  // Mỗi li ở ul thực đơn được nhấn -> active cho THỰC ĐƠN -> Dùng path trên URL 
-  const location = useLocation(); // useLocation -> Tự động re-render cho component nào sử dụng Hook này
-  // const isMenuActive = listCategories.some( // true/false
-  //   (category) => location.pathname === `/category/${category.categoryId}` // condition
-  // );
-  const isMenuActive = listCategories.some(
+  const location = useLocation(); 
+  const isMenuActive = listCategories.some( // active cho 'THỰC ĐƠN'
     (category) => location.pathname === `/category/${category.categoryId}` || location.pathname === `/combo`
   );
 
-
-  // ??? -> sticky chưa hiểu: JS + CSS
+  //add sticky
   useEffect(() => {
     const handleScroll = () => {
       const navbar = document.querySelector('.navbar');
@@ -63,11 +52,11 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // responsive
   const [isLeftPanelOpen, setIsLeftPanelOpen] = useState(false);
   const toggleLeftPanel = () => {
     setIsLeftPanelOpen(!isLeftPanelOpen);
   };
-
   const panelRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -81,13 +70,11 @@ const Navbar = () => {
     };
   }, []);
 
-
   return (
     <div className="navbar">
       <button className="navbar-toggle" onClick={toggleLeftPanel}>
         ☰
       </button>
-
       <div ref={panelRef} className={`left-panel ${isLeftPanelOpen ? "open" : ""}`}>
         <button className="close-btn" onClick={toggleLeftPanel}>×</button>  {/* Nút đóng */}
         <div className="left-panel-content">
@@ -134,7 +121,7 @@ const Navbar = () => {
 
       <NavLink
         to="/" className="logo"
-        end // 'end' đảm bảo rằng chỉ '/' (Trang Chủ) được kích hoạt
+        end //Đúng route '/'
       >
         <img src={logoStore} alt="" className="logo-image" />
       </NavLink>
@@ -153,7 +140,6 @@ const Navbar = () => {
           Giới thiệu
         </NavLink>
         <NavLink
-          // to={listCategories.length > 0 ? `combo` : "/category"}
           to={`combo`}
           className={({ isActive }) => (isActive || isMenuActive ? "active navbar-category" : "navbar-category")}
         >
@@ -189,30 +175,18 @@ const Navbar = () => {
             }
           </ul>
         </NavLink>
-
         <NavLink
           to="/promotion"
           className={({ isActive }) => (isActive ? 'active' : '')}
         >
           Khuyến mãi
         </NavLink>
-
-        {/* <NavLink
-          to="/contact"
-          className={({ isActive }) => (isActive ? 'active' : '')}
-        >
-          Liên hệ
-        </NavLink> */}
-
-       
-
         <NavLink
           to="/store"
           className={({ isActive }) => (isActive ? 'active' : '')}
         >
           Cửa hàng
         </NavLink>
-
         <NavLink
           to="/download"
           className={({ isActive }) => (isActive ? 'active' : '')}
@@ -234,7 +208,6 @@ const Navbar = () => {
             ? <>
               <NavLink
                 to="/cart"
-                // className="navbar-cart-icon"
                 className={({ isActive }) => (isActive ? 'active navbar-cart-icon' : 'navbar-cart-icon')}
               >
                 <img src={logoCart} alt="" />

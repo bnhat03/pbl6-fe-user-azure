@@ -18,7 +18,7 @@
       // height: auto; 
       aspect-ratio: 1/1; /* Thiết lập tỉ lệ 1:1 giữa chiều rộng và chiều cao */
       border-radius: 15px 15px 0px 0px;
-      object-fit: cover; /* Image ko bị méo */
+      object-fit: cover; 
     }
     .food-item-addtocart {
       position: absolute;
@@ -41,11 +41,7 @@
   .food-item-info {
     padding: 20px;
     .food-item-name-rating {
-      /* display: flex; */
-      /* justify-content: space-between; */
       min-height: 50px;
-      // align-items: center;
-      // justify-content: center;
       margin-bottom: 10px;
       font-weight: bold;
       text-transform: uppercase;

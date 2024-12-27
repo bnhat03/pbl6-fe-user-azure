@@ -33,13 +33,13 @@
                   
                   span {
                     display: flex;
-                    align-items: center; /* Căn giữa icon và nội dung */
+                    align-items: center; 
                     font-size: 14px;
                     color: #333;
                     background-color: #fff; 
                     padding: 5px;
                     border-radius: 8px; 
-                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Tăng độ rõ đổ bóng */
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
                   }
               
                   i {
@@ -47,8 +47,8 @@
                     background-color: #e60000; 
                     color: white;
                     font-weight: bold;
-                    border-radius: 50%; /* Icon dạng tròn */
-                    margin-right: 10px; /* Khoảng cách giữa icon và text */
+                    border-radius: 50%; 
+                    margin-right: 10px; 
                   }
                 }
             }
@@ -82,22 +82,21 @@
                   gap: 10px; 
                     span {
                       display: flex;
-                      align-items: center; /* Căn giữa icon và nội dung */
+                      align-items: center; 
                       font-size: 14px;
                       color: #333;
                       background-color: #fff; 
                       padding: 5px;
                       border-radius: 8px; 
-                      // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-                      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Tăng độ rõ đổ bóng */
+                      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
                     }
                     i {
                       padding: 8px;
                       background-color: #e60000; 
                       color: white;
                       font-weight: bold;
-                      border-radius: 50%; /* Icon dạng tròn */
-                      margin-right: 10px; /* Khoảng cách giữa icon và text */
+                      border-radius: 50%; 
+                      margin-right: 10px; 
                     }
                     .avatar{
                       img{
@@ -118,10 +117,6 @@
             // flex-direction: column;
             margin-left: 20px;
             .infor-right-ggmap-container {
-                // img {
-                //   height: 80vh; 
-                //   width: 100%; 
-                // }
               width: 100%;
               height: 80vh;
             }

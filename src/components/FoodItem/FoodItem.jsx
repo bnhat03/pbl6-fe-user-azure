@@ -1,14 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import './FoodItem.scss'
 import { Link } from "react-router-dom";
-import store1 from "../../assets/image_gg/introduce_1.png";
-import store2 from "../../assets/image_gg/introduce_2.png";
-import store3 from "../../assets/image_gg/introduce_3.png";
-import store4 from "../../assets/image_gg/introduce_4.png";
-import store5 from "../../assets/image_gg/introduce_5.png";
 import ProductItemModal from '../ProductItemModal/ProductItemModal';
 
-const FoodItem = ({ product }) => { // product => combo/product
+const FoodItem = ({ product }) => { 
   // Modal
   const [showModalProduct, setShowModalProduct] = useState(false);
   const [isAddToCart, setIsAddToCart] = useState(false);
@@ -23,7 +18,7 @@ const FoodItem = ({ product }) => { // product => combo/product
   };
   const handleAddToCartClick = () => {
     setIsAddToCart(true); // "Thêm vào giỏ hàng"
-    handleShowModalProduct(); // Hiển thị modal
+    handleShowModalProduct(); 
   };
 
   return (
@@ -42,7 +37,6 @@ const FoodItem = ({ product }) => { // product => combo/product
         </div>
         <div className="food-item-price-container">
           <span className="price-discount">
-            {/* {Number(product.price - product.discountedPrice).toLocaleString('vi-VN')} đ */}
             {Number(product.discountedPrice).toLocaleString('vi-VN')} đ
           </span>
           <span className="price-origin">

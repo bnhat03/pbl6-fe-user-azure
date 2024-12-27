@@ -1,5 +1,4 @@
 import types from "../types";
-
 const INITIAL_STATE = {
     listCategories: [],
     drinkCategoryId: 0,

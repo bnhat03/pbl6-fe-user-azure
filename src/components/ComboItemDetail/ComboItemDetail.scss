@@ -14,7 +14,7 @@
                 img {
                   height: 100%; 
                   width: 100%; 
-                  object-fit: contain; /* Đảm bảo tỉ lệ hình ảnh không bị biến dạng */
+                  object-fit: contain; 
                 //   object-position: left; 
                 }
               }
@@ -139,8 +139,8 @@
           border-radius: 8px;
           padding: 15px;
           margin-bottom: 30px;
-          background-color: #ffffff;  // Nền trắng để tăng độ tương phản
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12),  // Đổ bóng nhẹ và nổi bật hơn
+          background-color: #ffffff;  
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12),  
                       0 4px 8px rgba(0, 0, 0, 0.08);
       
           .avatar-username-star-container {
@@ -196,7 +196,7 @@
             .review-image {
               width: 100px; // Kích thước hình ảnh
               height: 100px;
-              object-fit: cover; // Đảm bảo hình ảnh không bị biến dạng
+              object-fit: cover; 
               border-radius: 4px;
               border: 1px solid #ccc;
               cursor: pointer;

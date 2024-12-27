@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserAccount } from '../../redux/actions/authActions';
 
-
 const OAuth2RedirectHandler = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -11,7 +10,6 @@ const OAuth2RedirectHandler = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const token = params.get('token');
-  
     if (token) {
       try {
         localStorage.setItem('token', token);

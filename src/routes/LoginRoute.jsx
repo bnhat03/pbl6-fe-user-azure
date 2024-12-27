@@ -6,7 +6,6 @@ import { showLoginModal } from '../redux/actions/modalActions';
 const LoginRoute = () => {
     const dispatch = useDispatch();
     const isLogin = useSelector((state) => state.auth.isAuthenticated);
-
     if (isLogin === true) {
         return <Navigate to="/" />;
     } else {

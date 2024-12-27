@@ -9,13 +9,13 @@
     min-height: 80vh; 
     background: url('../../assets/image_gg/introduce_1.png') no-repeat center center; /* Canh giữa hình nền */
     background-size: cover;
-    background-attachment: fixed; /* Giữ nguyên khi cuộn trang */
+    background-attachment: fixed; /* Giữ nguyên khi kéo trang */
     display: flex;
     align-items: center;
     justify-content: space-around;
     &::before{
-      background-color: rgba(0, 0, 0, 0); /* Màu nền mờ */
-      z-index: 1; /* Đặt z-index thấp hơn so với các phần tử khác */
+      background-color: rgba(0, 0, 0, 0); 
+      z-index: 1; 
     }
   
     .header-circle {
@@ -27,7 +27,7 @@
       padding: 50px;
       width: 400px; 
       height: 400px; 
-      border-radius: 50%; /* Tạo hình tròn */
+      border-radius: 50%; 
       text-align: center; 
       color: white;
       font-weight: bold;

@@ -25,13 +25,10 @@ const StoreDetail = () => {
   const storeDetail = useSelector((state) => {
     return state.store.storeDetail;
   })
-
   const listProductsByIdStore = useSelector((state) => {
     return state.product.listProductsByIdStore;
   })
   const isLoading = useSelector((state) => state.product.isLoadingListProductsByIdStore);
-
-
   const listVouchersStore = useSelector((state) => {
     return state.promotion.listVouchersStore;
   })
@@ -39,8 +36,7 @@ const StoreDetail = () => {
     return state.user.listVouchersUser;
   })
 
-
-
+  // Chat
   const handleClickChatStore = async () => {
     const on = await SearchOwner();
     // console.log("Onn: ",on)
@@ -56,19 +52,14 @@ const StoreDetail = () => {
       setSelectedUser(on);
       setShowChat(true);
     }
-
   }
-
   const loadStoreAgain = async () => {
     try {
       // console.log("Loading stores again...");
-
       const previousOnlineUsers = stores
         .filter(user => user.online === true)
         .map(user => user.id);
-
       const res = await GetAllStoresChat();
-
       if (res.data.EC === 0 && res.data.DT) {
         const updatedStores = res.data.DT.map(store => ({
           ...store,
@@ -82,7 +73,6 @@ const StoreDetail = () => {
       console.error("Lỗi khi thực hiện loadStoreAgain:", error);
     }
   };
-
   const saveMessage = async (idOwner) => {
     const sender = idOwner;
     const receiver = Number(idU);
@@ -95,7 +85,6 @@ const StoreDetail = () => {
       console.error('Error sending image:', exception);
     }
   }
-
   const SearchOwner = async () => {
     const res = await searchOwnerForStore(id);
     // console.log("owner: ", res)
@@ -104,16 +93,17 @@ const StoreDetail = () => {
     }
     return null;
   }
+
   // Format Date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const daysOfWeek = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
     const dayOfWeek = daysOfWeek[date.getDay()];
-    const day = date.getDate();  // Lấy ngày
-    const month = date.getMonth() + 1;  // Lấy tháng (tháng trong JS bắt đầu từ 0)
-    const year = date.getFullYear();  // Lấy năm
-    const hours = date.getHours().toString().padStart(2, '0');  // Lấy giờ (padStart để đảm bảo đủ 2 chữ số)
-    const minutes = date.getMinutes().toString().padStart(2, '0');  // Lấy phút
+    const day = date.getDate();  
+    const month = date.getMonth() + 1;  
+    const year = date.getFullYear();  
+    const hours = date.getHours().toString().padStart(2, '0');  
+    const minutes = date.getMinutes().toString().padStart(2, '0');  
     // return `${day}/${month}/${year} lúc ${hours}:${minutes}`;
     return `${hours}:${minutes}`;
   };
@@ -143,37 +133,19 @@ const StoreDetail = () => {
       const userHasVoucher = (Array.isArray(listVouchersUser) ? listVouchersUser : []).some(
         userVoucher => +userVoucher.voucherId === +storeVoucher.voucherId
       );
-      if (!userHasVoucher) {
+      if (!userHasVoucher) { // User chưa lưu Voucher => 'Lưu'
         return {
           ...storeVoucher,
           userHas: false
         };
-      }
-      return {
+      } 
+      return { // User đã lưu Voucher => 'Đã lưu'
         ...storeVoucher,
         userHas: true
       };
     });
-    // console.log('updatedListVouchersStore: ', updatedListVouchersStore);
     setVouchers(updatedListVouchersStore);
   }, [listVouchersUser, listVouchersStore]);
-
-  // useEffect(() => {
-  //   // Chỉ gọi API khi dữ liệu chưa có hoặc khi thay đổi `id`
-  //   if (!storeDetail || storeDetail.id !== id) {
-  //     dispatch(fetchStoreById(id));
-  //   }
-  //   if (!listProductsByIdStore.length || listProductsByIdStore[0]?.storeId !== id) {
-  //     dispatch(fetchProductsByIdStore(id));
-  //   }
-  //   if (!listVouchersStore.length || listVouchersStore[0]?.storeId !== id) {
-  //     dispatch(fetchVouchersByIdStore(id));
-  //   }
-  //   if (!listVouchersUser.length) {
-  //     dispatch(fetchVouchers());
-  //   }
-  // }, [id, dispatch, storeDetail, listProductsByIdStore, listVouchersStore, listVouchersUser]);
-
 
   if (!storeDetail) {
     return <div>Không có thông tin cửa hàng.</div>;

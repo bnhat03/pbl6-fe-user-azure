@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import "./styles/HomeStyle.css";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,13 +10,11 @@ import LoginModal from "./components/LoginModal/LoginModal";
 import RegisterModal from "./components/RegisterModal/RegisterModal";
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserAccount } from "./redux/actions/authActions";
-import { fetchAllProducts } from "./redux/actions/productActions";
+import { fetchAllProducts, fetchProductsBestSale } from "./redux/actions/productActions";
 import { fetchAllCategories } from "./redux/actions/categoryActions";
-import { fetchProductsBestSale } from "./redux/actions/productActions";
 import { fetchAllPromotions } from "./redux/actions/promotionActions";
 import { fetchAllStores } from "./redux/actions/storeActions";
 import ChatContext, { ChatProvider } from "./context/showChat";
-import PacmanLoader from 'react-spinners/PacmanLoader';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -41,7 +38,6 @@ const App = () => {
           <Navbar />
           <AppRoutes />
         </ChatProvider>
-        {/* Redux -> Dùng Provider bọc Login/Register Modal => Bắt buộc Provider phải bọc Modal nếu không Modal sẽ không sử dụng được state Redux */}
         <LoginModal />
         <RegisterModal />
       </div>

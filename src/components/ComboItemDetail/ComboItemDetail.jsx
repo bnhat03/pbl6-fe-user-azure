@@ -26,17 +26,16 @@ const ComboItemDetail = () => {
     setShowImagePreview(false);
     setPreviewImage('');
   };
-
   // Format Date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const daysOfWeek = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
     const dayOfWeek = daysOfWeek[date.getDay()];
-    const day = date.getDate();  // Lấy ngày
-    const month = date.getMonth() + 1;  // Lấy tháng (tháng trong JS bắt đầu từ 0)
-    const year = date.getFullYear();  // Lấy năm
-    const hours = date.getHours().toString().padStart(2, '0');  // Lấy giờ (padStart để đảm bảo đủ 2 chữ số)
-    const minutes = date.getMinutes().toString().padStart(2, '0');  // Lấy phút
+    const day = date.getDate();  
+    const month = date.getMonth() + 1;  
+    const year = date.getFullYear();  
+    const hours = date.getHours().toString().padStart(2, '0');  
+    const minutes = date.getMinutes().toString().padStart(2, '0');  
     return `${day}/${month}/${year} lúc ${hours}:${minutes}`;
   };
   // Modal
@@ -68,25 +67,20 @@ const ComboItemDetail = () => {
   const isLoading = useSelector((state) => state.product.isLoadingListSimilarCombos);
   // Tìm store chứa tất cả product trong combo
   const filterStoresWithAllComboProducts = (combo) => {
-    // console.log('>>> combo detail: ',combo);
     if (!combo || !combo.products || combo.products.length === 0) return [];
     // Tạo một mảng gồm các storeId từ sản phẩm đầu tiên trong combo
     let commonStores = combo.products[0].stores.map(store => store.storeId);
-
     // Duyệt qua từng product trong combo để tìm các storeId chung của All sản phẩm
     combo.products.forEach((product) => {
       const productStoreIds = product.stores.map(store => store.storeId);
       commonStores = commonStores.filter(storeId => productStoreIds.includes(storeId));
     });
-
     // Array detail infor của các stores có mặt trong commonStores
     const filteredStores = combo.products[0].stores.filter(store =>
       commonStores.includes(store.storeId)
     );
     return filteredStores; 
   };
-
-
   const stores = useSelector((state) => {
     return state.store.listStores;
   })
@@ -193,14 +187,12 @@ const ComboItemDetail = () => {
               <div className="infor-right-store-title">
                 <span>&#128073; Danh sách cửa hàng hiện có</span>
               </div>
-              {/* <StoreList stores={productDetail.stores} /> */}
               <StoreList stores={filterStoresWithAllComboProducts(comboDetail)} />
             </div>
             <ComboItemModal
               showModalCombo={showModalCombo}
               handleCloseModalCombo={handleCloseModalCombo}
               combo={comboDetail}
-              // stores={comboDetail.stores}
               stores={filterStoresWithAllComboProducts(comboDetail)}
               isAddToCart={isAddToCart}
             />

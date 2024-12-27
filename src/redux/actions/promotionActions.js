@@ -1,6 +1,5 @@
 import types from "../types";
 import { fetchAllPromotionsService, fetchPromotionByIdService, fetchVouchersByIdStoreService } from "../../services/promotionService";
-
 // Thunk: fetching data
 export const fetchPromotionsSuccess = (data) => {
     return {
@@ -8,7 +7,6 @@ export const fetchPromotionsSuccess = (data) => {
         dataPromotions: data
     };
 };
-
 const fetchAllPromotions = () => {
     return async (dispatch, getState) => {
         try {
@@ -59,8 +57,6 @@ const fetchVouchersByIdStore = (id) => {
         }
     }
 };
-
-
 
 export {
     fetchAllPromotions,

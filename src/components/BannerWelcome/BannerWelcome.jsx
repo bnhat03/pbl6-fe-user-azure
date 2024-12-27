@@ -12,7 +12,6 @@ import store11 from "../../assets/image_gg/introduce_11.png";
 import store12 from "../../assets/image_gg/introduce_12.png";
 
 function BannerWelcome() {
-  // fetch category
   const listCategories = useSelector((state) => {
     return state.category.listCategories;
   })
@@ -23,7 +22,7 @@ function BannerWelcome() {
           <Col lg={8} className="text-center text-lg-start mb-5 mb-lg-0 introduce">
             <h4 className="title">FOS XIN CHÀO</h4>
             <p className="description">
-              Chào mừng đến với FOS! Với 7 cửa hàng trên toàn quốc, chúng tôi tự hào mang đến trải nghiệm ẩm thực tuyệt vời cho các gia đình Việt.
+              Chào mừng đến với FOS! Với nhiều cửa hàng trên toàn quốc, chúng tôi tự hào mang đến trải nghiệm ẩm thực tuyệt vời cho các bạn.
               Chúng tôi cam kết cung cấp những món ăn ngon, chất lượng vượt trội, dịch vụ tận tâm và giá cả hợp lý.
               Hãy ghé thăm chúng tôi và tận hưởng những khoảnh khắc ẩm thực đáng nhớ!
             </p>

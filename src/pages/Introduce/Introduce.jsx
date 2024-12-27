@@ -6,7 +6,6 @@ import Introduce_2 from "../../assets/image_gg/introduce_2.png";
 import Introduce_3 from "../../assets/image_gg/introduce_3.png";
 import Introduce_4 from "../../assets/image_gg/introduce_4.png";
 import Introduce_5 from "../../assets/image_gg/introduce_5.png";
-
 import mission from "../../assets/blog/mission.png";
 import teamwork from "../../assets/blog/teamwork.png";
 import quality from "../../assets/blog/quality.png";
@@ -20,7 +19,6 @@ const Introduce = () => {
   return (
     <div>
       <section className="introduce-section-1">
-
         <Row className="align-items-center section-1-up">
           <div className="container-edit">
             <Col lg={6} className="text-center text-lg-start mb-5 mb-lg-0 introduce">
@@ -124,15 +122,9 @@ const Introduce = () => {
                 <h5>TIẾT KIỆM</h5>
               </Carousel.Caption>
             </Carousel.Item>
-
           </Carousel>
         </Row>
-
       </section>
-
-
-
-
     </div>
   )
 }
