@@ -1,3 +1,11 @@
+// Ẩn cảnh báo validateDOMNesting 
+const originalConsoleError = console.error;
+console.error = (...args) => {
+  if (typeof args[0] === 'string' && args[0].includes('validateDOMNesting')) {
+    return; // Không log cảnh báo validateDOMNesting
+  }
+  originalConsoleError(...args);
+};
 import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';

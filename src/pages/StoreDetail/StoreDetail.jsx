@@ -126,7 +126,9 @@ const StoreDetail = () => {
     dispatch(fetchStoreById(id));
     dispatch(fetchProductsByIdStore(id));
     dispatch(fetchVouchersByIdStore(id));
-    dispatch(fetchVouchers()); // list vouchers của user
+    if (isAuthenticated) {
+      dispatch(fetchVouchers()); // list vouchers của user
+    }
   }, [id]);
   useEffect(() => {
     const updatedListVouchersStore = listVouchersStore.map(storeVoucher => {

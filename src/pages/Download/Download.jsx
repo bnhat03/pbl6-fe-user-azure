@@ -10,25 +10,19 @@ const Download = () => {
             <div className="container">
                 <div className="paragraph">
                     <p>Tải ngay ứng dụng của chúng tôi dành cho mobile </p>
-                    {/* <NavLink
-                        to="/"
-                        end
-                    >
-                        <button>Về trang chủ</button>
-                    </NavLink> */}
                 </div>
                 <div className="btn-container">
-                    <a 
-                        href={iconUser} 
-                        download="user-app.png"
+                <a 
+                        href="/appUser.apk"  // Đường dẫn tuyệt đối tới thư mục public
+                        download="user-app.apk"  // Tên tệp khi tải xuống
                         className="btn-download"
                     >
                         <img src={iconUser} alt="" />
                         <span>Người dùng</span>
                     </a>
                     <a 
-                        href={iconUser}  
-                        download="user-app.png"
+                        href="/appShipper.apk"  
+                        download="shipper-app.apk"  
                         className="btn-download"
                     >
                         <img src={iconShipper} alt="" />

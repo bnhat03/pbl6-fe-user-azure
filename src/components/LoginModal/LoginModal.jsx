@@ -5,12 +5,10 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideLoginModal, showRegisterModal } from '../../redux/actions/modalActions';
 import { loginUser, loginGoogle } from '../../redux/actions/authActions';
-
 // import FacebookLogin from 'react-facebook-login';
 import fbIcon from '../../assets/logo/facebook.png'
 import googleIcon from '../../assets/logo/google.png'
 import { useNavigate, useLocation } from 'react-router-dom';
-
 import ForgetPasswordModal from '../ForgetPasswordModal/ForgetPasswordModal';
 
 const LoginModal = () => {

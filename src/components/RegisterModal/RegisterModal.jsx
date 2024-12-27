@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideRegisterModal, showLoginModal } from '../../redux/actions/modalActions';
 import { registerNewUser } from '../../redux/actions/authActions';
+
 const RegisterModal = () => {
   const dispatch = useDispatch();
   const registerNewUserSuccess = useSelector((state) => {
@@ -23,7 +24,6 @@ const RegisterModal = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-
   const defaultValidInput = {
     isValidFullname: true,
     isValidPhonenumber: true,
@@ -33,7 +33,7 @@ const RegisterModal = () => {
     isValidConfirmPassword: true,
   };
   const [objCheckInput, setObjCheckInput] = useState(defaultValidInput);
-  // Hàm để reset lại dữ liệu input
+  // Reset lại dữ liệu input
   const resetInputs = () => {
     setFullname("");
     setPhonenumber("");
@@ -81,7 +81,6 @@ const RegisterModal = () => {
       toast.error("Vui lòng điền đầy đủ thông tin!");
     }
   }
-
   // Theo dõi sự thay đổi của registerNewUserSuccess
   useEffect(() => {
     if (registerNewUserSuccess) {
