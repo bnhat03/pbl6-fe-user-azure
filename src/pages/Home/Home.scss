@@ -1,9 +1,12 @@
 .page-homepage{
-    h2{
-        margin-top: 50px;
+    .best-sale, .favourite{
+        // margin-top: 50px;
         font-size: 2.5rem;
         color: red;
         margin-bottom: 20px;
         text-align: center;
+    }
+    .favourite{
+        margin-top: 50px;
     }
 }

@@ -35,7 +35,7 @@ const Home = () => {
   }, []);
   
   useEffect(() => {
-    if (account) {
+    if (isAuthenticated) {
       dispatch(fetchFavouriteProducs(account.id));
     }
   }, [account, dispatch]);
@@ -44,14 +44,12 @@ const Home = () => {
     <div className='page-homepage'>
       <Header />
       <ExploreMenu />
-      <BannerWelcome />
-      <Service />
-      <h2>SẢN PHẨM BÁN CHẠY</h2>
+      <h2 className="best-sale">SẢN PHẨM BÁN CHẠY</h2>
       <FoodDisplay listProducts={listProductsBestSale} isLoading={isLoadingListProductsBestSale} />
       {
         isAuthenticated && (
           <>
-            <h2>CÓ THỂ BẠN QUAN TÂM</h2>
+            <h2 className="favourite">CÓ THỂ BẠN QUAN TÂM</h2>
             {
               listFavouriteProducts && (
                 <FoodDisplay listProducts={listFavouriteProducts} isLoading={isLoadingListFavouriteProducts} />
@@ -60,6 +58,8 @@ const Home = () => {
           </>
         )
       }
+      <BannerWelcome />
+      <Service />
 
     </div>
   )

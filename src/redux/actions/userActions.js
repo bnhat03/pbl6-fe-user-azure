@@ -1,4 +1,5 @@
 import types from "../types";
+import axios from "axios";
 import {
     updateProfileService,
     addProductToCartService,
@@ -458,11 +459,14 @@ const fetchAllOrders = () => {
             let dataOrder = res && res.data && res.data.data ? res.data.data : [];
             dataOrder = await Promise.all(
                 dataOrder.map(async (order) => {
-                    const resStore = await fetchStoreByIdService(order.storeId);
-                    const dataStore = resStore && resStore.data ? resStore.data.data : {};
+                    let dataStore = 'Cửa hàng đã chuyển nhượng';
+                    if (+order.storeId !== 0){
+                        const resStore = await fetchStoreByIdService(order.storeId);
+                        dataStore = resStore?.data?.data?.storeName ? resStore.data.data.storeName : 'Cửa hàng đã chuyển nhượng';
+                    }
                     return {
                         ...order,
-                        storeName: dataStore.storeName
+                        storeName: dataStore
                     };
                 })
             );
@@ -570,7 +574,6 @@ const fetchVouchers = () => {
 const fetchFavouriteProducsRequest = (data) => {
     return {
         type: types.FETCH_FAVOURITE_PRODUCT_REQUEST,
-
     };
 };
 const fetchFavouriteProducsSuccess = (data) => {
@@ -583,9 +586,17 @@ const fetchFavouriteProducs = (idUser) => {
     return async (dispatch, getState) => {
         try {
             dispatch(fetchFavouriteProducsRequest());
-            const res = await fetchFavouriteProducsService(idUser);
-            const data = res && res.data ? res.data : []; // list productIds
-            if (data) {
+            // const res = await fetchFavouriteProducsService(idUser);
+            let urlAI = `http://localhost:5000`;
+            // let urlAI = import.meta.env.VITE_AI_URL || `http://localhost:5000`;
+            const res = await axios.get(`${urlAI}/cross-sell/${idUser}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            const data = res && res.data ? res.data.data : []; // list productIds
+            console.log('>>> data favourite: ', res); 
+            if (data && Array.isArray(data)) {
                 // Sử dụng Promise.all -> call API cho mỗi productId
                 const listProductDetails = await Promise.all(
                     data.map(async (productId) => {

@@ -8,6 +8,8 @@ import { Form } from 'react-bootstrap';
 import L from 'leaflet';
 import iconStore from '../../assets/logo/map_store.png'
 import iconOrder from '../../assets/logo/map_order.png'
+import iconZalopay from '../../assets/logo/zalopay.png'
+import iconCash from '../../assets/logo/cash.png'
 import iconCurrentLocation from '../../assets/logo/map_current_location.png'
 //MAP
 import axios from 'axios';
@@ -470,7 +472,7 @@ const Checkout_V2 = () => {
 
                         <div className="shipping-method">
                             <h3>Phương thức thanh toán</h3>
-                            <div>
+                            <div className="payment-cash">
                                 <input
                                     type="radio"
                                     id="cash"
@@ -479,7 +481,9 @@ const Checkout_V2 = () => {
                                     checked={paymentMethod === "Thanh toán khi nhận hàng"}
                                     onChange={(e) => setPaymentMethod(e.target.value)}
                                 />
-                                <label htmlFor="cash">Thanh toán khi nhận hàng</label>
+                                <label htmlFor="cash">
+                                    <img src={iconCash} alt="" />Thanh toán khi nhận hàng
+                                </label>
                             </div>
                             <div>
                                 <input
@@ -490,7 +494,9 @@ const Checkout_V2 = () => {
                                     checked={paymentMethod === "Zalopay"}
                                     onChange={(e) => setPaymentMethod(e.target.value)}
                                 />
-                                <label htmlFor="Zalopay">Zalopay</label>
+                                <label htmlFor="Zalopay">
+                                    <img src={iconZalopay} alt="" />Zalopay
+                                </label>
                             </div>
                             {/* <div>
                                 <input

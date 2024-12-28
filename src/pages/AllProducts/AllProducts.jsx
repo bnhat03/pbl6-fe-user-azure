@@ -87,7 +87,7 @@ export default function AllProducts() {
     try {
       const base64FileImage = await handleFileChange(event);
       try {
-        let urlAI = import.meta.env.VITE_AI_URL || `http://localhost:5000`;
+        let urlAI = import.meta.env.VITE_AI_PRODUCT_URL || `http://localhost:5000`;
         const responseAI = await axios.post(`${urlAI}/predict`, {
           image: base64FileImage
         });

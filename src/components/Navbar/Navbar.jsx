@@ -121,7 +121,7 @@ const Navbar = () => {
               <NavLink to="/store" className='left-panel-link'>Cửa hàng</NavLink>
             </li>
             <li className="left-panel-item" >
-              <NavLink to="/dowload" className='left-panel-link'>Tải ngay</NavLink>
+              <NavLink to="/download" className='left-panel-link'>Tải ngay</NavLink>
             </li>
           </ul>
         </div>

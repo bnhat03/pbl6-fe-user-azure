@@ -92,6 +92,7 @@ const LoginModal = () => {
         centered
         dialogClassName="custom-modal-login"
         animation={false}
+        backdrop="static"
       >
         <Modal.Header closeButton>
           <Modal.Title className='title-bold'>ĐĂNG NHẬP</Modal.Title>
@@ -163,13 +164,13 @@ const LoginModal = () => {
                   >
                      <img src={googleIcon} alt="" />
                   </button>
-                  {/* <button 
+                  <button 
                     className='custom-facebook-button' 
                     onClick={handleSuccessFacebook}
                     title='Facebook'
                     >
                      <i className="fa-brands fa-facebook" />
-                  </button> */}
+                  </button>
                 </div>
               </div>
               <div className="click-register">

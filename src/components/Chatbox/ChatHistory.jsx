@@ -232,7 +232,7 @@ const ChatHistory = (props) => {
                 };
                 try {
                     let urlAI = import.meta.env.VITE_AI_URL || `http://localhost:5000`;
-                    const response = await fetch(`${urlAI}/intent-detection`, {
+                    const response = await fetch(`${urlAI}/intent-detection`, { // Tự động chat
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"

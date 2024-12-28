@@ -100,6 +100,7 @@ const RegisterModal = () => {
       centered
       dialogClassName="custom-modal-register"
       animation={false}
+      backdrop="static"
     >
       <Modal.Header closeButton>
         <Modal.Title className='title-bold'>ĐĂNG KÝ</Modal.Title>

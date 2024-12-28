@@ -35,7 +35,7 @@ const ExploreMenu = () => {
             )
           })}
       </div>
-      <hr />
+      {/* <hr /> */}
     </div>
   )
 }

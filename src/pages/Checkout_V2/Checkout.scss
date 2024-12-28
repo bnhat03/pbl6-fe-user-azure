@@ -139,13 +139,20 @@
 
           .shipping-method {
               margin: 20px 0;
-
+              .payment-cash{
+                margin-bottom: 15px;
+              }
               h4 {
                   margin-bottom: 10px;
               }
 
               label {
                   margin-left: 10px;
+                  img {
+                    width: 30px;
+                    height: 30px;
+                    margin-right: 15px;
+                  }
               }
           }
           .voucher-container{
