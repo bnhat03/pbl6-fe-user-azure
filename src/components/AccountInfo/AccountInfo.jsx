@@ -21,7 +21,7 @@ const AccountInfo = () => {
   // onclick 3 nút
   const handleSaveChangeClick = () => {
     setIsEditing(false); 
-    dispatch(updateProfile(fullname, avatarFile, email, address));
+    dispatch(updateProfile(fullname, phonenumber, avatarFile, email, address));
     // dispatch(updateAccountAuth(fullname, avatarPreview.slice(22), email, address));
   };
   const handleCancelClick = () => {

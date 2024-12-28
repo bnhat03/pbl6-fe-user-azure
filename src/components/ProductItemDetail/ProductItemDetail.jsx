@@ -25,7 +25,8 @@ const ProductItemDetail = () => {
   };
   // Format Date
   const formatDate = (dateString) => {
-    const date = new Date(dateString);
+    const validDateString = dateString.includes('+') ? dateString.split('+')[0] : dateString;   // "2024-12-28T14:05:05.659510170+07:00[Asia/Ho_Chi_Minh]"
+    const date = new Date(validDateString);
     const daysOfWeek = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
     const dayOfWeek = daysOfWeek[date.getDay()];
     const day = date.getDate(); 
@@ -157,7 +158,7 @@ const ProductItemDetail = () => {
         </div>
         <div className="product-detail-comment">
           <h2>Bài viết đánh giá</h2>
-          <div class="filter-wrapper">
+          <div className="filter-wrapper">
             <div className="filter-container">
               <select
                 className="form-select"
@@ -165,7 +166,7 @@ const ProductItemDetail = () => {
                 onChange={handleFilterRatingChange}
                 aria-label="Default select example"
               >
-                <option value="0" selected>Tất cả đánh giá</option>
+                <option value="0">Tất cả đánh giá</option>
                 <option value="1">Đánh giá 1 sao</option>
                 <option value="2">Đánh giá 2 sao</option>
                 <option value="3">Đánh giá 3 sao</option>
@@ -228,7 +229,7 @@ const ProductItemDetail = () => {
                       />
                     ))}
                   </div>
-                  <p className="comment-date">{formatDate(comment.createdAt)}</p>
+                  <p className="comment-date">{comment?.updatedAt ? formatDate(comment.updatedAt) : formatDate(comment.createdAt)}</p>
                 </div>
               );
             })

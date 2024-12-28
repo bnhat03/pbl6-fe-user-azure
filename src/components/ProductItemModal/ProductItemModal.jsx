@@ -61,9 +61,9 @@ const ProductItemModal = ({ showModalProduct, handleCloseModalProduct, product, 
   };
 
   // Fetch all sizes 
-  useEffect(() => {
-    dispatch(fetchAllSizes());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchAllSizes());
+  // }, [dispatch]);
 
   // list sizes thay đổi -> Chọn size đầu tiên
   useEffect(() => {

@@ -55,7 +55,7 @@ const ComboItemModal = ({ showModalCombo, handleCloseModalCombo, combo, stores, 
   // Fetch all sizes 
   useEffect(() => {
     // console.log('list stores: ', stores);
-    dispatch(fetchAllSizes());
+    // dispatch(fetchAllSizes());
     dispatch(fetchAllStores());
     // dispatch(fetchAllDrinks());
   }, [dispatch]);

@@ -197,10 +197,10 @@ const DeliveryMap_V2 = () => {
                         <i className="fa-solid fa-phone-volume"></i>
                         Số điện thoại: {orderInTransit?.shipperDetail?.phoneNumber ? orderInTransit.shipperDetail.phoneNumber : ''}
                       </span>
-                      <span className="">
+                      {/* <span className="">
                         <i className="fa-solid fa-list-ol"></i>
                         Biển số xe: 38X1-21129
-                      </span>
+                      </span> */}
                     </div>
                   )
                 }

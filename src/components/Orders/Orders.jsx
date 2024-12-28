@@ -114,7 +114,7 @@ const Orders = () => {
               onChange={handleStatusChange}
               aria-label="Default select example"
             >
-              <option value="0" selected>Tất cả đơn hàng</option>
+              <option value="0">Tất cả đơn hàng</option>
               <option value="Đơn hàng mới">Đơn hàng mới</option>
               <option value="Đơn hàng đã bị hủy">Đơn hàng đã bị hủy</option>
               <option value="Đơn hàng đã được xác nhận">Đơn hàng đã được xác nhận</option>

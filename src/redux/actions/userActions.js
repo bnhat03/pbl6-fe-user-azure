@@ -35,10 +35,10 @@ const updateProfileError = (errorMessage) => {
         type: types.UPDATE_PROFILE_ERROR,
     };
 };
-const updateProfile = (fullName, avatar, email, address) => {
+const updateProfile = (fullName, phonenumber, avatar, email, address) => {
     return async (dispatch) => {
         try {
-            const res = await updateProfileService(fullName, avatar, email, address);
+            const res = await updateProfileService(fullName, phonenumber, avatar, email, address);
             const isSuccess = res && res.data ? res.data.success : false;
             if (isSuccess) {
                 dispatch(updateProfileSuccess());
@@ -455,21 +455,17 @@ const fetchAllOrders = () => {
     return async (dispatch, getState) => {
         try {
             const res = await fetchAllOrdersService();
-            const dataOrder = res && res.data && res.data.data ? res.data.data : [];
-            // dataOrder = await Promise.all(
-            //     dataOrder.orderDetails.map(async (productInOrder) => {
-            //         const resStore = await fetchStoreByIdService(productInOrder.productDetail.storeId);
-            //         // Thêm thông tin cửa hàng -> storeId -> infor store
-            //         const dataStore = resStore && resStore.data ? resStore.data.data : {};
-            //         return {
-            //             ...productInOrder,
-            //             product: {
-            //                 ...productInOrder.product,
-            //                 dataStore: dataStore, // Thêm thông tin từ dataStore vào product
-            //             },
-            //         };
-            //     })
-            // );
+            let dataOrder = res && res.data && res.data.data ? res.data.data : [];
+            dataOrder = await Promise.all(
+                dataOrder.map(async (order) => {
+                    const resStore = await fetchStoreByIdService(order.storeId);
+                    const dataStore = resStore && resStore.data ? resStore.data.data : {};
+                    return {
+                        ...order,
+                        storeName: dataStore.storeName
+                    };
+                })
+            );
             dispatch(fetchAllOrdersSuccess(dataOrder));
         } catch (error) {
             console.log(error);

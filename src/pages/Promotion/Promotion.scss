@@ -98,7 +98,6 @@ body {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
         gap: 30px;
-    
         .promo-card {
           background-color: white;
           border-radius: 10px;
@@ -134,6 +133,12 @@ body {
               text-transform: uppercase;
             }
           }
+        }
+        .no-promotion {
+          grid-column: 1 / -1; /* Chiếm toàn bộ chiều rộng của grid */
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
     }   

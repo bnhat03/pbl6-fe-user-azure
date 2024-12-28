@@ -14,17 +14,19 @@ import { fetchAllProducts, fetchProductsBestSale } from "./redux/actions/product
 import { fetchAllCategories } from "./redux/actions/categoryActions";
 import { fetchAllPromotions } from "./redux/actions/promotionActions";
 import { fetchAllStores } from "./redux/actions/storeActions";
+import { fetchAllSizes } from "./redux/actions/sizeActions";
 import ChatContext, { ChatProvider } from "./context/showChat";
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserAccount());
-    dispatch(fetchAllProducts());
+    // dispatch(fetchAllProducts());
     dispatch(fetchAllCategories());
     dispatch(fetchProductsBestSale());
-    dispatch(fetchAllPromotions());
-    dispatch(fetchAllStores());
+    dispatch(fetchAllSizes());
+    // dispatch(fetchAllPromotions());
+    // dispatch(fetchAllStores());
   }, [dispatch]);
 
   const { isLoading } = useSelector((state) => state.auth); // Redux lưu tất cả state trước khi đến các route

@@ -1,12 +1,13 @@
 import instance from "../setup/instanceAxios"; // an instance of axios
 import axios from "axios";
-const updateProfileService = (fullName, avatar, email, address) => {
+const updateProfileService = (fullName, phonenumber, avatar, email, address) => {
     const formData = new FormData();
     if (fullName) formData.append('fullName', fullName);
+    // if (phonenumber) formData.append('phonenumber', phonenumber);
     if (avatar) formData.append('avatar', avatar); // Thêm tệp avatar
     if (email) formData.append('email', email);
     if (address) formData.append('address', address);
-
+    console.log('>>> check: ', phonenumber);
     return instance({
         method: 'put',
         url: '/api/v1/user/auth/profile/update',

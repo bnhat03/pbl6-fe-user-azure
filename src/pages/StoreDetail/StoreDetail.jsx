@@ -80,7 +80,7 @@ const StoreDetail = () => {
     const mess = `Xin chào mừng bạn đến với cửa hàng ${storeDetail.storeName},cửa hàng chúng tôi tự hào bán những sản phẩm chất lượng và an toàn. Bạn cần sự giúp đỡ gì từ chúng tôi đây?`;
     try {
       let res = await PostSaveMess(sender, receiver, isRead, mess);
-      // console.log(res);
+      console.log("connect thành công");
     } catch (exception) {
       console.error('Error sending image:', exception);
     }

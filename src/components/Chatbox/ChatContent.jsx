@@ -276,7 +276,7 @@ const ChatContent = (props) => {
                                         }
                                         <div className="about">
                                             <div className="name">{item.fullName}</div>
-                                            <small><i className={`fa fa-circle ${selectedUser.online === true ? ' online' : ' offline'}`}></i></small>
+                                            {/* <small><i className={`fa fa-circle ${selectedUser.online === true ? ' online' : ' offline'}`}></i></small> */}
 
                                         </div>
                                     </li>

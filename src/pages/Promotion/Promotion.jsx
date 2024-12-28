@@ -9,13 +9,15 @@ import { fetchAllPromotions } from '../../redux/actions/promotionActions';
 import Pagination from 'react-bootstrap/Pagination';
 
 const Promotion = () => {
+  const dispatch = useDispatch();
   // state phân trang
   const promotions = useSelector((state) => state.promotion.listPromotions);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6); 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    dispatch(fetchAllPromotions());
+  }, [dispatch]);
   // Lướt 
   const contentRef = useRef(null);
   const scrollToContent = () => {
@@ -70,7 +72,7 @@ const Promotion = () => {
                   </Link>
                 ))
               ) : (
-                <div>KHÔNG CÓ CHƯƠNG TRÌNH KHUYẾN MÃI</div>
+                <div className='no-promotion'><span>KHÔNG CÓ CHƯƠNG TRÌNH KHUYẾN MÃI</span></div>
               )
             }
           </div>

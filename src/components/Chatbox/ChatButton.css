@@ -4,7 +4,6 @@
     bottom: 0px;
     right: 20px;
     z-index: 1000;
-    /* Thay đổi màu nền, padding và border-radius của nút chat */
 }
 
 .chat-button button {
@@ -16,7 +15,7 @@
     font-size: 16px;
     cursor: pointer;
     box-shadow: 0px 4px 6px rgba(16, 4, 4, 0.1);
-    position: relative; /* Để badge có thể được căn chỉnh tương đối với nút */
+    position: relative; 
 }
 
 .chat-button button:hover {
@@ -26,13 +25,13 @@
 /* CSS cho notification-badge */
 .notification-badge {
     position: absolute;
-    top: -10px; /* Điều chỉnh vị trí của badge so với nút */
-    right: -10px; /* Điều chỉnh vị trí của badge so với nút */
-    background-color: red; /* Màu nền của badge */
-    color: white; /* Màu chữ của badge */
+    top: -10px; 
+    right: -10px; 
+    background-color: red; 
+    color: white; 
     border-radius: 50%;
-    width: 20px; /* Đường kính của badge */
-    height: 20px; /* Đường kính của badge */
+    width: 20px; 
+    height: 20px; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,7 +51,7 @@
 .other-message {
     /* background-color: #24c57c !important; */
     text-align: left !important; /* Đặt căn từ trái sang phải */
-    float: right; /* Căn toàn bộ khung từ phải */
+    float: right; 
     clear: both;
     max-width: 320px !important;
 }
@@ -111,8 +110,8 @@
 }
 
 .list-unstyled{
-    max-width: 300px; /* Giới hạn chiều rộng tối đa của khung chat */
-    max-height: 400px; /* Giới hạn chiều cao tối đa của khung chat */
+    max-width: 300px; 
+    max-height: 400px;
     overflow-y: auto;
 }
 .people-list .chat-list li {
@@ -386,8 +385,8 @@ padding: 16px;
 }
 
 .chat-history {
-    width: 500px; /* Giới hạn chiều rộng tối đa của khung chat */
-    height: 450px; /* Giới hạn chiều cao tối đa của khung chat */
+    width: 500px; 
+    height: 450px;
     overflow-y: auto; /* Kích hoạt thanh cuộn dọc khi nội dung vượt quá chiều cao */
     padding: 10px;
     border: 0;
@@ -418,7 +417,7 @@ padding: 16px;
     
 }
 
-.image-preview {
+.image-preview-chat {
     position: relative;
     width: 100%;
     height: 100px; /* Adjust height as needed */
@@ -431,7 +430,7 @@ padding: 16px;
     border-radius: 4px;
 }
 
-.image-preview img {
+.image-preview-chat img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;

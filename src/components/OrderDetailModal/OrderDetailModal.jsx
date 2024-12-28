@@ -62,7 +62,7 @@ const OrderDetailModal = ({ showModal, handleClose, orderDetails, statusOrderInt
               </div>
               <div className="order-detail-infor-item">
                 <p className="infor-title">Cửa hàng</p>
-                <p className="infor-content">BE CÒN TRỐNG</p>
+                <p className="infor-content">{orderDetails.storeName}</p>
               </div>
               <div className="order-detail-infor-item">
                 <p className="infor-title">Phương thức thanh toán</p>
@@ -78,7 +78,7 @@ const OrderDetailModal = ({ showModal, handleClose, orderDetails, statusOrderInt
               </div>
               <div className="order-detail-infor-item">
                 <p className="infor-title">Mã giảm giá</p>
-                <p className="infor-content">BE CÒN TRỐNG</p>
+                <p className="infor-content">{orderDetails.discountCode === 'Unknown Discount Code' ? 'Không áp dụng' : orderDetails.discountCode}</p>
               </div>
             </div>
 

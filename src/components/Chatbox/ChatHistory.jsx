@@ -384,12 +384,24 @@ const ChatHistory = (props) => {
             <div className="chat-header clearfix">
                 <div className="row">
                     <div className="col-lg-6">
-                        <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                        {/* <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
                             {
                                 selectedUser && selectedUser?.avatar ? (
                                     <img src={`data:image/jpeg;base64,${selectedUser.avatar}`} alt="avatar" />
                                 ) :
                                     <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" />
+                            }
+                        </a> */}
+                        <a onClick={(e) => {
+                            e.preventDefault(); // Ngăn ngừa hành động mặc định của liên kết
+                            // Mở modal thông qua JavaScript nếu cần
+                            $('#view_info').modal('show');
+                        }} data-toggle="modal" data-target="#view_info">
+                            {
+                                selectedUser && selectedUser?.avatar ? (
+                                    <img src={`data:image/jpeg;base64,${selectedUser.avatar}`} alt="avatar" />
+                                ) :
+                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" />
                             }
                         </a>
                         <div className="chat-about">
@@ -540,7 +552,7 @@ const ChatHistory = (props) => {
                                 }}
                             />
                         ) : (
-                            <div className="image-preview">
+                            <div className="image-preview-chat">
                                 <button className="remove-image" onClick={handleImageRemove}>
                                     <i className="fa fa-times"></i>
                                 </button>
