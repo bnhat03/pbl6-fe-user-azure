@@ -60,7 +60,7 @@ const changePasswordUserService = (oldPassword, newPassword) => {
 }
 const addPhoneNumberService = (phoneNumber) => {
     return instance({
-        method: 'post',
+        method: 'put',
         url: `/api/v1/user/auth/profile/add-phone?phone=${phoneNumber}`,
     });
 }
