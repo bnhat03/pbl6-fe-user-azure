@@ -271,8 +271,6 @@ const ChatHistory = (props) => {
         } catch (error) {
             console.error("Looix ", error);
         }
-
-
     };
     const handleQuestionClick = (question) => {
         // Gửi tin nhắn tới hệ thống chat (hoặc xử lý theo yêu cầu của bạn)

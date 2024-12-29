@@ -58,7 +58,6 @@ const ComboItemModal = ({ showModalCombo, handleCloseModalCombo, combo, stores, 
 
   // Fetch all sizes 
   useEffect(() => {
-    // console.log('list stores: ', stores);
     // dispatch(fetchAllSizes());
     dispatch(fetchAllStores());
     // dispatch(fetchAllDrinks());
@@ -85,7 +84,6 @@ const ComboItemModal = ({ showModalCombo, handleCloseModalCombo, combo, stores, 
   useEffect(() => {
     const drink = allDrinks.find(drink => +drink.productId === +selectedDrinkId);
     setSelectedDrink(drink);
-    // console.log('>>> selectedDrink: ', selectedDrink);
   }, [selectedDrinkId, allDrinks]);
 
   // ADD TO CART / BUY NOW
@@ -100,14 +98,6 @@ const ComboItemModal = ({ showModalCombo, handleCloseModalCombo, combo, stores, 
       else {
         dispatch(addToCartCombo(combo.comboId, quantity, selectedStore.storeId, selectedSize, 'Pending', selectedDrink));
         handleModalClose();
-
-        // if (quantity > product.stockQuantity) {
-        //   toast.error("Số lượng sản phẩm vượt quy định!")
-        // }
-        // else { // Giả sử thêm vào thành công (Chưa xủ lý các điều kiện -> BE chưa làm)
-        //   dispatch(addToCart(product.productId, quantity, selectedStore.storeId, selectedSize, 'Pending'));
-        //   handleModalClose();
-        // }
       }
       // }
     }
@@ -131,18 +121,8 @@ const ComboItemModal = ({ showModalCombo, handleCloseModalCombo, combo, stores, 
         }
         else {
           dispatch(placeOrderComboUsingBuyNow(combo, finalPrice, quantity, selectedStore, selectedSize, selectedDrink));
-          // console.log('>>> selectedDrink: ', selectedDrink);
           navigate('/checkout');
           handleModalClose();
-
-          // if (quantity > product.stockQuantity) {
-          //   toast.error("Số lượng sản phẩm vượt quy định!");
-          // }
-          // else { // Giả sử thêm vào thành công (Chưa xủ lý các điều kiện -> BE chưa làm)
-          //   dispatch(placeOrderUsingBuyNow(product, quantity, selectedStore, selectedSize));
-          //   navigate('/checkout');
-          //   handleModalClose();
-          // }
         }
       }
     }
@@ -158,12 +138,6 @@ const ComboItemModal = ({ showModalCombo, handleCloseModalCombo, combo, stores, 
       setFinalPrice(combo.price);
     }, 1000);
   };
-
-  // const drinks = [
-  //   { drinkId: 1, drinkName: "Coca Cola", price: 10000 },
-  //   { drinkId: 2, drinkName: "Pepsi", price: 10000 },
-  //   { drinkId: 3, drinkName: "7Up", price: 10000 }
-  // ]
   return (
     <Modal
       show={showModalCombo}
@@ -260,15 +234,13 @@ const ComboItemModal = ({ showModalCombo, handleCloseModalCombo, combo, stores, 
                       </div>
                       <StoreList stores={stores} onSelectStore={handleStoreSelect} selectedStore={selectedStore} />
                     </div>
-
-                    {/* Note: Chọn cửa hàng rồi mới hiển thị kích cỡ + số lượng còn lại */}
                     {
                       // selectedStore ? (
                       <>
                         <div className="size-container">
                           <span className='title'>&#128073; Chọn kích cỡ</span>
                           <div className="list-size">
-                            {listSizes.map((size, index) => ( // Note: Sửa lại listSizes là của sản phẩm ở cửa hàng được chọn => Default size: first item
+                            {listSizes.map((size, index) => ( 
                               <div
                                 key={index}
                                 className={`size-item ${selectedSize === size.name ? 'selected' : ''}`}

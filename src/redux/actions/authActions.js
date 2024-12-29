@@ -239,13 +239,15 @@ const addPhoneNumber = (phoneNumber) => {
                 dispatch(addPhoneNumberSuccess());
                 dispatch(hideAddPhoneNumberModal());
                 toast.success(res.data.message ||'Thêm số điện thoại thành công!');
+                localStorage.removeItem('token');
+                localStorage.setItem('token', res?.data?.data?.token ? res.data.data.token : 'N/A');
                 dispatch(getUserAccount());
             } else {
                 toast.error(res.data.message || "Số điện thoại không hợp lệ");
             }
         } catch (error) {
             console.log(error);
-            toast.error("Số điện thoại không hợp lệ");
+            toast.error(res.data.message || "Số điện thoại không hợp lệ");
         }
     };
 };

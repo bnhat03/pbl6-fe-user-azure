@@ -586,17 +586,17 @@ const fetchFavouriteProducs = (idUser) => {
     return async (dispatch, getState) => {
         try {
             dispatch(fetchFavouriteProducsRequest());
-            // const res = await fetchFavouriteProducsService(idUser);
-            // let urlAI = `http://192.168.1.58:5000`;
-            let urlAI = import.meta.env.VITE_AI_URL || `http://localhost:5000`;
-            const res = await axios.get(`${urlAI}/cross-sell/${idUser}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            const data = res && res.data ? res.data.data : []; // list productIds
-            console.log('>>> res favourite: ', res); 
-            console.log('>>> data object favourite: ', data); 
+            const res = await fetchFavouriteProducsService(idUser);
+            // let urlAI = import.meta.env.VITE_AI_URL || `http://localhost:5000`;
+            // const res = await axios.get(`${urlAI}/cross-sell/${idUser}`, {
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'ngrok-skip-browser-warning': 'true' // Bỏ qua cảnh báo của Ngrok
+            //     }
+            // });
+            const data = res && res.data ? res.data : []; 
+            // console.log('>>> res favourite: ', res); 
+            // console.log('>>> data object favourite: ', data); 
             if (data && Array.isArray(data)) {
                 // Sử dụng Promise.all -> call API cho mỗi productId
                 const listProductDetails = await Promise.all(
@@ -607,8 +607,6 @@ const fetchFavouriteProducs = (idUser) => {
                 );
                 // Lọc bỏ những phần tử null nếu có lỗi trong khi fetch product detail
                 const validProducts = listProductDetails.filter(product => product !== null);
-                // console.log('validProducts: ', validProducts);
-                // Dispatch action với danh sách sản phẩm
                 dispatch(fetchFavouriteProducsSuccess(validProducts));
             }
             else {

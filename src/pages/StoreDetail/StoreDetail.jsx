@@ -55,7 +55,6 @@ const StoreDetail = () => {
   }
   const loadStoreAgain = async () => {
     try {
-      // console.log("Loading stores again...");
       const previousOnlineUsers = stores
         .filter(user => user.online === true)
         .map(user => user.id);

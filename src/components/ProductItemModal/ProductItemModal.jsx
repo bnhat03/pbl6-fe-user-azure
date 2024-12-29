@@ -22,21 +22,6 @@ const ProductItemModal = ({ showModalProduct, handleCloseModalProduct, product, 
   const accountInfo = useSelector((state) => {
     return state.auth.account;
   });
-  // Change size
-  // const handleSizeChange = (size) => {
-  //   setSelectedSize(size); // Cập nhật kích thước được chọn
-  //   switch (size) {
-  //     case listSizes[0].name:
-  //       setFinalPrice((product?.discountedPrice != null) ? product.discountedPrice : 0);
-  //       break;
-  //     case listSizes[1].name:
-  //       setFinalPrice((product?.discountedPrice != null) ? (product.discountedPrice + 10000) : 0);
-  //       break;
-  //     case listSizes[2].name:
-  //       setFinalPrice((product?.discountedPrice != null) ? (product.discountedPrice + 20000) : 0);
-  //       break;
-  //   }
-  // };
 
   // Optimize change size
   const handleSizeChange = (size) => {
@@ -89,17 +74,10 @@ const ProductItemModal = ({ showModalProduct, handleCloseModalProduct, product, 
         toast.error('Sản phẩm không có ở cửa hàng nào!');
       }
       else {
-        if (!selectedStore) { // Không chọn cửa hàng
+        if (!selectedStore) { 
           toast.error('Vui lòng chọn cửa hàng');
         }
         else {
-          // const store = product.stores.find(store => +store.storeId === +selectedStore.storeId);
-          // if (quantity > +store.stockQuantity) {
-
-          // if (quantity > product.stockQuantity) {
-          //   toast.error("Số lượng sản phẩm vượt quy định!")
-          // }
-          // else { // Giả sử thêm vào thành công (Chưa xủ lý các điều kiện -> BE chưa làm)
             dispatch(addToCartProduct(product.productId, quantity, selectedStore.storeId, selectedSize, 'Pending'));
             handleModalClose();
           // }
@@ -124,20 +102,7 @@ const ProductItemModal = ({ showModalProduct, handleCloseModalProduct, product, 
         if (!selectedStore) { // Không chọn cửa hàng
           toast.error('Vui lòng chọn cửa hàng');
         }
-        else { // if: Xử lý tiếp  (Báo lỗi các trường hợp)
-          // Note Xử lý: Sản phẩm có:
-          // 1. Size khác nhau
-          // 2. Cửa hàng khác nhau
-          // => Hiển thị số lượng sản phẩm ở cửa hàng tại mỗi size khác nhau
-          // => 1. Chọn cửa hàng mới hiển thị size  (Size default: first item)
-          //    2. Chọn size -> Hiển thị lại số lượng
-          //    3. Chuyển cửa hàng -> Chuyển listSizes + Default size + Số lượng
-
-          // else: Mua được
-          // if (quantity > product.stockQuantity) {
-          //   toast.error("Số lượng sản phẩm vượt quy định!");
-          // }
-          // else { // Giả sử thêm vào thành công (Chưa xủ lý các điều kiện -> BE chưa làm)
+        else { 
             dispatch(placeOrderUsingBuyNow(product, finalPrice, quantity, selectedStore, selectedSize));
             navigate('/checkout');
             handleModalClose();

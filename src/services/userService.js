@@ -261,16 +261,16 @@ const fetchVouchersService = () => {
     });
 }
 const fetchFavouriteProducsService = (idUser) => {
-    console.log('>>> check id favourite: ', idUser);
-    let urlAI = import.meta.env.VITE_AI_URL || `http://localhost:5000`;
-    // return axios({
-    //     method: 'get',
-    //     url: `${urlAI}/cross-sell/${+idUser}`,
-    //     headers: {
-    //         Accept: 'application/json', // Yêu cầu trả JSON
-    //     },
-    // });
-    return axios.get(`${urlAI}/cross-sell/${idUser}`);
+    let urlAI = import.meta.env.VITE_AI_URL;
+    return axios({
+        method: 'get',
+        url: `${urlAI}/cross-sell/${+idUser}`,
+        headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true' // Bỏ qua cảnh báo của Ngrok
+        }
+    });
+    // return axios.get(`${urlAI}/cross-sell/${idUser}`);
 }
 const saveVoucherService = (voucherId) => {
     return instance({

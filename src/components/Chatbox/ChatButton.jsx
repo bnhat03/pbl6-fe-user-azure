@@ -10,7 +10,7 @@ import ChatContext from '../../context/showChat';
 const ChatButton = (props) => {
     const stores = useSelector((state) => state.stores.stores); // Lấy dữ liệu từ Redux store
     const { product } = props;
-    const [newMessagesCount, setNewMessagesCount] = useState(1);
+    const [newMessagesCount, setNewMessagesCount] = useState(0);
     const [unreadUsers, setUnreadUsers] = useState([]);
     const dispatch = useDispatch();
     const {showChat, setShowChat,selectedUser, setSelectedUser,owner,setOwner} = useContext(ChatContext);
