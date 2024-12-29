@@ -247,7 +247,10 @@ const addPhoneNumber = (phoneNumber) => {
             }
         } catch (error) {
             console.log(error);
-            toast.error(res.data.message || "Số điện thoại không hợp lệ");
+            const errorMessage = error?.response?.data?.message
+                ? error.response.data.message
+                : "Số điện thoại không hợp lệ.";
+            toast.error(errorMessage);
         }
     };
 };
