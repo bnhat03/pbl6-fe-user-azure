@@ -233,11 +233,13 @@ const addPhoneNumber = (phoneNumber) => {
     return async (dispatch) => {
         try {
             const res = await addPhoneNumberService(phoneNumber);
+            console.log('>>> res add phone: ', res);
             const isSuccess = res && res.data ? res.data.success : false;
             if (isSuccess) {
                 dispatch(addPhoneNumberSuccess());
                 dispatch(hideAddPhoneNumberModal());
-                toast.success('Thêm số điện thoại thành công!');
+                toast.success(res.data.message ||'Thêm số điện thoại thành công!');
+                dispatch(getUserAccount());
             } else {
                 toast.error(res.data.message || "Số điện thoại không hợp lệ");
             }
