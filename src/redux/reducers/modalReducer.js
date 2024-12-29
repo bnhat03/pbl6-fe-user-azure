@@ -2,6 +2,7 @@
 const initialState = {
     isLoginModalVisible: false,
     isRegisterModalVisible: false,
+    isAddPhoneModalVisible: false,
 };
 
 const modalReducer = (state = initialState, action) => {
@@ -14,6 +15,10 @@ const modalReducer = (state = initialState, action) => {
             return { ...state, isRegisterModalVisible: true };
         case 'HIDE_REGISTER_MODAL':
             return { ...state, isRegisterModalVisible: false };
+        case 'SHOW_ADD_PHONE_NUMBER_MODAL':
+            return { ...state, isAddPhoneModalVisible: true };
+        case 'HIDE_ADD_PHONE_NUMBER_MODAL':
+            return { ...state, isAddPhoneModalVisible: false };
         default:
             return state;
     }

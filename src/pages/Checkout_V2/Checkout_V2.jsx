@@ -89,9 +89,9 @@ const Checkout_V2 = () => {
         if (!fullname || !phonenumber || !address) {
             toast.error('Vui lòng điền đầy đủ thông tin đơn hàng!');
         }
-        // else if (!/^0\d{9}$/.test(phonenumber)){
-        //     toast.error('Nhập số điện thoại hợp lệ!');
-        // }
+        else if (!/^0\d{9}$/.test(phonenumber)){
+            toast.error('Nhập số điện thoại hợp lệ!');
+        }
         else {
             let method = 'CASH';
             switch (paymentMethod) {
@@ -288,8 +288,8 @@ const Checkout_V2 = () => {
                                 type="text"
                                 placeholder="Số điện thoại"
                                 value={phonenumber}
-                                // onChange={(e) => setPhonenumber(e.target.value)}
-                                disabled={true}
+                                onChange={(e) => setPhonenumber(e.target.value)}
+                                disabled={accountInfo?.phoneNumber ? true : false}
                                 required
                             />
                         </div>

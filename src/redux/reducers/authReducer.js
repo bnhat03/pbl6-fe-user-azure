@@ -6,7 +6,7 @@ const initialState = {
     account: {}, // Thông tin account
     isSentOTP: false,
     isVerifyOTPSuccess: false,
-
+    isAddPhoneNumberSuccess: false,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -55,6 +55,8 @@ const authReducer = (state = initialState, action) => {
             return { ...state, isVerifyOTPSuccess: true };
         case 'CHANGE_PASSWORD_USER_SUCCESS':
             return { ...state };
+        case 'ADD_PHONE_NUMBER_SUCCESS':
+                return { ...state, isAddPhoneNumberSuccess: true};
         default:
             return state;
     }

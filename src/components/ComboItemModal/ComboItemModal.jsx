@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { addToCartCombo, placeOrderComboUsingBuyNow } from "../../redux/actions/userActions";
 import { fetchAllStores } from "../../redux/actions/storeActions";
 import { showLoginModal } from "../../redux/actions/modalActions";
+import { showAddPhoneNumberModal } from "../../redux/actions/modalActions";
 // import { fetchAllDrinks } from "../../redux/actions/productActions";
 
 import { Form } from 'react-bootstrap';
@@ -22,6 +23,9 @@ const ComboItemModal = ({ showModalCombo, handleCloseModalCombo, combo, stores, 
   const listSizes = useSelector((state) => state.size.listSizes);
   const allDrinks = useSelector((state) => state.product.allDrinks);
   const isLogin = useSelector((state) => state.auth.isAuthenticated);
+  const accountInfo = useSelector((state) => {
+      return state.auth.account;
+  });
   const [selectedSize, setSelectedSize] = useState(listSizes.length > 0 ? listSizes[0].name : "");
   const [selectedStore, setSelectedStore] = useState(null);
   const [selectedDrinkId, setSelectedDrinkId] = useState("");
@@ -90,10 +94,6 @@ const ComboItemModal = ({ showModalCombo, handleCloseModalCombo, combo, stores, 
       handleModalClose();
       dispatch(showLoginModal()); // hiện modal login
     } else {
-      // if (!stores) {
-      //   toast.error('Sản phẩm không có ở cửa hàng nào!');
-      // }
-      // else {
       if (!selectedStore) { // Không chọn cửa hàng
         toast.error('Vui lòng chọn cửa hàng');
       }
@@ -116,6 +116,10 @@ const ComboItemModal = ({ showModalCombo, handleCloseModalCombo, combo, stores, 
     if (isLogin === false) { // chưa login
       handleModalClose();
       dispatch(showLoginModal()); // hiện modal login
+    }
+    else if(!accountInfo?.phoneNumber) {
+      handleModalClose();
+      dispatch(showAddPhoneNumberModal());
     }
     else {
       if (stores.length === 0) {

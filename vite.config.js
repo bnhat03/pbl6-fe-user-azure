@@ -10,8 +10,8 @@ export default defineConfig({
   define: {
     'import.meta.env.VITE_BACKEND_URL': JSON.stringify('https://food-app-gvbhgyfabjcthbhd.southeastasia-01.azurewebsites.net'),
     // 'import.meta.env.VITE_AI_URL': JSON.stringify('http://localhost:5000'),
-    'import.meta.env.VITE_AI_URL': JSON.stringify('https://d8d2-14-191-113-242.ngrok-free.app'),
-    'import.meta.env.VITE_AI_PRODUCT_URL': JSON.stringify('http://192.168.1.31:5000'),
+    'import.meta.env.VITE_AI_URL': JSON.stringify('https://d709-14-191-113-242.ngrok-free.app'),
+    'import.meta.env.VITE_AI_PRODUCT_URL': JSON.stringify('https://d709-14-191-113-242.ngrok-free.app'),
   },
   server: {
     port: 3000,

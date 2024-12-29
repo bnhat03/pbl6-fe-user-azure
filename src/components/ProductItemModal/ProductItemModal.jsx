@@ -8,8 +8,7 @@ import { fetchAllSizes } from "../../redux/actions/sizeActions";
 import { toast } from "react-toastify";
 import { addToCartProduct, placeOrderUsingBuyNow } from "../../redux/actions/userActions";
 import { showLoginModal } from "../../redux/actions/modalActions";
-
-
+import { showAddPhoneNumberModal } from "../../redux/actions/modalActions";
 const ProductItemModal = ({ showModalProduct, handleCloseModalProduct, product, stores, isAddToCart }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,7 +19,9 @@ const ProductItemModal = ({ showModalProduct, handleCloseModalProduct, product, 
   const [selectedSize, setSelectedSize] = useState(listSizes.length > 0 ? listSizes[0].name : "");
   const [selectedStore, setSelectedStore] = useState(null);
   const [finalPrice, setFinalPrice] = useState((product?.discountedPrice != null) ? product.discountedPrice : 0);
-
+  const accountInfo = useSelector((state) => {
+    return state.auth.account;
+  });
   // Change size
   // const handleSizeChange = (size) => {
   //   setSelectedSize(size); // Cập nhật kích thước được chọn
@@ -110,6 +111,10 @@ const ProductItemModal = ({ showModalProduct, handleCloseModalProduct, product, 
     if (isLogin === false) { // chưa login
       handleModalClose();
       dispatch(showLoginModal()); // hiện modal login
+    }
+    else if(!accountInfo?.phoneNumber) {
+      handleModalClose();
+      dispatch(showAddPhoneNumberModal());
     }
     else {
       if (stores.length === 0) {

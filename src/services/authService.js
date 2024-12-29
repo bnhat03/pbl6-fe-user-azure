@@ -58,7 +58,12 @@ const changePasswordUserService = (oldPassword, newPassword) => {
         url: `/api/v1/user/auth/reset-password?oldPassword=${oldPassword}&newPassword=${newPassword}`,
     });
 }
-
+const addPhoneNumberService = (phoneNumber) => {
+    return instance({
+        method: 'post',
+        url: `/api/v1/user/auth/profile/add-phone?phone=${phoneNumber}`,
+    });
+}
 export {
     registerNewUserService,
     loginUserService,
@@ -68,6 +73,6 @@ export {
     sendOTPService,
     verifyOTPService,
     changePasswordUserService,
-
+    addPhoneNumberService,
 
 }

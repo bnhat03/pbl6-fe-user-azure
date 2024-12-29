@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import AppRoutes from "./routes/AppRoutes";
 import LoginModal from "./components/LoginModal/LoginModal";
 import RegisterModal from "./components/RegisterModal/RegisterModal";
+import AddPhoneNumberModal from "./components/AddPhoneNumberModal/AddPhoneNumberModal";
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserAccount } from "./redux/actions/authActions";
 import { fetchAllProducts, fetchProductsBestSale } from "./redux/actions/productActions";
@@ -42,6 +43,7 @@ const App = () => {
         </ChatProvider>
         <LoginModal />
         <RegisterModal />
+        <AddPhoneNumberModal />
       </div>
       <Footer />
       <ToastContainer

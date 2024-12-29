@@ -587,15 +587,16 @@ const fetchFavouriteProducs = (idUser) => {
         try {
             dispatch(fetchFavouriteProducsRequest());
             // const res = await fetchFavouriteProducsService(idUser);
-            let urlAI = `http://localhost:5000`;
-            // let urlAI = import.meta.env.VITE_AI_URL || `http://localhost:5000`;
+            // let urlAI = `http://192.168.1.58:5000`;
+            let urlAI = import.meta.env.VITE_AI_URL || `http://localhost:5000`;
             const res = await axios.get(`${urlAI}/cross-sell/${idUser}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 }
             });
             const data = res && res.data ? res.data.data : []; // list productIds
-            console.log('>>> data favourite: ', res); 
+            console.log('>>> res favourite: ', res); 
+            console.log('>>> data object favourite: ', data); 
             if (data && Array.isArray(data)) {
                 // Sử dụng Promise.all -> call API cho mỗi productId
                 const listProductDetails = await Promise.all(

@@ -13,3 +13,11 @@ export const showRegisterModal = () => ({
 export const hideRegisterModal = () => ({
   type: 'HIDE_REGISTER_MODAL',
 });
+
+export const showAddPhoneNumberModal = () => ({
+  type: 'SHOW_ADD_PHONE_NUMBER_MODAL',
+});
+
+export const hideAddPhoneNumberModal = () => ({
+  type: 'HIDE_ADD_PHONE_NUMBER_MODAL',
+});

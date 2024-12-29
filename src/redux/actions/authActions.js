@@ -7,8 +7,10 @@ import {
     getUserAccountService,
     sendOTPService,
     verifyOTPService,
-    changePasswordUserService
+    changePasswordUserService,
+    addPhoneNumberService
 } from "../../services/authService";
+import { hideAddPhoneNumberModal } from "./modalActions";
 import { toast } from "react-toastify";
 import { resetAllUser, fetchProductsInCart } from "./userActions";
 
@@ -221,7 +223,30 @@ const verifyOTP = (email, otp, newPassword) => {
         }
     };
 };
-
+// add phone
+const addPhoneNumberSuccess = () => {
+    return {
+        type: types.ADD_PHONE_NUMBER_SUCCESS,
+    };
+};
+const addPhoneNumber = (phoneNumber) => {
+    return async (dispatch) => {
+        try {
+            const res = await addPhoneNumberService(phoneNumber);
+            const isSuccess = res && res.data ? res.data.success : false;
+            if (isSuccess) {
+                dispatch(addPhoneNumberSuccess());
+                dispatch(hideAddPhoneNumberModal());
+                toast.success('Thêm số điện thoại thành công!');
+            } else {
+                toast.error(res.data.message || "Số điện thoại không hợp lệ");
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error("Số điện thoại không hợp lệ");
+        }
+    };
+};
 // Change password
 const changePasswordUserSuccess = () => {
     return {
@@ -257,5 +282,6 @@ export {
     getUserAccount,
     sendOTP,
     verifyOTP,
-    changePasswordUser
+    changePasswordUser,
+    addPhoneNumber
 };

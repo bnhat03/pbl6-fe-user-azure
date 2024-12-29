@@ -12,7 +12,7 @@ import {
 } from "../../redux/actions/userActions";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-
+import { showAddPhoneNumberModal } from "../../redux/actions/modalActions";
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,7 +24,9 @@ const Cart = () => {
   const listCombosInCart = useSelector((state) => {
     return state.user.listCombosInCart;
   })
-
+  const accountInfo = useSelector((state) => {
+    return state.auth.account;
+  });
   // state
   const [checkedItems, setCheckedItems] = useState([]); // Array chứa list cartIds đã check
   const [selectedStore, setSelectedStore] = useState(0);
@@ -109,10 +111,14 @@ const Cart = () => {
     if (!Array.isArray(listProductsInCart) && listProductsInCart.length === 0 && !Array.isArray(listCombosInCart) && listCombosInCart.length === 0) {
       toast.error('Không có sản phẩm trong giỏ hàng!');
     } 
+    else if(!accountInfo?.phoneNumber) {
+      dispatch(showAddPhoneNumberModal());
+    }
     else {
       if (checkedItems.length === 0) {
         toast.error('Chọn ít nhất một sản phẩm để thanh toán!');
       } else {
+        console.log('>>> account: ', accountInfo);
         const selectedProducts = listProductsInCart.filter(
           (item) =>
             checkedItems.includes(item.cartId) && // checked
