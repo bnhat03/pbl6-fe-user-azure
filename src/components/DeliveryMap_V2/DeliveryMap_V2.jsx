@@ -101,7 +101,7 @@ const DeliveryMap_V2 = () => {
       toast.warn('Chưa có đủ thông tin tọa độ để tìm đường.');
       return;
     }
-    const url = `http://router.project-osrm.org/route/v1/driving/${orderCoords[0]},${orderCoords[1]};${shipperCoords[0]},${shipperCoords[1]}?overview=full&steps=true`; // [long, lat]
+    const url = `https://router.project-osrm.org/route/v1/driving/${orderCoords[0]},${orderCoords[1]};${shipperCoords[0]},${shipperCoords[1]}?overview=full&steps=true`; // [long, lat]
     const response = await axios.get(url);
     try {
       if (
