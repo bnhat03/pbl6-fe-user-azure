@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [react()],
   define: {
     'import.meta.env.VITE_BACKEND_URL': JSON.stringify('https://food-app-gvbhgyfabjcthbhd.southeastasia-01.azurewebsites.net'),
-    'import.meta.env.VITE_AI_URL': JSON.stringify('https://4ae3-14-191-112-76.ngrok-free.app'),
+    'import.meta.env.VITE_AI_URL': JSON.stringify('https://da73-14-191-112-76.ngrok-free.app'),
     // 'import.meta.env.VITE_AI_PRODUCT_URL': JSON.stringify('https://d709-14-191-113-242.ngrok-free.app'),
   },
   server: {
