@@ -106,9 +106,9 @@ const ReviewModal = ({ showModal, handleClose, orderDetails }) => {
                         {item.productDetail.quantity}
                       </p>
                     </div>
-                    <p className="infor-store">
+                    {/* <p className="infor-store">
                       Cửa hàng: {item.productDetail.storeId}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               ))
@@ -132,9 +132,9 @@ const ReviewModal = ({ showModal, handleClose, orderDetails }) => {
                         {item.comboDetail.quantity}
                       </p>
                     </div>
-                    <p className="infor-store">
+                    {/* <p className="infor-store">
                       Cửa hàng: {item.comboDetail.storeId}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               ))

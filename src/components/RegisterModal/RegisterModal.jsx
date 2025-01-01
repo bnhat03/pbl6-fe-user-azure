@@ -154,7 +154,7 @@ const RegisterModal = () => {
               <div className="password-input-container">
                 <input
                   type={showPassword ? 'text' : 'password'}
-                  placeholder='Password'
+                  placeholder='Mật khẩu'
                   value={password}
                   className={objCheckInput.isValidPassword ? 'form-control' : 'form-control is-invalid'}
                   onChange={(event) => setPassword(event.target.value)}
