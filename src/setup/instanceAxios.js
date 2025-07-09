@@ -2,38 +2,37 @@ import axios from "axios";
 
 const instance = axios.create({
     baseURL:import.meta.env.VITE_BACKEND_URL,
-    // withCredentials: true, // Gửi cookie khi request
 });
 
-// Thêm interceptor cho request 
+// interceptors request
 instance.interceptors.request.use(function (config) {
     const token = localStorage.getItem("token"); 
     if (token) {
-        config.headers.Authorization = `Bearer ${token}`; // Thêm token vào headers
+        config.headers.Authorization = `Bearer ${token}`; 
     }
     return config;
 }, function (error) {
     return Promise.reject(error);
 });
 
-let isRefreshing = false; // Tránh gửi nhiều request refresh token cùng lúc.
-let failedQueue = []; // Danh sách các request bị treo trong quá trình refresh
+let isRefreshing = false; 
+let failedQueue = []; 
 // Xử lý các request bị chờ trong lúc refresh token.
 const processQueue = (error, token) => {
     failedQueue.forEach(prom => {
-        if (error) { //  refresh thất bại -> Reject các request trong queue.
+        if (error) { 
             prom.reject(error);
-        } else { // refresh thành công -> Gọi lại các request bị chờ với token mới.
+        } else { 
             prom.resolve(token); 
         }
     });
     failedQueue = [];
 };
 // Interceptor cho response => Xử lý lỗi 401 Unauthorized
-instance.interceptors.response.use(function (response) { // status code: 2xx
+instance.interceptors.response.use(function (response) { 
     return response;
-}, async function (error) { // status code: 4xx, 5xx
-    const originalRequest = error.config; // Retry request sau khi refresh token thành công.
+}, async function (error) { 
+    const originalRequest = error.config; 
     if (error?.response?.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         if (isRefreshing) {
@@ -49,7 +48,7 @@ instance.interceptors.response.use(function (response) { // status code: 2xx
                 return Promise.reject(err);
             });
         }
-        // Bắt đầu refresh token (request đầu tiên bắt đầu)
+        // Bắt đầu refresh token 
         isRefreshing = true;
         const refreshToken = localStorage.getItem("token"); 
         try {
@@ -61,16 +60,14 @@ instance.interceptors.response.use(function (response) { // status code: 2xx
             originalRequest.headers.Authorization = `Bearer ${newToken}`; 
             return instance(originalRequest); // Retry request ban đầu 
         } catch (refreshError) {
-            // Xóa thông tin authentication
             localStorage.removeItem("token");
-            // localStorage.removeItem("refreshToken");
-            processQueue(refreshError, null); // Xử lý các request trong queue với lỗi refresh
+            processQueue(refreshError, null); 
             return Promise.reject(refreshError); 
         } finally {
             isRefreshing = false;
         }
     }
-    return Promise.reject(error); // Trả về lỗi nếu không phải lỗi 401
+    return Promise.reject(error); // !401
 });
 
 export default instance;

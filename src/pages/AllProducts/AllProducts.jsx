@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import './AllProducts.scss';
+import "./AllProducts.scss";
 import ProductItem from "../../components/ProductItem/ProductItem";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "../../redux/actions/productActions";
-import Pagination from 'react-bootstrap/Pagination';
-import axios from 'axios';
+import Pagination from "react-bootstrap/Pagination";
+import axios from "axios";
 import { toast } from "react-toastify";
-import PacmanLoader from 'react-spinners/PacmanLoader';
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 export default function AllProducts() {
   const dispatch = useDispatch();
@@ -14,18 +14,21 @@ export default function AllProducts() {
   const isLoading = useSelector((state) => state.product.isLoadingAllProducts);
   // Phân trang
   const [activePage, setActivePage] = useState(1);
-  const itemsPerPage = 8; 
-  const totalPages = allProducts && allProducts.length > 0 ? Math.ceil(allProducts.length / itemsPerPage) : 0; // Tổng số trang
+  const itemsPerPage = 8;
+  const totalPages =
+    allProducts && allProducts.length > 0
+      ? Math.ceil(allProducts.length / itemsPerPage)
+      : 0; // Tổng số trang
   // State cho AI + search + select
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchTermAI, setSearchTermAI] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTermAI, setSearchTermAI] = useState("");
   const [selectedSort, setSelectedSort] = useState("default");
 
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchAllProducts());
   }, [dispatch]);
-  
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
     setActivePage(1); // Reset về trang 1 khi tìm kiếm mới
@@ -35,16 +38,26 @@ export default function AllProducts() {
     setActivePage(1); // Reset về trang 1 khi thay đổi sắp xếp
   };
   // Lọc và sắp xếp sản phẩm theo từ khóa và giá
-  const filteredProducts = allProducts && allProducts.length > 0 ? (allProducts
-    .filter((product) =>
-      product.productName.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      product.productName.toLowerCase().includes(searchTermAI.toLowerCase())
-    )
-    .sort((a, b) => {
-      if (selectedSort === "asc") return a.discountedPrice - b.discountedPrice;
-      if (selectedSort === "desc") return b.discountedPrice - a.discountedPrice;
-      return 0; // Mặc định
-    })) : [];
+  const filteredProducts =
+    allProducts && allProducts.length > 0
+      ? allProducts
+          .filter(
+            (product) =>
+              product.productName
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase()) &&
+              product.productName
+                .toLowerCase()
+                .includes(searchTermAI.toLowerCase())
+          )
+          .sort((a, b) => {
+            if (selectedSort === "asc")
+              return a.discountedPrice - b.discountedPrice;
+            if (selectedSort === "desc")
+              return b.discountedPrice - a.discountedPrice;
+            return 0; // Mặc định
+          })
+      : [];
   // Phân trang
   const currentProducts = filteredProducts.slice(
     (activePage - 1) * itemsPerPage,
@@ -73,7 +86,7 @@ export default function AllProducts() {
         const reader = new FileReader(); // Asynchronous
         reader.onloadend = () => {
           const base64String = reader.result.split(",")[1]; // Chuyển thành base64
-          resolve(base64String); // 
+          resolve(base64String); //
           setPreviewImage(reader.result);
         };
         reader.onerror = (error) => reject(error);
@@ -89,7 +102,7 @@ export default function AllProducts() {
       try {
         let urlAI = import.meta.env.VITE_AI_URL || `http://localhost:5000`;
         const responseAI = await axios.post(`${urlAI}/predict`, {
-          image: base64FileImage
+          image: base64FileImage,
         });
         if (responseAI?.data) {
           const nameProduct = responseAI.data;
@@ -97,7 +110,7 @@ export default function AllProducts() {
           setSearchTerm(nameProduct);
         }
       } catch (err) {
-        toast.error('Có lỗi ở Server!');
+        toast.error("Có lỗi ở Server!");
         console.error("Error details: ", err);
       }
     } catch (error) {
@@ -109,7 +122,7 @@ export default function AllProducts() {
     <div className="page-all-products">
       <div className="search-filter-container">
         {/* AI */}
-        <div className="file-upload-AI-container">
+        {/* <div className="file-upload-AI-container">
         <input
             type="file"
             id="file-input"
@@ -132,7 +145,7 @@ export default function AllProducts() {
               )
             }
           </label>
-        </div>
+        </div> */}
 
         <div className="search-container">
           <div className="row">
@@ -147,7 +160,10 @@ export default function AllProducts() {
                 />
 
                 <span className="input-group-append">
-                  <button className="btn btn-outline-secondary bg-white border ms-n5" type="button">
+                  <button
+                    className="btn btn-outline-secondary bg-white border ms-n5"
+                    type="button"
+                  >
                     <i className="fa fa-search"></i>
                   </button>
                 </span>
@@ -168,52 +184,52 @@ export default function AllProducts() {
           </select>
         </div>
       </div>
-      {
-        isLoading === false ? (
-          currentProducts && currentProducts.length > 0 ? (
-            <div className="has-products">
-              <div className="list-products">
-                {
-                  currentProducts.map((product, index) => (
-                    <React.Fragment key={index}>
-                      <ProductItem product={product} />
-                      {
-                        (index + 1) % 4 === 0 && (index + 1) !== currentProducts.length && <hr className="hr-separate" />
-                      }
-                    </React.Fragment>
-                  ))
-                }
-              </div>
-              {/* Phần phân trang */}
-              <div className="pagination-container">
-                <Pagination>
-                  <Pagination.Prev onClick={handlePrevious} disabled={activePage === 1} />
-                  {[...Array(totalPages)].map((_, number) => (
-                    <Pagination.Item
-                      key={number + 1}
-                      active={number + 1 === activePage}
-                      onClick={() => handlePageChange(number + 1)}
-                    >
-                      {number + 1}
-                    </Pagination.Item>
-                  ))}
-                  <Pagination.Next onClick={handleNext} disabled={activePage === totalPages} />
-                </Pagination>
-              </div>
+      {isLoading === false ? (
+        currentProducts && currentProducts.length > 0 ? (
+          <div className="has-products">
+            <div className="list-products">
+              {currentProducts.map((product, index) => (
+                <React.Fragment key={index}>
+                  <ProductItem product={product} />
+                  {(index + 1) % 4 === 0 &&
+                    index + 1 !== currentProducts.length && (
+                      <hr className="hr-separate" />
+                    )}
+                </React.Fragment>
+              ))}
             </div>
-          ) : (
-            <div className="no-product">Không có sản phẩm nào</div>
-          )
-        ) : (
-          <div className="loading-container">
-            <PacmanLoader size={20} color={"#ff0000"} loading={isLoading} />
-            <span className="loading-data">
-              Đang tải dữ liệu
-            </span>
+            {/* Phần phân trang */}
+            <div className="pagination-container">
+              <Pagination>
+                <Pagination.Prev
+                  onClick={handlePrevious}
+                  disabled={activePage === 1}
+                />
+                {[...Array(totalPages)].map((_, number) => (
+                  <Pagination.Item
+                    key={number + 1}
+                    active={number + 1 === activePage}
+                    onClick={() => handlePageChange(number + 1)}
+                  >
+                    {number + 1}
+                  </Pagination.Item>
+                ))}
+                <Pagination.Next
+                  onClick={handleNext}
+                  disabled={activePage === totalPages}
+                />
+              </Pagination>
+            </div>
           </div>
+        ) : (
+          <div className="no-product">Không có sản phẩm nào</div>
         )
-      }
-
+      ) : (
+        <div className="loading-container">
+          <PacmanLoader size={20} color={"#ff0000"} loading={isLoading} />
+          <span className="loading-data">Đang tải dữ liệu</span>
+        </div>
+      )}
     </div>
   );
 }

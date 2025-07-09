@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from "react";
-import './Category.scss';
+import "./Category.scss";
 import ProductItem from "../../components/ProductItem/ProductItem";
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsByIdCategory } from "../../redux/actions/productActions";
-import Pagination from 'react-bootstrap/Pagination';
-import axios from 'axios';
+import Pagination from "react-bootstrap/Pagination";
+import axios from "axios";
 import { toast } from "react-toastify";
-import PacmanLoader from 'react-spinners/PacmanLoader';
-
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 export default function Category() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const listProducts = useSelector((state) => state.product.listProductsByIdCategory);
-  const isLoading = useSelector((state) => state.product.isLoadingListProductsByIdCategory);
+  const listProducts = useSelector(
+    (state) => state.product.listProductsByIdCategory
+  );
+  const isLoading = useSelector(
+    (state) => state.product.isLoadingListProductsByIdCategory
+  );
   // Phân trang
   const [activePage, setActivePage] = useState(1);
-  const itemsPerPage = 8; 
-  const totalPages = Math.ceil(listProducts.length / itemsPerPage); 
+  const itemsPerPage = 8;
+  const totalPages = Math.ceil(listProducts.length / itemsPerPage);
   // State cho AI + search + select
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchTermAI, setSearchTermAI] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTermAI, setSearchTermAI] = useState("");
   const [selectedSort, setSelectedSort] = useState("default");
 
   useEffect(() => {
@@ -30,18 +33,19 @@ export default function Category() {
   }, [id, dispatch]); // 'id' category thay đổi -> lấy lại list products
 
   const handleSearchChange = (event) => {
-  setSearchTerm(event.target.value);
-    setActivePage(1); 
+    setSearchTerm(event.target.value);
+    setActivePage(1);
   };
   const handleSortChange = (event) => {
     setSelectedSort(event.target.value);
-    setActivePage(1); 
+    setActivePage(1);
   };
   // Lọc và sắp xếp sản phẩm theo từ khóa và giá (search & select)
   const filteredProducts = listProducts
-    .filter((product) =>
-      product.productName.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      product.productName.toLowerCase().includes(searchTermAI.toLowerCase())
+    .filter(
+      (product) =>
+        product.productName.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        product.productName.toLowerCase().includes(searchTermAI.toLowerCase())
     )
     .sort((a, b) => {
       if (selectedSort === "asc") return a.discountedPrice - b.discountedPrice;
@@ -97,7 +101,7 @@ export default function Category() {
       try {
         let urlAI = import.meta.env.VITE_AI_URL || `http://localhost:5000`;
         const responseAI = await axios.post(`${urlAI}/predict`, {
-          image: base64FileImage
+          image: base64FileImage,
         });
         if (responseAI?.data) {
           const nameProduct = responseAI.data;
@@ -105,7 +109,7 @@ export default function Category() {
           setSearchTerm(nameProduct);
         }
       } catch (err) {
-        toast.error('Có lỗi ở Server!');
+        toast.error("Có lỗi ở Server!");
         console.error("Error details: ", err);
       }
     } catch (error) {
@@ -117,7 +121,7 @@ export default function Category() {
     <div className="page-category">
       <div className="search-filter-container">
         {/* AI */}
-        <div className="file-upload-AI-container">
+        {/* <div className="file-upload-AI-container">
           <input
             type="file"
             id="file-input"
@@ -135,13 +139,12 @@ export default function Category() {
                 />
               ) : (
                 <div className="image-upload-placeholder">
-                  {/* <i className="fa-solid fa-robot"></i> */}
                   AI
               </div>
               )
             }
           </label>
-        </div>
+        </div> */}
         <div className="search-container">
           <div className="row">
             <div className="col-md-12">
@@ -155,7 +158,10 @@ export default function Category() {
                 />
 
                 <span className="input-group-append">
-                  <button className="btn btn-outline-secondary bg-white border ms-n5" type="button">
+                  <button
+                    className="btn btn-outline-secondary bg-white border ms-n5"
+                    type="button"
+                  >
                     <i className="fa fa-search"></i>
                   </button>
                 </span>
@@ -176,27 +182,32 @@ export default function Category() {
           </select>
         </div>
       </div>
-      {
-        isLoading === false ? (
-          currentProducts && currentProducts.length > 0 ? (
-            <div className="has-products">
-              <div className="category-list-products">
-                {
-                  currentProducts.map((product, index) => (
-                    <React.Fragment key={index}>
-                      <ProductItem product={product} />
-                      {(index + 1) % 4 === 0 && (index + 1) !== currentProducts.length && (  // Vẽ kẻ ngang
-                        <hr className="hr-separate" />
-                      )}
-                    </React.Fragment>
-                  ))
-                }
-              </div>
-              {/* Phần phân trang */}
-              <div className="pagination-container">
-                <Pagination>
-                  <Pagination.Prev onClick={handlePrevious} disabled={activePage === 1} />
-                  {[...Array(totalPages)].map((_, number) => ( // Array chạy từ 0
+      {isLoading === false ? (
+        currentProducts && currentProducts.length > 0 ? (
+          <div className="has-products">
+            <div className="category-list-products">
+              {currentProducts.map((product, index) => (
+                <React.Fragment key={index}>
+                  <ProductItem product={product} />
+                  {(index + 1) % 4 === 0 &&
+                    index + 1 !== currentProducts.length && ( // Vẽ kẻ ngang
+                      <hr className="hr-separate" />
+                    )}
+                </React.Fragment>
+              ))}
+            </div>
+            {/* Phần phân trang */}
+            <div className="pagination-container">
+              <Pagination>
+                <Pagination.Prev
+                  onClick={handlePrevious}
+                  disabled={activePage === 1}
+                />
+                {[...Array(totalPages)].map(
+                  (
+                    _,
+                    number // Array chạy từ 0
+                  ) => (
                     <Pagination.Item
                       key={number + 1}
                       active={number + 1 === activePage}
@@ -204,23 +215,24 @@ export default function Category() {
                     >
                       {number + 1}
                     </Pagination.Item>
-                  ))}
-                  <Pagination.Next onClick={handleNext} disabled={activePage === totalPages} />
-                </Pagination>
-              </div>
+                  )
+                )}
+                <Pagination.Next
+                  onClick={handleNext}
+                  disabled={activePage === totalPages}
+                />
+              </Pagination>
             </div>
-          ) : (
-            <div className="no-product">Không có sản phẩm nào</div>
-          )
-        ) : (
-          <div className="loading-container">
-            <PacmanLoader size={20} color={"#ff0000"} loading={isLoading} />
-            <span className="loading-data">
-              Đang tải dữ liệu
-            </span>
           </div>
+        ) : (
+          <div className="no-product">Không có sản phẩm nào</div>
         )
-      }
+      ) : (
+        <div className="loading-container">
+          <PacmanLoader size={20} color={"#ff0000"} loading={isLoading} />
+          <span className="loading-data">Đang tải dữ liệu</span>
+        </div>
+      )}
     </div>
   );
 }
